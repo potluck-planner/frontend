@@ -50,7 +50,7 @@ class App extends React.Component {
             exact
             path="/users"
             render={props => {
-              if (this.state.isLoggedIn === true) {
+              if (this.props.isLoggedIn === true) {
                 return (
                   <Link to={`/users/${this.state.userID}/events`}>
                     My Events
