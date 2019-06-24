@@ -38,12 +38,12 @@ class App extends React.Component {
             exact
             path="/"
             render={props => {
-              return <Link to={`/users/login`}>Login</Link>;
+              return <Link to={`/login`}>Login</Link>;
             }}
           />
           <Route
             exact
-            path="/users/login"
+            path="/login"
             render={props => <Login {...props} {...this.state} />}
           />
           <Route
@@ -57,7 +57,7 @@ class App extends React.Component {
                   </Link>
                 );
               } else {
-                return <Link to={`/users/login`}>Please Login</Link>;
+                return <Link to={`/login`}>Please Login</Link>;
               }
             }}
           />

@@ -22,7 +22,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
             </>
           );
         }
-        return <Redirect to="/users/login" />;
+        return <Redirect to="/login" />;
       }}
     />
   );
