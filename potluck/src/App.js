@@ -21,9 +21,11 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    const URL = `https://potlucker-planner.herokuapp.com/users/1/events`;
+    const URL = `https://potlucker-planner.herokuapp.com/users/${
+      this.state.userID
+    }/events`;
     // const URL = `https://potlucker-planner.herokuapp.com/users/${id}/events`;
-    // this.props.getData(URL);
+    this.props.getData(URL);
   }
 
   render() {
@@ -32,7 +34,33 @@ class App extends React.Component {
     return (
       <Router>
         <div className="App">
-          <Route exact path="/users/login" component={Login} />
+          <Route
+            exact
+            path="/"
+            render={props => {
+              return <Link to={`/users/login`}>Login</Link>;
+            }}
+          />
+          <Route
+            exact
+            path="/users/login"
+            render={props => <Login {...props} {...this.state} />}
+          />
+          <Route
+            exact
+            path="/users"
+            render={props => {
+              if (this.state.isLoggedIn === true) {
+                return (
+                  <Link to={`/users/${this.state.userID}/events`}>
+                    My Events
+                  </Link>
+                );
+              } else {
+                return <Link to={`/users/login`}>Please Login</Link>;
+              }
+            }}
+          />
           <PrivateRoute exact path="/users/:id/events" component={EventsList} />
           <PrivateRoute exact path="/users/:id/addevent" component={AddEvent} />
           <PrivateRoute exact path="/event/:id" component={EventLink} />
@@ -44,7 +72,8 @@ class App extends React.Component {
 
 const mapStateToProps = state => ({
   // error: state.eventReducer.error,
-  // getData: state.eventReducer.getData
+  fetchingEvents: state.fetchingEvents,
+  isLoggedIn: state.loginReducer.isLoggedIn
 });
 
 export default connect(

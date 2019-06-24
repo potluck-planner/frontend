@@ -3,16 +3,18 @@ export const LOGIN_START = "LOGIN_START";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
-export const login = creds => dispatch => {
+export const login = (creds, history) => dispatch => {
   dispatch({ type: LOGIN_START });
-  return axiosWithAuth()
-    .post("https://potlucker-planner.herokuapp.com/users/login", creds)
-    .then(res => {
-      localStorage.setItem("token", res.data.token);
-      dispatch({ type: LOGIN_SUCCESS });
-      return true;
-    })
-    .catch(err => console.log(err.response));
+  return (
+    axiosWithAuth()
+      .post("https://potlucker-planner.herokuapp.com/users/login", creds)
+      .then(res => {
+        localStorage.setItem("token", res.data.token);
+        dispatch({ type: LOGIN_SUCCESS });
+      })
+      // .then(() => history.push(`/users`))
+      .catch(err => console.log(err.response))
+  );
 };
 
 export const FETCH_DATA_START = "FETCH_DATA_START";

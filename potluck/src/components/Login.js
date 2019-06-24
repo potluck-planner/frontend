@@ -2,13 +2,17 @@ import React from "react";
 import { connect } from "react-redux";
 import Loader from "react-loader-spinner";
 import { login } from "../actions";
+import jsonwebtoken from "jsonwebtoken";
 
 class Login extends React.Component {
   state = {
     credentials: {
       username: "",
       password: ""
-    }
+    },
+    userID: jsonwebtoken.decode(localStorage.getItem("token"))
+      ? jsonwebtoken.decode(localStorage.getItem("token")).id
+      : null
   };
 
   handleChange = event => {
@@ -22,15 +26,16 @@ class Login extends React.Component {
 
   login = event => {
     event.preventDefault();
-    this.props.login(this.state.credentials).then(response => {
-      //if (response) {
-      //this.props.history.push("/users/:id/events");
-      //}
-      console.log(response);
-    });
+    this.props.login(this.state.credentials);
+    // .then(response => {
+    //   if (response) {
+    this.props.history.push(`/users/`);
+    //   }
+    // });
   };
 
   render() {
+    console.log(this.props.isLoggedIn);
     return (
       <div>
         <form onSubmit={this.login} className="Login">
@@ -66,7 +71,8 @@ class Login extends React.Component {
 
 const mapStateToProps = state => ({
   // error: state.eventReducer.error,
-  loggingIn: state.loggingIn
+  loggingIn: state.loggingIn,
+  isLoggedIn: state.loginReducer.isLoggedIn
 });
 
 export default connect(

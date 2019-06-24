@@ -18,11 +18,11 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
                   Add Events
                 </NavLink>
               </div>
-              {/* <Component {...props} /> */}
+              <Component {...props} />
             </>
           );
         }
-        return <Redirect to="/login" />;
+        return <Redirect to="/users/login" />;
       }}
     />
   );
