@@ -6,22 +6,22 @@ import { getEvents, deleteEvent } from "../actions";
 import { connect } from "react-redux";
 
 class EventsList extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			user: jsonwebtoken.decode(localStorage.getItem("token"))
-				? jsonwebtoken.decode(localStorage.getItem("token"))
-				: null
-		};
-	}
+  constructor() {
+    super();
+    this.state = {
+      user: jsonwebtoken.decode(localStorage.getItem("token"))
+        ? jsonwebtoken.decode(localStorage.getItem("token"))
+        : null
+    };
+  }
 
-	componentDidMount() {
-		const URL = `https://potlucker-planner.herokuapp.com/users/${
-			this.state.user.username
-		}/events`;
-		// const URL = `https://potlucker-planner.herokuapp.com/users/`;
-		this.props.getEvents(URL);
-	}
+  componentDidMount() {
+    const URL = `https://potlucker-planner.herokuapp.com/users/${
+      this.state.user.username
+    }/events`;
+    // const URL = `https://potlucker-planner.herokuapp.com/users/`;
+    this.props.getEvents(URL);
+  }
 
 	render() {
 		console.log(this.props);
@@ -43,7 +43,6 @@ class EventsList extends React.Component {
 								{...this.state}
 								key={event.event_id}
 								deleteEvent={this.props.deleteEvent}
-								getEvents={this.props.getEvents}
 							/>
 						);
 					})}
@@ -54,12 +53,13 @@ class EventsList extends React.Component {
 }
 
 const mapStateToProps = state => ({
-	error: state.fetchDataReducer.error,
-	fetchingEvents: state.fetchDataReducer.fetchingEvents,
-	events: state.fetchDataReducer.events
+  error: state.fetchDataReducer.error,
+  fetchingEvents: state.fetchDataReducer.fetchingEvents,
+  events: state.fetchDataReducer.events
 });
 
 export default connect(
 	mapStateToProps,
-	{ getEvents, deleteEvent }
+	{ deleteEvent }
+
 )(EventsList);

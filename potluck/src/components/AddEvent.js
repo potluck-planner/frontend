@@ -18,9 +18,9 @@ class AddEvent extends React.Component {
 		};
 	}
 
-	handleChange = e => {
-		this.setState({ [e.target.name]: e.target.value });
-	};
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
 	render() {
 		console.log(this.props);
@@ -90,9 +90,10 @@ class AddEvent extends React.Component {
 			</form>
 		);
 	}
+
 }
 
 export default connect(
-	null,
-	{ addEvent }
+  null,
+  { addEvent }
 )(AddEvent);

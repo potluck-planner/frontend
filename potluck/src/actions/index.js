@@ -22,12 +22,12 @@ export const REGISTER_START = "REGISTER_START";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAILURE = "REGISTER_FAILURE";
 
-export const signUp = user => dispatch => {
-	dispatch({ type: REGISTER_START });
-	axios
-		.post(URL, user)
-		.then(res => dispatch({ type: REGISTER_SUCCESS, payload: res.data }))
-		.catch(err => dispatch({ type: REGISTER_FAILURE, payload: err.response }));
+export const signUp = (URL, user) => dispatch => {
+  dispatch({ type: REGISTER_START });
+  axios
+    .post(URL, user)
+    .then(res => dispatch({ type: REGISTER_SUCCESS, payload: res.data }))
+    .catch(err => dispatch({ type: REGISTER_FAILURE, payload: err.response }));
 };
 
 export const FETCH_EVENT_START = "FETCH_EVENT_START";
@@ -97,14 +97,14 @@ export const FETCH_SINGLE_EVENT_START = "FETCH_SINGLE_EVENT_START";
 export const FETCH_SINGLE_EVENT_SUCCESS = "FETCH_SINGLE_EVENT_SUCCESS";
 export const FETCH_SINGLE_EVENT_FAILURE = "FETCH_SINGLE_EVENT_FAILURE";
 export const getSingleEvent = URL => dispatch => {
-	dispatch({ type: FETCH_SINGLE_EVENT_START });
-	axiosWithAuth()
-		.get(URL)
-		.then(res => {
-			dispatch({ type: FETCH_SINGLE_EVENT_SUCCESS, payload: res.data });
-		})
-		.catch(err => {
-			console.log(err.response);
-			dispatch({ type: FETCH_SINGLE_EVENT_FAILURE, payload: err.response });
-		});
+  dispatch({ type: FETCH_SINGLE_EVENT_START });
+  axiosWithAuth()
+    .get(URL)
+    .then(res => {
+      dispatch({ type: FETCH_SINGLE_EVENT_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      console.log(err.response);
+      dispatch({ type: FETCH_SINGLE_EVENT_FAILURE, payload: err.response });
+    });
 };
