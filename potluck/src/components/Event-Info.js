@@ -1,6 +1,7 @@
 import React from "react";
 
 const EventInfo = props => {
+	console.log(props);
 	return (
 		<div className="eventInfo eventElement">
 			<ul>
