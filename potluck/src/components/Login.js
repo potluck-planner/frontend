@@ -9,10 +9,7 @@ class Login extends React.Component {
 		credentials: {
 			username: "",
 			password: ""
-		},
-		userID: jsonwebtoken.decode(localStorage.getItem("token"))
-			? jsonwebtoken.decode(localStorage.getItem("token")).id
-			: null
+		}
 	};
 
 	handleChange = event => {

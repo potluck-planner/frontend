@@ -5,7 +5,7 @@ const EventCard = props => {
 	console.log(props);
 
 	return (
-		<div className="event">
+		<div className="eventCard">
 			<div className="cardTop">
 				<Link to={`/event/${props.event_id}`} className="viewDiv">
 					View Event

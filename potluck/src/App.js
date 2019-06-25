@@ -59,7 +59,7 @@ class App extends React.Component {
 									</Link>
 								);
 							} else {
-								return <Link to={`/login`}>Please Login</Link>;
+								return <Link to={`/`}>Please Login</Link>;
 							}
 						}}
 					/>
