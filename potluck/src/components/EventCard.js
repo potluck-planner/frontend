@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const EventCard = props => {
-	console.log(props);
+  console.log(props);
 
 	return (
 		<div className="eventCard">
@@ -31,14 +31,14 @@ const EventCard = props => {
 				</div>
 			</div>
 
-			<div>
-				<p>Event Name: {props.event_name}</p>
-				<p>Organizer: {props.username}</p>
-				<p>Date: {props.date}</p>
-				<p>{props.going === null ? "Please Confirm" : "You Are Confirmed!"}</p>
-			</div>
-		</div>
-	);
+      <div>
+        <p>Event Name: {props.event_name}</p>
+        <p>Organizer: {props.username}</p>
+        <p>Date: {props.date}</p>
+        <p>{props.going === null ? "Please Confirm" : "You Are Confirmed!"}</p>
+      </div>
+    </div>
+  );
 };
 
 export default EventCard;
