@@ -2,7 +2,7 @@ import React from "react";
 import EventCard from "./EventCard";
 import Loader from "react-loader-spinner";
 import jsonwebtoken from "jsonwebtoken";
-import { getEvents } from "../actions";
+import { getEvents, deleteEvent } from "../actions";
 import { connect } from "react-redux";
 
 class EventsList extends React.Component {
@@ -37,7 +37,15 @@ class EventsList extends React.Component {
 				<h1>Events Listing</h1>
 				<ul>
 					{this.props.events.map(event => {
-						return <EventCard {...event} key={event.event_id} />;
+						return (
+							<EventCard
+								{...event}
+								{...this.state}
+								key={event.event_id}
+								deleteEvent={this.props.deleteEvent}
+								getEvents={this.props.getEvents}
+							/>
+						);
 					})}
 				</ul>
 			</div>
@@ -53,5 +61,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{ getEvents }
+	{ getEvents, deleteEvent }
 )(EventsList);

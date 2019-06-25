@@ -1,6 +1,7 @@
 import React from "react";
 
 const EventLocation = props => {
+	console.log(props);
 	return (
 		<div className="eventLocation eventElement">
 			{/* location might need [0] in front if Erik keeps as array */}

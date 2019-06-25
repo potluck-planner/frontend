@@ -2,7 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const EventCard = props => {
-  console.log(props);
+	console.log(props);
+
+	function deleteEvent(e) {
+		e.preventDefault();
+		props.deleteEvent(
+			`https://potlucker-planner.herokuapp.com/event/${props.event_id}`
+		);
+	}
 
 	return (
 		<div className="eventCard">
@@ -23,7 +30,7 @@ const EventCard = props => {
 					<div
 						// onClick should have hover with text saying decline
 						// for organizers it could say delete
-						/*onClick={e => props.deleteEvent(e, this.props.id)}*/
+						onClick={e => deleteEvent(e)}
 						className="deleteButton"
 					>
 						<i className="far fa-trash-alt" />
@@ -31,14 +38,14 @@ const EventCard = props => {
 				</div>
 			</div>
 
-      <div>
-        <p>Event Name: {props.event_name}</p>
-        <p>Organizer: {props.username}</p>
-        <p>Date: {props.date}</p>
-        <p>{props.going === null ? "Please Confirm" : "You Are Confirmed!"}</p>
-      </div>
-    </div>
-  );
+			<div>
+				<p>Event Name: {props.event_name}</p>
+				<p>Organizer: {props.username}</p>
+				<p>Date: {props.date}</p>
+				<p>{props.going === null ? "Please Confirm" : "You Are Confirmed!"}</p>
+			</div>
+		</div>
+	);
 };
 
 export default EventCard;

@@ -87,11 +87,11 @@ export class Event extends Component {
 				<div className="eventGuests eventElement">
 					<ul>
 						{this.props.singleEvent.guests.map(guest => (
-							<EventGuests {...this.props} {...guest} key={guest.id} />
+							<EventGuests {...this.props} {...guest} key={guest.username} />
 						))}
 					</ul>
 				</div>
-				<div className="eventGuests eventElement">
+				<div className="eventFood eventElement">
 					<ul>
 						{this.props.singleEvent.food.map(food => (
 							<EventFood {...this.props} {...food} key={food.id} />

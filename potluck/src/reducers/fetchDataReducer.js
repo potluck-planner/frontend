@@ -55,9 +55,8 @@ const fetchDataReducer = (state = initialState, action) => {
 		case DELETE_EVENT_SUCCESS:
 			return {
 				...state,
-				// Need to revisit this logic once endpoint is up and running
 				events: [...state.events].filter(
-					(event, index) => index !== action.index
+					event => event.event_id !== action.payload.Oldevent.event_id
 				),
 				error: null
 			};
