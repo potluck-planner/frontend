@@ -12,18 +12,10 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 					return (
 						<>
 							<div className="navBar">
-								<NavLink
-									exact
-									to={`/users/${rest.user.username}/events`}
-									className="navLink"
-								>
+								<NavLink exact to={`/`} className="navLink">
 									Events List
 								</NavLink>
-								<NavLink
-									exact
-									to={`/users/${rest.user.username}/addevent`}
-									className="navLink"
-								>
+								<NavLink exact to={`/addevent`} className="navLink">
 									Add Events
 								</NavLink>
 							</div>
@@ -35,7 +27,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 			}}
 		/>
 	);
-
 };
 
 export default PrivateRoute;
