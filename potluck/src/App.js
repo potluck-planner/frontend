@@ -6,6 +6,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import EventsList from "./components/EventsList";
 import AddEvent from "./components/AddEvent";
 import EventLink from "./components/EventLink";
+import SignUpRedirect from "./components/SignUpRedirect";
 import SignUp from "./components/SignUp";
 
 class App extends React.Component {
@@ -35,6 +36,7 @@ class App extends React.Component {
               return <SignUp {...props} {...this.state} />;
             }}
           />
+          <Route exact path="/redirect" component={SignUpRedirect} />
           <PrivateRoute
             exact
             path={`/`}
