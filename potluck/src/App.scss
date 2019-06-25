@@ -1,33 +1,94 @@
-.App {
-  text-align: center;
+// NavBar from top
+.navBar {
+	display: flex;
+	justify-content: space-evenly;
+	.navLink {
+		font-size: 2rem;
+		text-decoration: none;
+		background: whitesmoke;
+		flex-grow: 1;
+		padding: 1%;
+		border: 1px solid black;
+		color: darkblue;
+		text-align: center;
+	}
+	.active {
+		background: lightskyblue;
+	}
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.loadingIcon {
+	margin: 20%;
+	display: flex;
+	justify-content: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+// EventsList - sets spacing for event cards
+.eventsList {
+	display: flex;
+	text-align: center;
+	flex-flow: column wrap;
+	ul {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: space-evenly;
+	}
 }
 
-.App-link {
-  color: #61dafb;
+// Event and EventLink - sets cards
+.event {
+	display: flex;
+	flex-flow: column wrap;
+	background: lightskyblue;
+	color: darkblue;
+	padding: 0 1% 1% 1%;
+	margin: 1% auto;
+	width: 25%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+// .toHome {
+// 	button {
+// 		margin: 1%;
+// 	}
+// }
+
+// Individual Card design
+.eventCard {
+	.cardElement {
+		font-size: 1.5rem;
+		text-align: center;
+	}
+	.buttonDiv {
+		display: flex;
+		justify-content: flex-end;
+		.deleteButton {
+			width: 10%;
+		}
+	}
+}
+
+// Add Event Design
+.eventAdd {
+	display: flex;
+	flex-flow: column wrap;
+	width: 30%;
+	padding: 1%;
+	.addElement {
+		padding: 1%;
+		margin: 2%;
+	}
+	button {
+		width: 50%;
+		margin: 2% auto;
+		padding: 1%;
+	}
+}
+
+// Update Form design
+.updateForm {
+	display: flex;
+	button {
+		width: 70%;
+		height: 50%;
+	}
 }
