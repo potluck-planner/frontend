@@ -1,14 +1,12 @@
 import React from "react";
 
 const EventFood = props => {
+	console.log(props);
 	return (
-		<div className="eventGuests eventElement">
-			<ul>
-				{props.singleEvent.guests.map(guest => (
-					<li>{guest.username}</li>
-				))}
-			</ul>
-		</div>
+		<li>{`${props.food.recipe_name}, number: ${props.food.quantity}, ${
+			props.food.guest_name
+		},
+	${props.food.being_brought}`}</li>
 	);
 };
 

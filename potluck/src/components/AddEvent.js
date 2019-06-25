@@ -1,16 +1,22 @@
 import React from "react";
 import { connect } from "react-redux";
 import { addEvent } from "../actions";
+import jsonwebtoken from "jsonwebtoken";
 
 class AddEvent extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			organizer_id: this.props.user.id,
-			event_name: "",
-			description: "",
-			date: new Date(),
-			time: "12:00"
+			user: jsonwebtoken.decode(localStorage.getItem("token"))
+				? jsonwebtoken.decode(localStorage.getItem("token"))
+				: null,
+			event: {
+				organizer_id: "",
+				event_name: "",
+				description: "",
+				date: new Date(),
+				time: "12:00"
+			}
 		};
 	}
 
@@ -28,12 +34,14 @@ class AddEvent extends React.Component {
 						this.props.addEvent(
 							"https://potlucker-planner.herokuapp.com/event/",
 							{
-								...this.state
+								organizer_id: this.state.user.id,
+								event_name: this.state.event_name,
+								description: this.state.description,
+								date: this.state.date,
+								time: this.state.time
 							}
 						);
-						this.props.history.push(
-							`/users/${this.props.user.username}/events`
-						);
+						this.props.history.push(`/`);
 					}}
 					className="eventAdd"
 				>
