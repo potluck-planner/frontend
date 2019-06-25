@@ -1,7 +1,14 @@
 import {
 	FETCH_EVENT_START,
 	FETCH_EVENT_SUCCESS,
-	FETCH_EVENT_FAILURE
+	FETCH_EVENT_FAILURE,
+	ADD_EVENT_SUCCESS,
+	ADD_EVENT_FAIL
+	// DELETE_EVENT_SUCCESS,
+	// DELETE_EVENT_FAIL,
+	// UPDATE_EVENT_START,
+	// UPDATE_EVENT_SUCCESS,
+	// UPDATE_EVENT_FAIL
 } from "../actions";
 
 const initialState = {
@@ -31,6 +38,17 @@ const fetchDataReducer = (state = initialState, action) => {
 			return {
 				...state,
 				fetchingEvents: false,
+				error: action.payload
+			};
+		case ADD_EVENT_SUCCESS:
+			return {
+				...state,
+				events: [...state.events, action.payload.event],
+				error: null
+			};
+		case ADD_EVENT_FAIL:
+			return {
+				...state,
 				error: action.payload
 			};
 		default:
