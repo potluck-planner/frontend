@@ -1,115 +1,109 @@
 .App {
-	text-align: center;
+    text-align: center;
 }
 
 // NavBar from top
 .navBar {
-	display: flex;
-	justify-content: space-evenly;
-	.navLink {
-		font-size: 2rem;
-		text-decoration: none;
-		background: whitesmoke;
-		flex-grow: 1;
-		padding: 1%;
-		border: 1px solid black;
-		color: darkblue;
-		text-align: center;
-	}
-	.active {
-		background: lightskyblue;
-	}
+    display: flex;
+    justify-content: space-evenly;
+    .navLink {
+        font-size: 2rem;
+        text-decoration: none;
+        background: whitesmoke;
+        flex-grow: 1;
+        padding: 1%;
+        border: 1px solid black;
+        color: darkblue;
+        text-align: center;
+    }
+    .active {
+        background: lightskyblue;
+    }
 }
 
 .loadingIcon {
-	margin: 20%;
-	display: flex;
-	justify-content: center;
+    margin: 20%;
+    display: flex;
+    justify-content: center;
 }
 
 // EventsList - sets spacing for event cards
 .eventsList {
-	display: flex;
-	text-align: center;
-	flex-flow: column wrap;
-	ul {
-		display: flex;
-		flex-flow: row wrap;
-		justify-content: space-evenly;
-	}
+    display: flex;
+    text-align: center;
+    flex-flow: column wrap;
+    ul {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-evenly;
+    }
 }
-
-// Event and EventLink - sets cards
-.event {
-	display: flex;
-	flex-flow: column wrap;
-	background: lightskyblue;
-	color: darkblue;
-	padding: 0 1% 1% 1%;
-	margin: 1% auto;
-	width: 25%;
-	.cardTop {
-		display: flex;
-		font-size: 1.5rem;
-		padding: 1%;
-		justify-content: space-between;
-		.viewDiv {
-			font-size: 1.2rem;
-		}
-		.buttonDiv {
-			display: flex;
-			margin-right: 1%;
-			width: 15%;
-			.deleteButton {
-				padding-left: 10%;
-			}
-		}
-	}
-}
-
-// .toHome {
-// 	button {
-// 		margin: 1%;
-// 	}
-// }
 
 // Individual Card design
 .eventCard {
-	.cardElement {
-		font-size: 1.5rem;
-		text-align: center;
-	}
-	.buttonDiv {
-		display: flex;
-		justify-content: flex-end;
-		.deleteButton {
-			width: 10%;
-		}
-	}
+    display: flex;
+    flex-flow: column wrap;
+    background: lightskyblue;
+    color: darkblue;
+    padding: 0 1% 1% 1%;
+    margin: 1% auto;
+    width: 25%;
+    .cardTop {
+        display: flex;
+        font-size: 1.5rem;
+        padding: 1%;
+        justify-content: space-between;
+        .viewDiv {
+            font-size: 1.2rem;
+        }
+        .buttonDiv {
+            display: flex;
+            margin-right: 1%;
+            width: 15%;
+            .deleteButton {
+                padding-left: 10%;
+            }
+        }
+    }
+}
+
+// Event Page
+.event {
+    .eventElement {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+    .buttonDiv {
+        display: flex;
+        justify-content: flex-end;
+        .deleteButton {
+            width: 10%;
+        }
+    }
 }
 
 // Add Event Design
 .eventAdd {
-	display: flex;
-	flex-flow: column wrap;
-	width: 30%;
-	padding: 1%;
-	.addElement {
-		padding: 1%;
-		margin: 2%;
-	}
-	button {
-		width: 50%;
-		margin: 2% auto;
-		padding: 1%;
-	}
+    display: flex;
+    flex-flow: column wrap;
+    width: 30%;
+    padding: 1%;
+    .addElement {
+        padding: 1%;
+        margin: 2%;
+    }
+    button {
+        width: 50%;
+        margin: 2% auto;
+        padding: 1%;
+    }
 }
 
 // Update Form design
 .updateForm {
-	display: flex;
-	button {
-		width: 70%;
-		height: 50%;
-	}
+    display: flex;
+    button {
+        width: 70%;
+        height: 50%;
+    }
 }
