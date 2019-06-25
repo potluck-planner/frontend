@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "./App.scss";
-import { getData } from "./actions";
+import { getEvents } from "./actions";
 import { connect } from "react-redux";
 import Login from "./components/Login";
 import PrivateRoute from "./components/PrivateRoute";
@@ -25,7 +25,7 @@ class App extends React.Component {
 			this.state.user.username
 		}/events`;
 		// const URL = `https://potlucker-planner.herokuapp.com/users/`;
-		this.props.getData(URL);
+		this.props.getEvents(URL);
 	}
 
 	render() {
@@ -37,14 +37,16 @@ class App extends React.Component {
 					<Route
 						exact
 						path="/"
-						render={() => {
-							return <Link to={`/login`}>Login</Link>;
+						render={props => {
+							return (
+								<div>
+									<Login {...props} {...this.state} />
+									<Link exact to="/signup">
+										Sign Up
+									</Link>
+								</div>
+							);
 						}}
-					/>
-					<Route
-						exact
-						path="/login"
-						render={props => <Login {...props} {...this.state} />}
 					/>
 					<Route
 						exact
@@ -66,18 +68,21 @@ class App extends React.Component {
 						path={`/users/${this.state.user.username}/events`}
 						component={EventsList}
 						{...this.state}
+						{...this.props}
 					/>
 					<PrivateRoute
 						exact
 						path={`/users/${this.state.user.username}/addevent`}
 						component={AddEvent}
 						{...this.state}
+						{...this.props}
 					/>
 					<PrivateRoute
 						exact
 						path="/event/:id"
 						component={EventLink}
 						{...this.state}
+						{...this.props}
 					/>
 				</div>
 			</Router>
@@ -86,12 +91,13 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => ({
-	// error: state.eventReducer.error,
+	error: state.fetchDataReducer.error,
 	fetchingEvents: state.fetchDataReducer.fetchingEvents,
-	isLoggedIn: state.loginReducer.isLoggedIn
+	isLoggedIn: state.loginReducer.isLoggedIn,
+	events: state.fetchDataReducer.events
 });
 
 export default connect(
 	mapStateToProps,
-	{ getData }
+	{ getEvents }
 )(App);

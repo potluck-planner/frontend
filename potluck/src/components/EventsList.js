@@ -1,20 +1,18 @@
 import React from "react";
-import Event from "./Event";
+import EventCard from "./EventCard";
 
-class EventsList extends React.Component {
-  render() {
-    return (
-      <div className="EventsList">
-        <h1>Events Listing</h1>
-        <ul>
-          Placeholder Placeholder Placeholder Placeholder Placeholder
-          {/* {this.props.eventsList.map(Event => {
-            return <Event {...Event} key={Event.id} />;
-          })} */}
-        </ul>
-      </div>
-    );
-  }
-}
+const EventsList = props => {
+	console.log(props);
+	return (
+		<div className="eventsList">
+			<h1>Events Listing</h1>
+			<ul>
+				{props.events.map(event => {
+					return <EventCard {...event} key={event.event_id} />;
+				})}
+			</ul>
+		</div>
+	);
+};
 
 export default EventsList;

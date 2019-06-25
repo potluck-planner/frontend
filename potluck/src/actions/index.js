@@ -17,19 +17,19 @@ export const login = (creds, history) => dispatch => {
 	);
 };
 
-export const FETCH_DATA_START = "FETCH_DATA_START";
-export const FETCH_DATA_SUCCESS = "FETCH_DATA_SUCCESS";
-export const FETCH_DATA_FAILURE = "FETCH_DATA_FAILURE";
-export const getData = URL => dispatch => {
-	dispatch({ type: FETCH_DATA_START });
+export const FETCH_EVENT_START = "FETCH_EVENT_START";
+export const FETCH_EVENT_SUCCESS = "FETCH_EVENT_SUCCESS";
+export const FETCH_EVENT_FAILURE = "FETCH_EVENT_FAILURE";
+export const getEvents = URL => dispatch => {
+	dispatch({ type: FETCH_EVENT_START });
 	axiosWithAuth()
 		.get(URL)
 		.then(res => {
-			dispatch({ type: FETCH_DATA_SUCCESS, payload: res.data });
+			dispatch({ type: FETCH_EVENT_SUCCESS, payload: res.data });
 		})
 		.catch(err => {
 			console.log(err.response);
-			dispatch({ type: FETCH_DATA_FAILURE, payload: err.response.data.error });
+			dispatch({ type: FETCH_EVENT_FAILURE, payload: err.response });
 		});
 };
 
