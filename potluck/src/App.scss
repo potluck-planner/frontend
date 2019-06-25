@@ -41,45 +41,45 @@
 
 // Individual Card design
 .eventCard {
-    display: flex;
-    flex-flow: column wrap;
-    background: lightskyblue;
-    color: darkblue;
-    padding: 0 1% 1% 1%;
-    margin: 1% auto;
-    width: 25%;
-    .cardTop {
-        display: flex;
-        font-size: 1.5rem;
-        padding: 1%;
-        justify-content: space-between;
-        .viewDiv {
-            font-size: 1.2rem;
-        }
-        .buttonDiv {
-            display: flex;
-            margin-right: 1%;
-            width: 15%;
-            .deleteButton {
-                padding-left: 10%;
-            }
-        }
-    }
+	display: flex;
+	flex-flow: column wrap;
+	background: lightskyblue;
+	color: darkblue;
+	padding: 0 1% 1% 1%;
+	margin: 1% auto;
+	width: 25%;
+	.cardTop {
+		display: flex;
+		font-size: 1.5rem;
+		padding: 1%;
+		justify-content: space-between;
+		.viewDiv {
+			font-size: 1.2rem;
+		}
+		.buttonDiv {
+			display: flex;
+			margin-right: 1%;
+			width: 15%;
+			.deleteButton {
+				padding-left: 10%;
+			}
+		}
+	}
 }
 
 // Event Page
 .event {
-    .eventElement {
-        font-size: 1.5rem;
-        text-align: center;
-    }
-    .buttonDiv {
-        display: flex;
-        justify-content: flex-end;
-        .deleteButton {
-            width: 10%;
-        }
-    }
+	.eventElement {
+		font-size: 1.5rem;
+		text-align: center;
+	}
+	.buttonDiv {
+		display: flex;
+		justify-content: flex-end;
+		.deleteButton {
+			width: 10%;
+		}
+	}
 }
 
 // Add Event Design

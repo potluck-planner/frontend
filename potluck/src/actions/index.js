@@ -92,3 +92,19 @@ export const updateEvent = (id, updatedEvent) => dispatch => {
       dispatch({ type: UPDATE_EVENT_FAIL, payload: err.response });
     });
 };
+
+export const FETCH_SINGLE_EVENT_START = "FETCH_SINGLE_EVENT_START";
+export const FETCH_SINGLE_EVENT_SUCCESS = "FETCH_SINGLE_EVENT_SUCCESS";
+export const FETCH_SINGLE_EVENT_FAILURE = "FETCH_SINGLE_EVENT_FAILURE";
+export const getSingleEvent = URL => dispatch => {
+	dispatch({ type: FETCH_SINGLE_EVENT_START });
+	axiosWithAuth()
+		.get(URL)
+		.then(res => {
+			dispatch({ type: FETCH_SINGLE_EVENT_SUCCESS, payload: res.data });
+		})
+		.catch(err => {
+			console.log(err.response);
+			dispatch({ type: FETCH_SINGLE_EVENT_FAILURE, payload: err.response });
+		});
+};

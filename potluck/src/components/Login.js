@@ -5,15 +5,12 @@ import { login } from "../actions";
 import jsonwebtoken from "jsonwebtoken";
 
 class Login extends React.Component {
-  state = {
-    credentials: {
-      username: "",
-      password: ""
-    },
-    userID: jsonwebtoken.decode(localStorage.getItem("token"))
-      ? jsonwebtoken.decode(localStorage.getItem("token")).id
-      : null
-  };
+	state = {
+		credentials: {
+			username: "",
+			password: ""
+		}
+	};
 
   handleChange = event => {
     this.setState({
