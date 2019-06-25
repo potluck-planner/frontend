@@ -3,9 +3,9 @@ import {
 	FETCH_EVENT_SUCCESS,
 	FETCH_EVENT_FAILURE,
 	ADD_EVENT_SUCCESS,
-	ADD_EVENT_FAIL
-	// DELETE_EVENT_SUCCESS,
-	// DELETE_EVENT_FAIL,
+	ADD_EVENT_FAIL,
+	DELETE_EVENT_SUCCESS,
+	DELETE_EVENT_FAIL
 	// UPDATE_EVENT_START,
 	// UPDATE_EVENT_SUCCESS,
 	// UPDATE_EVENT_FAIL
@@ -43,10 +43,25 @@ const fetchDataReducer = (state = initialState, action) => {
 		case ADD_EVENT_SUCCESS:
 			return {
 				...state,
+				// organizer is still not immediately loading
 				events: [...state.events, action.payload.event],
 				error: null
 			};
 		case ADD_EVENT_FAIL:
+			return {
+				...state,
+				error: action.payload
+			};
+		case DELETE_EVENT_SUCCESS:
+			return {
+				...state,
+				// Need to revisit this logic once endpoint is up and running
+				events: [...state.events].filter(
+					(event, index) => index !== action.index
+				),
+				error: null
+			};
+		case DELETE_EVENT_FAIL:
 			return {
 				...state,
 				error: action.payload
