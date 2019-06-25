@@ -8,46 +8,12 @@ import EventInfo from "./Event-Info";
 import EventLocation from "./Event-Location";
 
 export class Event extends Component {
-	constructor() {
-		super();
-		this.state = {
-			updatingInfo: false,
-			updatingLocation: false
-		};
-	}
-
 	componentDidMount() {
 		const URL = `https://potlucker-planner.herokuapp.com/event/${
 			this.props.event_id
 		}`;
 		this.props.getSingleEvent(URL);
 	}
-
-	updateInfo = e => {
-		e.preventDefault();
-		if (this.state.updatingInfo === false) {
-			this.setState({
-				updatingInfo: true
-			});
-		} else {
-			this.setState({
-				updatingInfo: false
-			});
-		}
-	};
-
-	updateLocation = e => {
-		e.preventDefault();
-		if (this.state.updatingLocation === false) {
-			this.setState({
-				updatingLocation: true
-			});
-		} else {
-			this.setState({
-				updatingLocation: false
-			});
-		}
-	};
 
 	render() {
 		console.log(this.props);
@@ -64,10 +30,7 @@ export class Event extends Component {
 
 		return (
 			<div className="event">
-				<div className="cardElement buttonDiv">
-					<div onClick={this.updateInfo} className="updateButton">
-						<i className="far fa-edit" />
-					</div>
+				<div className="eventTop">
 					<div
 						onClick={e => {
 							e.preventDefault();
@@ -82,21 +45,25 @@ export class Event extends Component {
 						<i className="far fa-trash-alt" />
 					</div>
 				</div>
-				<EventInfo {...this.props} />
-				<EventLocation {...this.props} />
-				<div className="eventGuests eventElement">
-					<ul>
-						{this.props.singleEvent.guests.map(guest => (
-							<EventGuests {...this.props} {...guest} key={guest.username} />
-						))}
-					</ul>
-				</div>
-				<div className="eventFood eventElement">
-					<ul>
-						{this.props.singleEvent.food.map(food => (
-							<EventFood {...this.props} {...food} key={food.id} />
-						))}
-					</ul>
+				<div className="eventBottom">
+					<div className="eventLeft">
+						<EventInfo {...this.props} />
+						<EventLocation {...this.props} />
+					</div>
+					<div className="eventRight">
+						<div className="eventGuests">
+							<h1>Guest List</h1>
+							{this.props.singleEvent.guests.map(guest => (
+								<EventGuests {...this.props} {...guest} key={guest.username} />
+							))}
+						</div>
+						<div className="eventFood">
+							<h1>Food List</h1>
+							{this.props.singleEvent.food.map(food => (
+								<EventFood {...this.props} {...food} key={food.id} />
+							))}
+						</div>
+					</div>
 				</div>
 			</div>
 		);
