@@ -46,12 +46,13 @@ export class Event extends Component {
 						<i className="far fa-trash-alt" />
 					</div>
 				</div>
-				<EventRender
+				{/* <EventRender
 					{...this.props}
 					{...this.state}
 					updateEvent={this.props.updateEvent}
 					updateState={this.updateState}
-				/>
+				/> */}
+				Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder
 			</div>
 		);
 	}
