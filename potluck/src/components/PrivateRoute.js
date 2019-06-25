@@ -2,30 +2,39 @@ import React from "react";
 import { Route, Redirect, NavLink } from "react-router-dom";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  return (
-    <Route
-      {...rest}
-      render={props => {
-        if (localStorage.getItem("token")) {
-          // return <Component {...props} />;
-          return (
-            <>
-              <div className="navBar">
-                <NavLink exact to="/users/:id/events" className="navLink">
-                  Events List
-                </NavLink>
-                <NavLink exact to="/users/:id/addevent" className="navLink">
-                  Add Events
-                </NavLink>
-              </div>
-              <Component {...props} />
-            </>
-          );
-        }
-        return <Redirect to="/users/login" />;
-      }}
-    />
-  );
+	console.log(rest);
+	return (
+		<Route
+			{...rest}
+			render={props => {
+				if (localStorage.getItem("token")) {
+					// return <Component {...props} />;
+					return (
+						<>
+							<div className="navBar">
+								<NavLink
+									exact
+									to={`/users/${rest.user.username}/events`}
+									className="navLink"
+								>
+									Events List
+								</NavLink>
+								<NavLink
+									exact
+									to={`/users/${rest.user.username}/addevent`}
+									className="navLink"
+								>
+									Add Events
+								</NavLink>
+							</div>
+							<Component {...props} {...rest} />
+						</>
+					);
+				}
+				return <Redirect to="/login" />;
+			}}
+		/>
+	);
 };
 
 export default PrivateRoute;
