@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getSingleEvent, deleteEvent, updateEvent } from "../actions";
+import { getSingleEvent, deleteEvent, addGuest, deleteGuest } from "../actions";
 import { connect } from "react-redux";
 import Loader from "react-loader-spinner";
 import EventFood from "./Event-Food";
@@ -29,35 +29,34 @@ export class Event extends Component {
       );
     }
 
-    return (
-      <div className="event">
-        <div className="eventTop">
-          <div
-            onClick={e => {
-              e.preventDefault();
-              this.props.deleteEvent(this.props.event_id);
-              // need to hook up user info so pushes to the correct page
-              // return this.props.match === undefined
-              // 	? null
-              // 	: this.props.history.push(`/users/${this.state.user.username}/events`);
-            }}
-            className="deleteButton"
-          >
-            <i className="far fa-trash-alt" />
-          </div>
-        </div>
-        <div className="eventBottom">
-          <div className="eventLeft">
-            <EventInfo {...this.props} />
-            <EventLocation {...this.props} />
-          </div>
-          <div className="eventRight">
-            <div className="eventGuests">
-              <h1>Guest List</h1>
-              {this.props.singleEvent.guests.map(guest => (
-                <EventGuests {...this.props} {...guest} key={guest.username} />
-              ))}
-            </div>
+		return (
+			<div className="event">
+				<div className="eventTop">
+					<div
+						onClick={e => {
+							e.preventDefault();
+							this.props.deleteEvent(this.props.event_id);
+							// need to hook up user info so pushes to the correct page
+							// return this.props.match === undefined
+							// 	? null
+							// 	: this.props.history.push(`/users/${this.state.user.username}/events`);
+						}}
+						className="deleteButton"
+					>
+						<i className="far fa-trash-alt" />
+					</div>
+				</div>
+				<div className="eventBottom">
+					<div className="eventLeft">
+						<EventInfo {...this.props} />
+						<EventLocation {...this.props} />
+					</div>
+					<div className="eventRight">
+						<EventGuests
+							{...this.props}
+							addGuest={this.props.addGuest}
+							deleteGuest={this.props.deleteGuest}
+						/>
             <div className="eventFood">
               <h1>Food List</h1>
               {this.props.singleEvent.food.map(food => (
@@ -79,6 +78,6 @@ const mapStateToProps = state => ({
 });
 
 export default connect(
-  mapStateToProps,
-  { getSingleEvent, updateEvent, deleteEvent }
+	mapStateToProps,
+	{ getSingleEvent, deleteEvent, addGuest, deleteGuest }
 )(Event);
