@@ -8,60 +8,50 @@ import AddEvent from "./components/AddEvent";
 import EventLink from "./components/EventLink";
 import SignUpRedirect from "./components/SignUpRedirect";
 import SignUp from "./components/SignUp";
+import jsonwebtoken from "jsonwebtoken";
 
 class App extends React.Component {
-  render() {
-    console.log(this.props);
-    return (
-      <Router>
-        <div className="App">
-          <Route
-            exact
-            path="/login"
-            render={props => {
-              return (
-                <div>
-                  <Login {...props} {...this.state} />
-                  <Link exact to="/signup">
-                    Sign Up
-                  </Link>
-                </div>
-              );
-            }}
-          />
-          <Route
-            exact
-            path="/signup"
-            render={props => {
-              return <SignUp {...props} {...this.state} />;
-            }}
-          />
-          <Route exact path="/redirect" component={SignUpRedirect} />
-          <PrivateRoute
-            exact
-            path={`/`}
-            component={EventsList}
-            {...this.state}
-            {...this.props}
-          />
-          <PrivateRoute
-            exact
-            path={`/addevent`}
-            component={AddEvent}
-            {...this.state}
-            {...this.props}
-          />
-          <PrivateRoute
-            exact
-            path="/event/:id"
-            component={EventLink}
-            {...this.state}
-            {...this.props}
-          />
-        </div>
-      </Router>
-    );
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			user: jsonwebtoken.decode(localStorage.getItem("token"))
+				? jsonwebtoken.decode(localStorage.getItem("token"))
+				: null
+		};
+	}
+
+	render() {
+		console.log(this.props);
+		return (
+			<Router>
+				<div className="App">
+					<Route
+						exact
+						path="/login"
+						render={props => {
+							return (
+								<div>
+									<Login {...props} />
+									<Link to="/signup">Sign Up</Link>
+								</div>
+							);
+						}}
+					/>
+					<Route
+						exact
+						path="/signup"
+						render={props => {
+							return <SignUp {...props} />;
+						}}
+					/>
+					<Route exact path="/redirect" component={SignUpRedirect} />
+					<PrivateRoute exact path={`/`} component={EventsList} />
+					<PrivateRoute exact path={`/addevent`} component={AddEvent} />
+					<PrivateRoute exact path="/event/:id" component={EventLink} />
+				</div>
+			</Router>
+		);
+	}
 }
 
 export default App;

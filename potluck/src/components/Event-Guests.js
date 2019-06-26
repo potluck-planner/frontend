@@ -29,15 +29,34 @@ class EventGuests extends React.Component {
 
 	addGuest = e => {
 		e.preventDefault();
-		this.props.addGuest(
-			`https://potlucker-planner.herokuapp.com/event/${
-				this.props.event_id
-			}/guests`,
-			{
-				username: this.state.username,
-				going: null
-			}
-		);
+		// Checks to see if user exists
+		this.state.allUsers.map(el => el.name).includes(this.state.username)
+			? this.props.addGuest(
+					`https://potlucker-planner.herokuapp.com/event/${
+						this.props.event_id
+					}/guests`,
+					{
+						username: this.state.allUsers.find(
+							el => el.name === this.state.username
+						).username,
+						going: null
+					}
+			  )
+			: alert(
+					`${this.state.username} is not in the system! Please invite ${
+						this.state.username
+					} to join Potluck Planner!`
+			  );
+		// No check for if user exists
+		// this.props.addGuest(
+		// 	`https://potlucker-planner.herokuapp.com/event/${
+		// 		this.props.event_id
+		// 	}/guests`,
+		// 	{
+		// 		username: this.state.username,
+		// 		going: null
+		// 	}
+		// );
 	};
 
 	handleChange = e => {
