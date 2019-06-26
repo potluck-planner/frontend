@@ -18,30 +18,30 @@ class AddEvent extends React.Component {
 		};
 	}
 
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
+	handleChange = e => {
+		this.setState({ [e.target.name]: e.target.value });
+	};
+
+	addEvent = event => {
+		event.preventDefault();
+		const newEvent = {
+			organizer_id: this.state.user.id,
+			event_name: this.state.event_name,
+			description: this.state.description,
+			date: this.state.date,
+			time: this.state.time
+		};
+		this.props.addEvent(
+			"https://potlucker-planner.herokuapp.com/event/",
+			newEvent
+		);
+		this.props.history.push(`/`);
+	};
 
 	render() {
 		console.log(this.props);
 		return (
-			<form
-				onSubmit={e => {
-					e.preventDefault();
-					this.props.addEvent(
-						"https://potlucker-planner.herokuapp.com/event/",
-						{
-							organizer_id: this.state.user.id,
-							event_name: this.state.event_name,
-							description: this.state.description,
-							date: this.state.date,
-							time: this.state.time
-						}
-					);
-					this.props.history.push(`/`);
-				}}
-				className="eventAdd"
-			>
+			<form onSubmit={this.addEvent} className="eventAdd">
 				<label htmlFor="event_name">Event Name</label>
 				<input
 					onChange={this.handleChange}
@@ -90,10 +90,9 @@ class AddEvent extends React.Component {
 			</form>
 		);
 	}
-
 }
 
 export default connect(
-  null,
-  { addEvent }
+	null,
+	{ addEvent }
 )(AddEvent);

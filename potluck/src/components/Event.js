@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getSingleEvent, deleteEvent, updateEvent } from "../actions";
+import { getSingleEvent, deleteEvent, addGuest, deleteGuest } from "../actions";
 import { connect } from "react-redux";
 import Loader from "react-loader-spinner";
 import EventFood from "./Event-Food";
@@ -51,12 +51,11 @@ export class Event extends Component {
 						<EventLocation {...this.props} />
 					</div>
 					<div className="eventRight">
-						<div className="eventGuests">
-							<h1>Guest List</h1>
-							{this.props.singleEvent.guests.map(guest => (
-								<EventGuests {...this.props} {...guest} key={guest.username} />
-							))}
-						</div>
+						<EventGuests
+							{...this.props}
+							addGuest={this.props.addGuest}
+							deleteGuest={this.props.deleteGuest}
+						/>
 						<div className="eventFood">
 							<h1>Food List</h1>
 							{this.props.singleEvent.food.map(food => (
@@ -78,5 +77,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{ getSingleEvent, updateEvent, deleteEvent }
+	{ getSingleEvent, deleteEvent, addGuest, deleteGuest }
 )(Event);

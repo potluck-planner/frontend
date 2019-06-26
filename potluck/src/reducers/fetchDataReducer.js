@@ -13,8 +13,6 @@ import {
 
 const initialState = {
 	events: [],
-	guests: [],
-	food: [],
 	fetchingEvents: false,
 	error: null
 };
