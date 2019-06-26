@@ -17,16 +17,34 @@
 	margin: 0 auto;
 }
 
+.loginLogo {
+  width: 200px;
+}
+
 .loginForm {
+<<<<<<< HEAD
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin: 15% auto 10% auto;
+  padding: 2%;
+  background: white;
+=======
 	display: flex;
 	flex-direction: column;
 	width: 60%;
 	margin: 20% auto 10% auto;
 	padding: 2%;
 	background: white;
+>>>>>>> 0b0e830ed1e15241818d878ad3e4c64b7dd88a3a
 
 	border-top: 1px solid #6a7fdb;
 	box-shadow: 0 3px 12px rgba(4, 15, 15, 0.4);
+}
+
+.redirectConfirm {
+  width: 80%;
+  margin: 20% auto;
 }
 
 .loginTitle {
