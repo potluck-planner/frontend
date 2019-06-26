@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Loader from "react-loader-spinner";
-import { login } from "../actions";
+import { login, getUsers } from "../actions";
 import { Link } from "react-router-dom";
 import { Logo } from "./img/logo.png";
 
@@ -26,6 +26,10 @@ class Login extends React.Component {
 		event.preventDefault();
 		this.props
 			.login(this.state.credentials)
+			// .then(this.props.getUsers(`http://localhost:5000/users/`))
+			.then(
+				this.props.getUsers(`https://potlucker-planner.herokuapp.com/users/`)
+			)
 			.then(() => this.props.history.push(`/`));
 	};
 
@@ -76,10 +80,11 @@ class Login extends React.Component {
 
 const mapStateToProps = state => ({
 	error: state.loginReducer.error,
-	loggingIn: state.loginReducer.loggingIn
+	loggingIn: state.loginReducer.loggingIn,
+	allUsers: state.fetchUsers.allUsers
 });
 
 export default connect(
 	mapStateToProps,
-	{ login }
+	{ login, getUsers }
 )(Login);
