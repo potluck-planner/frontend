@@ -47,6 +47,7 @@ class EventsList extends React.Component {
 						return (
 							<EventCard
 								{...event}
+								{...this.props}
 								{...this.state}
 								key={event.event_id}
 								deleteEvent={this.props.deleteEvent}

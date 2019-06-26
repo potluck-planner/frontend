@@ -158,9 +158,9 @@ export const addGuest = (URL, guest) => dispatch => {
 
 export const DELETE_GUEST_SUCCESS = "DELETE_GUEST_SUCCESS";
 export const DELETE_GUEST_FAIL = "DELETE_GUEST_FAIL";
-export const deleteGuest = (eventID, username) => dispatch => {
+export const deleteGuest = (URL, id, username) => dispatch => {
 	return axiosWithAuth()
-		.delete(eventID, username)
+		.delete(URL, id, username)
 		.then(res => {
 			console.log(res);
 			dispatch({ type: DELETE_EVENT_SUCCESS, payload: res.data });
