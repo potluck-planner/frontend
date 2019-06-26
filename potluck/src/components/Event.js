@@ -32,19 +32,21 @@ export class Event extends Component {
 		return (
 			<div className="event">
 				<div className="eventTop">
-					<div
-						onClick={e => {
-							e.preventDefault();
-							this.props.deleteEvent(this.props.event_id);
-							// need to hook up user info so pushes to the correct page
-							// return this.props.match === undefined
-							// 	? null
-							// 	: this.props.history.push(`/users/${this.state.user.username}/events`);
-						}}
-						className="deleteButton"
-					>
-						<i className="far fa-trash-alt" />
-					</div>
+					{this.props.user.id === this.props.organizer_id && (
+						<div
+							onClick={e => {
+								e.preventDefault();
+								this.props.deleteEvent(this.props.event_id);
+								// need to hook up user info so pushes to the correct page
+								// return this.props.match === undefined
+								// 	? null
+								// 	: this.props.history.push(`/users/${this.state.user.username}/events`);
+							}}
+							className="deleteButton"
+						>
+							<i className="far fa-trash-alt" />
+						</div>
+					)}
 				</div>
 				<div className="eventBottom">
 					<div className="eventLeft">
@@ -52,7 +54,10 @@ export class Event extends Component {
 							{...this.props}
 							getSingleEvent={this.props.getSingleEvent}
 						/>
-						<EventLocation {...this.props} />
+						<EventLocation
+							{...this.props}
+							getSingleEvent={this.props.getSingleEvent}
+						/>
 					</div>
 					<div className="eventRight">
 						<EventGuests

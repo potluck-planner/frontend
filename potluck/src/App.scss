@@ -2,6 +2,16 @@
 	text-align: center;
 }
 
+// Logout button
+.logOut {
+	display: flex;
+	justify-content: space-between;
+	padding: 1%;
+	button {
+		padding: 0.5%;
+	}
+}
+
 // NavBar from top
 .navBar {
 	display: flex;
@@ -100,7 +110,8 @@
 			.eventLocation {
 				border: 1px solid black;
 				margin: 1%;
-				padding: 1%;
+				padding: 1% 1% 5% 15%;
+				text-align: left;
 				.updateButton {
 					display: flex;
 					justify-content: flex-end;

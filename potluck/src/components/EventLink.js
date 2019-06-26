@@ -40,7 +40,12 @@ class EventLink extends React.Component {
 						event => event.event_id === parseInt(this.props.match.params.id)
 					)
 					.map(event => (
-						<Event {...event} {...this.props} key={event.event_id} />
+						<Event
+							{...event}
+							{...this.state}
+							{...this.props}
+							key={event.event_id}
+						/>
 					))}
 			</div>
 		);
