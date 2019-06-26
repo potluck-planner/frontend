@@ -2,7 +2,7 @@ import React from "react";
 import EventCard from "./EventCard";
 import Loader from "react-loader-spinner";
 import jsonwebtoken from "jsonwebtoken";
-import { getEvents, deleteEvent } from "../actions";
+import { getEvents, deleteEvent, getUsers } from "../actions";
 import { connect } from "react-redux";
 
 class EventsList extends React.Component {
@@ -22,7 +22,11 @@ class EventsList extends React.Component {
 		const URL = `https://potlucker-planner.herokuapp.com/users/${
 			this.state.user.username
 		}/events`;
-		this.props.getEvents(URL);
+		this.props
+			.getEvents(URL)
+			.then(
+				this.props.getUsers(`https://potlucker-planner.herokuapp.com/users/`)
+			);
 	}
 
 	render() {
@@ -59,10 +63,11 @@ class EventsList extends React.Component {
 const mapStateToProps = state => ({
 	error: state.fetchDataReducer.error,
 	fetchingEvents: state.fetchDataReducer.fetchingEvents,
-	events: state.fetchDataReducer.events
+	events: state.fetchDataReducer.events,
+	allUsers: state.fetchUsers.allUsers
 });
 
 export default connect(
 	mapStateToProps,
-	{ getEvents, deleteEvent }
+	{ getEvents, deleteEvent, getUsers }
 )(EventsList);

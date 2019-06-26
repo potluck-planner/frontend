@@ -16,18 +16,6 @@ class EventGuests extends React.Component {
 		};
 	}
 
-	componentDidMount() {
-		axiosWithAuth()
-			// .get("http://localhost:5000/users")
-			.get("https://potlucker-planner.herokuapp.com/users")
-			.then(res => {
-				this.setState({ allUsers: res.data });
-			})
-			.catch(err => {
-				console.log(err.response);
-			});
-	}
-
 	addGuest = e => {
 		e.preventDefault();
 		// Checks to see if user exists

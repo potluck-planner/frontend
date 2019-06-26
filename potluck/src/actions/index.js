@@ -50,7 +50,7 @@ export const FETCH_EVENT_SUCCESS = "FETCH_EVENT_SUCCESS";
 export const FETCH_EVENT_FAILURE = "FETCH_EVENT_FAILURE";
 export const getEvents = URL => dispatch => {
 	dispatch({ type: FETCH_EVENT_START });
-	axiosWithAuth()
+	return axiosWithAuth()
 		.get(URL)
 		.then(res => {
 			dispatch({ type: FETCH_EVENT_SUCCESS, payload: res.data });
