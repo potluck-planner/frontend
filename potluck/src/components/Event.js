@@ -10,6 +10,7 @@ import AddFood from "./AddFoodForm";
 
 export class Event extends Component {
 	componentDidMount() {
+		// const URL = `http://localhost:5000/event/${this.props.event_id}`;
 		const URL = `https://potlucker-planner.herokuapp.com/event/${
 			this.props.event_id
 		}`;
