@@ -46,7 +46,7 @@ export const getEvents = URL => dispatch => {
 export const ADD_EVENT_SUCCESS = "ADD_EVENT_SUCCESS";
 export const ADD_EVENT_FAIL = "ADD_EVENT_FAIL";
 export const addEvent = (URL, event) => dispatch => {
-	axiosWithAuth()
+	return axiosWithAuth()
 		.post(URL, event)
 		.then(res => {
 			console.log(res.data);
@@ -94,7 +94,7 @@ export const UPDATE_EVENT_INFO_SUCCESS = "UPDATE_EVENT_INFO_SUCCESS";
 export const UPDATE_EVENT_INFO_FAIL = "UPDATE_EVENT_INFO_FAIL";
 export const updateEventInfo = (URL, updatedEventInfo) => dispatch => {
 	dispatch({ type: UPDATE_EVENT_INFO_START });
-	axiosWithAuth()
+	return axiosWithAuth()
 		.put(URL, updatedEventInfo)
 		.then(res => {
 			console.log(res.data);

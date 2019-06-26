@@ -1,6 +1,6 @@
 import React from "react";
 import jsonwebtoken from "jsonwebtoken";
-// import { axiosWithAuth } from "../util/axiosWithAuth";
+import { axiosWithAuth } from "../util/axiosWithAuth";
 
 class EventGuests extends React.Component {
 	constructor() {
@@ -16,16 +16,16 @@ class EventGuests extends React.Component {
 		};
 	}
 
-	// componentDidMount() {
-	// 	axiosWithAuth()
-	// 		.get("https://potlucker-planner.herokuapp.com/users")
-	// 		.then(res => {
-	// 			this.setState({ allUsers: res.data });
-	// 		})
-	// 		.catch(err => {
-	// 			console.log(err.response);
-	// 		});
-	// }
+	componentDidMount() {
+		axiosWithAuth()
+			.get("https://potlucker-planner.herokuapp.com/users")
+			.then(res => {
+				this.setState({ allUsers: res.data });
+			})
+			.catch(err => {
+				console.log(err.response);
+			});
+	}
 
 	addGuest = e => {
 		e.preventDefault();
