@@ -4,19 +4,19 @@ import { addEvent } from "../actions";
 import jsonwebtoken from "jsonwebtoken";
 
 class AddEvent extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			user: jsonwebtoken.decode(localStorage.getItem("token"))
-				? jsonwebtoken.decode(localStorage.getItem("token"))
-				: null,
-			organizer_id: "",
-			event_name: "",
-			description: "",
-			date: new Date(),
-			time: "12:00"
-		};
-	}
+  constructor() {
+    super();
+    this.state = {
+      user: jsonwebtoken.decode(localStorage.getItem("token"))
+        ? jsonwebtoken.decode(localStorage.getItem("token"))
+        : null,
+      organizer_id: "",
+      event_name: "",
+      description: "",
+      date: new Date(),
+      time: "12:00"
+    };
+  }
 
 	handleChange = e => {
 		this.setState({ [e.target.name]: e.target.value });
