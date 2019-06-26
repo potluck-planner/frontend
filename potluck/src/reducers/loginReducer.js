@@ -1,9 +1,12 @@
 import { LOGIN_START, LOGIN_SUCCESS, LOGIN_FAILURE } from "../actions";
+import jsonwebtoken from "jsonwebtoken";
 
 const initialState = {
 	loggingIn: false,
 	error: null,
-	isLoggedIn: false
+	activeUser: jsonwebtoken.decode(localStorage.getItem("token"))
+		? jsonwebtoken.decode(localStorage.getItem("token"))
+		: null
 };
 
 const loginReducer = (state = initialState, action) => {
@@ -12,22 +15,21 @@ const loginReducer = (state = initialState, action) => {
 			return {
 				...state,
 				error: null,
-				loggingIn: true,
-				isLoggedIn: false
+				loggingIn: true
 			};
 		case LOGIN_SUCCESS:
 			return {
 				...state,
 				loggingIn: false,
 				error: null,
-				isLoggedIn: true
+				activeUser: jsonwebtoken.decode(action.payload)
 			};
 		case LOGIN_FAILURE:
 			return {
 				...state,
 				loggingIn: false,
 				error: action.payload,
-				isLoggedIn: false
+				activeUser: null
 			};
 		default:
 			return state;
