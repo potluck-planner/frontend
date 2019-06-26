@@ -5,6 +5,13 @@ import { connect } from "react-redux";
 class PrivateRoute extends Component {
 	render() {
 		const { component: Component, ...rest } = this.props;
+		const myName = this.props.allUsers.filter(
+			user => user.id === this.props.activeUser.id
+		)[0]
+			? this.props.allUsers.filter(
+					user => user.id === this.props.activeUser.id
+			  )[0].name
+			: null;
 		console.log(this.props);
 		console.log(rest);
 		return (
@@ -15,7 +22,7 @@ class PrivateRoute extends Component {
 						return (
 							<>
 								<div className="logOut">
-									<div>Welcome {this.props.activeUser.username}</div>
+									<div>Welcome {myName}</div>
 									<button
 										onClick={() => {
 											localStorage.removeItem("token");
@@ -45,7 +52,8 @@ class PrivateRoute extends Component {
 }
 
 const mapStateToProps = state => ({
-	activeUser: state.loginReducer.activeUser
+	activeUser: state.loginReducer.activeUser,
+	allUsers: state.fetchUsers.allUsers
 });
 
 export default connect(

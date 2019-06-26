@@ -42,16 +42,16 @@ class EventLocation extends React.Component {
 		};
 		this.props
 			.updateEventLocation(
-				`http://localhost:5000/event/${this.props.event_id}/location`,
-				// `https://potlucker-planner.herokuapp.com/event/${
-				// 	this.props.event_id
-				// }/location`,
+				// `http://localhost:5000/event/${this.props.event_id}/location`,
+				`https://potlucker-planner.herokuapp.com/event/${
+					this.props.event_id
+				}/location`,
 				updatedLocation
 			)
 			.then(() =>
 				this.props.getSingleEvent(
-					`http://localhost:5000/event/${this.props.event_id}`
-					// `https://potlucker-planner.herokuapp.com/event/${this.props.event_id}`
+					// `http://localhost:5000/event/${this.props.event_id}`
+					`https://potlucker-planner.herokuapp.com/event/${this.props.event_id}`
 				)
 			);
 		this.setState({ updatingLocation: false });

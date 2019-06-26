@@ -8,8 +8,8 @@ export const login = creds => dispatch => {
 	dispatch({ type: LOGIN_START });
 	return (
 		axiosWithAuth()
-			.post("http://localhost:5000/users/login", creds)
-			// .post("https://potlucker-planner.herokuapp.com/users/login", creds)
+			// .post("http://localhost:5000/users/login", creds)
+			.post("https://potlucker-planner.herokuapp.com/users/login", creds)
 			.then(res => {
 				localStorage.setItem("token", res.data.token);
 				dispatch({ type: LOGIN_SUCCESS, payload: res.data.token });
@@ -79,7 +79,7 @@ export const addEvent = (URL, event) => dispatch => {
 export const DELETE_EVENT_SUCCESS = "DELETE_EVENT_SUCCESS";
 export const DELETE_EVENT_FAIL = "DELETE_EVENT_FAIL";
 export const deleteEvent = URL => dispatch => {
-	axiosWithAuth()
+	return axiosWithAuth()
 		.delete(URL)
 		.then(res => {
 			console.log(res);

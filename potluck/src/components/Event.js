@@ -16,13 +16,13 @@ import AddFood from "./AddFoodForm";
 
 export class Event extends Component {
 	componentDidMount() {
-		const URL = `http://localhost:5000/event/${this.props.event_id}`;
-		// const URL = `https://potlucker-planner.herokuapp.com/event/${
-		// 	this.props.event_id
-		// }`;
+		// const URL = `http://localhost:5000/event/${this.props.event_id}`;
+		const URL = `https://potlucker-planner.herokuapp.com/event/${
+			this.props.event_id
+		}`;
 		this.props.getSingleEvent(URL).then(
-			this.props.getUsers(`http://localhost:5000/users/`)
-			// this.props.getUsers(`https://potlucker-planner.herokuapp.com/users/`)
+			// this.props.getUsers(`http://localhost:5000/users/`)
+			this.props.getUsers(`https://potlucker-planner.herokuapp.com/users/`)
 		);
 	}
 
@@ -46,11 +46,14 @@ export class Event extends Component {
 						<div
 							onClick={e => {
 								e.preventDefault();
-								this.props.deleteEvent(this.props.event_id);
-								// need to hook up user info so pushes to the correct page
-								// return this.props.match === undefined
-								// 	? null
-								// 	: this.props.history.push(`/users/${this.state.user.username}/events`);
+								this.props
+									.deleteEvent(
+										// `http://localhost:5000/event/${this.props.event_id}`
+										`https://potlucker-planner.herokuapp.com/event/${
+											this.props.event_id
+										}`
+									)
+									.then(() => this.props.history.push(`/`));
 							}}
 							className="deleteButton"
 						>

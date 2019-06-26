@@ -16,15 +16,15 @@ class EventsList extends React.Component {
 	}
 
 	componentDidMount() {
-		const URL = `http://localhost:5000/users/${
-			this.state.user.username
-		}/events`;
-		// const URL = `https://potlucker-planner.herokuapp.com/users/${
+		// const URL = `http://localhost:5000/users/${
 		// 	this.state.user.username
 		// }/events`;
+		const URL = `https://potlucker-planner.herokuapp.com/users/${
+			this.state.user.username
+		}/events`;
 		this.props.getEvents(URL).then(
-			this.props.getUsers(`http://localhost:5000/users/`)
-			// this.props.getUsers(`https://potlucker-planner.herokuapp.com/users/`)
+			// this.props.getUsers(`http://localhost:5000/users/`)
+			this.props.getUsers(`https://potlucker-planner.herokuapp.com/users/`)
 		);
 	}
 
