@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Loader from "react-loader-spinner";
 import { login } from "../actions";
 import { Link } from "react-router-dom";
+import { Logo } from "./img/logo.png";
 
 class Login extends React.Component {
   state = {
