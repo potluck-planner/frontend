@@ -29,8 +29,8 @@ class PrivateRoute extends Component {
 									<NavLink exact to={`/`} className="navLink">
 										Events List
 									</NavLink>
-									<NavLink exact to={`/addevent`} className="navLink">
-										Add Events
+									<NavLink exact to={`/createevent`} className="navLink">
+										Create Event
 									</NavLink>
 								</div>
 								<Component {...this.props} {...props} />

@@ -36,7 +36,7 @@ class App extends React.Component {
 					/>
 					<Route exact path="/redirect" component={SignUpRedirect} />
 					<PrivateRoute exact path={`/`} component={EventsList} />
-					<PrivateRoute exact path={`/addevent`} component={AddEvent} />
+					<PrivateRoute exact path={`/createevent`} component={AddEvent} />
 					<PrivateRoute exact path="/event/:id" component={EventLink} />
 				</div>
 			</Router>

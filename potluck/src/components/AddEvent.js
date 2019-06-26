@@ -10,7 +10,10 @@ class AddEvent extends React.Component {
 			event_name: "",
 			description: "",
 			date: new Date(),
-			time: "12:00"
+			time: "12:00",
+			address: "",
+			city: "",
+			state: ""
 		};
 	}
 
@@ -18,7 +21,7 @@ class AddEvent extends React.Component {
 		this.setState({ [e.target.name]: e.target.value });
 	};
 
-	addEvent = event => {
+	createEvent = event => {
 		event.preventDefault();
 		const newEvent = {
 			organizer_id: this.props.activeUser.username,
@@ -27,6 +30,11 @@ class AddEvent extends React.Component {
 			date: this.state.date,
 			time: this.state.time
 		};
+		// const newEventLocation = {
+		// 	address: this.props.address,
+		// 	city: this.props.city,
+		// 	state: this.props.state
+		// };
 		this.props
 			.addEvent("https://potlucker-planner.herokuapp.com/event/", newEvent)
 			.then(() => this.props.history.push(`/`));
@@ -36,7 +44,7 @@ class AddEvent extends React.Component {
 		console.log(this.props);
 		console.log(this.state);
 		return (
-			<form onSubmit={this.addEvent} className="eventAdd">
+			<form onSubmit={this.createEvent} className="eventAdd">
 				<label htmlFor="event_name">Event Name</label>
 				<input
 					onChange={this.handleChange}
@@ -81,7 +89,7 @@ class AddEvent extends React.Component {
 					className="addElement"
 					required
 				/>
-				<button>Add Event</button>
+				<button>Create Event</button>
 			</form>
 		);
 	}

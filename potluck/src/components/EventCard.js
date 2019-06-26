@@ -29,16 +29,6 @@ class EventCard extends React.Component {
 					{/* need connect/functionality here to confirm and delete/decline event */}
 					<div className="buttonDiv">
 						<div
-							// onClick should have hover with text saying confirm
-							// onClick should only appear if guest has not already confirmed
-							/*onClick={this.props.confirmEvent}*/
-							className="updateButton"
-						>
-							<i className="fas fa-check">
-								<span>Confirm your attendance</span>
-							</i>
-						</div>
-						<div
 							// onClick should have hover with text saying decline
 							// for organizers it could say delete
 							onClick={e => this.deleteEvent(e)}
@@ -46,6 +36,17 @@ class EventCard extends React.Component {
 						>
 							<i className="far fa-trash-alt">
 								<span>Delete this event</span>
+							</i>
+						</div>
+
+						<div
+							// onClick should have hover with text saying confirm
+							// onClick should only appear if guest has not already confirmed
+							/*onClick={this.props.confirmEvent}*/
+							className="updateButton"
+						>
+							<i className="fas fa-check">
+								<span>Confirm your attendance</span>
 							</i>
 						</div>
 					</div>
