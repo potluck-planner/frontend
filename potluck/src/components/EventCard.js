@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 
 class EventCard extends React.Component {
 	componentDidMount() {
+		// const URL = `http://localhost:5000/event/${this.props.event_id}`;
 		const URL = `https://potlucker-planner.herokuapp.com/event/${
 			this.props.event_id
 		}`;
@@ -14,6 +15,7 @@ class EventCard extends React.Component {
 	deleteEvent = e => {
 		e.preventDefault();
 		this.props.deleteEvent(
+			// `http://localhost:5000/event/${this.props.event_id}`
 			`https://potlucker-planner.herokuapp.com/event/${this.props.event_id}`
 		);
 	};
@@ -26,29 +28,33 @@ class EventCard extends React.Component {
 					<Link to={`/event/${this.props.event_id}`} className="viewDiv">
 						View Event
 					</Link>
-					{/* need connect/functionality here to confirm and delete/decline event */}
 					<div className="buttonDiv">
-						<div
-							// onClick should have hover with text saying decline
-							// for organizers it could say delete
-							onClick={e => this.deleteEvent(e)}
-							className="deleteButton"
-						>
-							<i className="far fa-trash-alt">
-								<span>Delete this event</span>
-							</i>
-						</div>
-
-						<div
-							// onClick should have hover with text saying confirm
-							// onClick should only appear if guest has not already confirmed
-							/*onClick={this.props.confirmEvent}*/
-							className="updateButton"
-						>
-							<i className="fas fa-check">
-								<span>Confirm your attendance</span>
-							</i>
-						</div>
+						{this.props.activeUser.id === this.props.organizer_id && (
+							<div onClick={e => this.deleteEvent(e)} className="deleteButton">
+								<i className="far fa-trash-alt">
+									<span>Delete this event</span>
+								</i>
+							</div>
+						)}
+						{this.props.activeUser.id !== this.props.organizer_id && (
+							<>
+								<div
+									// onClick should have hover with text saying confirm
+									// onClick should only appear if guest has not already confirmed
+									/*onClick={this.props.confirmEvent}*/
+									className="updateButton"
+								>
+									<i className="fas fa-check">
+										<span>Confirm your attendance</span>
+									</i>
+								</div>
+								<div className="deleteButton">
+									<i className="fas fa-times">
+										<span>Decline invite</span>
+									</i>
+								</div>
+							</>
+						)}
 					</div>
 				</div>
 
@@ -70,7 +76,8 @@ class EventCard extends React.Component {
 const mapStateToProps = state => ({
 	error: state.singleEventReducer.error,
 	fetchingSingleEvent: state.singleEventReducer.updatingEvent,
-	singleEvent: state.singleEventReducer.singleEvent
+	singleEvent: state.singleEventReducer.singleEvent,
+	activeUser: state.loginReducer.activeUser
 });
 
 export default connect(

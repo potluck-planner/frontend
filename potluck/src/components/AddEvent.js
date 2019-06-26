@@ -24,7 +24,8 @@ class AddEvent extends React.Component {
 	createEvent = event => {
 		event.preventDefault();
 		const newEvent = {
-			organizer_id: this.props.activeUser.username,
+			// organizer_id: this.props.activeUser.id,
+			organizer_id: this.props.activeUser.id,
 			event_name: this.state.event_name,
 			description: this.state.description,
 			date: this.state.date,
@@ -36,6 +37,7 @@ class AddEvent extends React.Component {
 		// 	state: this.props.state
 		// };
 		this.props
+			// .addEvent("http://localhost:5000/event/", newEvent)
 			.addEvent("https://potlucker-planner.herokuapp.com/event/", newEvent)
 			.then(() => this.props.history.push(`/`));
 	};
