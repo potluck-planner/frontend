@@ -10,7 +10,7 @@ export const login = creds => dispatch => {
 		.post("https://potlucker-planner.herokuapp.com/users/login", creds)
 		.then(res => {
 			localStorage.setItem("token", res.data.token);
-			dispatch({ type: LOGIN_SUCCESS });
+			dispatch({ type: LOGIN_SUCCESS, payload: res.data.token });
 		})
 		.catch(err => console.log(err.response));
 };
@@ -126,7 +126,7 @@ export const updateEventLocation = (URL, updatedEventLocation) => dispatch => {
 export const ADD_GUEST_SUCCESS = "ADD_GUEST_SUCCESS";
 export const ADD_GUEST_FAIL = "ADD_GUEST_FAIL";
 export const addGuest = (URL, guest) => dispatch => {
-	axiosWithAuth()
+	return axiosWithAuth()
 		.post(URL, guest)
 		.then(res => {
 			console.log(res.data);
@@ -141,7 +141,7 @@ export const addGuest = (URL, guest) => dispatch => {
 export const DELETE_GUEST_SUCCESS = "DELETE_GUEST_SUCCESS";
 export const DELETE_GUEST_FAIL = "DELETE_GUEST_FAIL";
 export const deleteGuest = (eventID, username) => dispatch => {
-	axiosWithAuth()
+	return axiosWithAuth()
 		.delete(eventID, username)
 		.then(res => {
 			console.log(res);
@@ -153,12 +153,29 @@ export const deleteGuest = (eventID, username) => dispatch => {
 		});
 };
 
+export const UPDATE_GUEST_START = "UPDATE_GUEST_START";
+export const UPDATE_GUEST_SUCCESS = "UPDATE_GUEST_SUCCESS";
+export const UPDATE_GUEST_FAIL = "UPDATE_GUEST_FAIL";
+export const updateGuest = (URL, username) => dispatch => {
+	dispatch({ type: UPDATE_GUEST_START });
+	return axiosWithAuth()
+		.put(URL, username)
+		.then(res => {
+			console.log(res);
+			dispatch({ type: UPDATE_GUEST_SUCCESS, payload: res.data });
+		})
+		.catch(err => {
+			console.log(err.response);
+			dispatch({ type: UPDATE_GUEST_FAIL, payload: err.response });
+		});
+};
+
 const ADD_FOOD_START = "ADD_FOOD_START";
 const ADD_FOOD_SUCCESS = "ADD_FOOD_SUCCESS";
 const ADD_FOOD_FAILURE = "ADD_FOOD_FAILURE";
 export const addFood = (URL, food) => dispatch => {
 	dispatch({ type: ADD_FOOD_START });
-	axiosWithAuth()
+	return axiosWithAuth()
 		.post(URL, food)
 		.then(res => {
 			dispatch({ type: ADD_FOOD_SUCCESS, payload: res.data });

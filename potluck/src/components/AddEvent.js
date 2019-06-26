@@ -1,15 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { addEvent } from "../actions";
-import jsonwebtoken from "jsonwebtoken";
 
 class AddEvent extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			user: jsonwebtoken.decode(localStorage.getItem("token"))
-				? jsonwebtoken.decode(localStorage.getItem("token"))
-				: null,
 			organizer_id: "",
 			event_name: "",
 			description: "",
@@ -25,7 +21,7 @@ class AddEvent extends React.Component {
 	addEvent = event => {
 		event.preventDefault();
 		const newEvent = {
-			organizer_id: this.state.user.id,
+			organizer_id: this.props.activeUser.username,
 			event_name: this.state.event_name,
 			description: this.state.description,
 			date: this.state.date,
@@ -38,6 +34,7 @@ class AddEvent extends React.Component {
 
 	render() {
 		console.log(this.props);
+		console.log(this.state);
 		return (
 			<form onSubmit={this.addEvent} className="eventAdd">
 				<label htmlFor="event_name">Event Name</label>
@@ -90,7 +87,11 @@ class AddEvent extends React.Component {
 	}
 }
 
+const mapStateToProps = state => ({
+	activeUser: state.loginReducer.activeUser
+});
+
 export default connect(
-	null,
+	mapStateToProps,
 	{ addEvent }
 )(AddEvent);
