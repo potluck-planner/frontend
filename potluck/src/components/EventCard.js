@@ -5,18 +5,18 @@ import { connect } from "react-redux";
 
 class EventCard extends React.Component {
 	componentDidMount() {
-		// const URL = `http://localhost:5000/event/${this.props.event_id}`;
-		const URL = `https://potlucker-planner.herokuapp.com/event/${
-			this.props.event_id
-		}`;
+		const URL = `http://localhost:5000/event/${this.props.event_id}`;
+		// const URL = `https://potlucker-planner.herokuapp.com/event/${
+		// 	this.props.event_id
+		// }`;
 		this.props.getSingleEvent(URL);
 	}
 
 	deleteEvent = e => {
 		e.preventDefault();
 		this.props.deleteEvent(
-			// `http://localhost:5000/event/${this.props.event_id}`
-			`https://potlucker-planner.herokuapp.com/event/${this.props.event_id}`
+			`http://localhost:5000/event/${this.props.event_id}`
+			// `https://potlucker-planner.herokuapp.com/event/${this.props.event_id}`
 		);
 	};
 

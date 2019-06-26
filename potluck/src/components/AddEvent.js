@@ -37,8 +37,8 @@ class AddEvent extends React.Component {
 		// 	state: this.props.state
 		// };
 		this.props
-			// .addEvent("http://localhost:5000/event/", newEvent)
-			.addEvent("https://potlucker-planner.herokuapp.com/event/", newEvent)
+			.addEvent("http://localhost:5000/event/", newEvent)
+			// .addEvent("https://potlucker-planner.herokuapp.com/event/", newEvent)
 			.then(() => this.props.history.push(`/`));
 	};
 

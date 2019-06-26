@@ -8,8 +8,8 @@ export const login = creds => dispatch => {
 	dispatch({ type: LOGIN_START });
 	return (
 		axiosWithAuth()
-			// .post("http://localhost:5000/users/login", creds)
-			.post("https://potlucker-planner.herokuapp.com/users/login", creds)
+			.post("http://localhost:5000/users/login", creds)
+			// .post("https://potlucker-planner.herokuapp.com/users/login", creds)
 			.then(res => {
 				localStorage.setItem("token", res.data.token);
 				dispatch({ type: LOGIN_SUCCESS, payload: res.data.token });
@@ -96,7 +96,7 @@ export const FETCH_SINGLE_EVENT_SUCCESS = "FETCH_SINGLE_EVENT_SUCCESS";
 export const FETCH_SINGLE_EVENT_FAILURE = "FETCH_SINGLE_EVENT_FAILURE";
 export const getSingleEvent = URL => dispatch => {
 	dispatch({ type: FETCH_SINGLE_EVENT_START });
-	axiosWithAuth()
+	return axiosWithAuth()
 		.get(URL)
 		.then(res => {
 			dispatch({ type: FETCH_SINGLE_EVENT_SUCCESS, payload: res.data });

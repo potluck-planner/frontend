@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { getSingleEvent, deleteEvent, addGuest, deleteGuest } from "../actions";
+import {
+	getSingleEvent,
+	deleteEvent,
+	addGuest,
+	deleteGuest,
+	getUsers
+} from "../actions";
 import { connect } from "react-redux";
 import Loader from "react-loader-spinner";
 import EventFood from "./Event-Food";
@@ -10,11 +16,14 @@ import AddFood from "./AddFoodForm";
 
 export class Event extends Component {
 	componentDidMount() {
-		// const URL = `http://localhost:5000/event/${this.props.event_id}`;
-		const URL = `https://potlucker-planner.herokuapp.com/event/${
-			this.props.event_id
-		}`;
-		this.props.getSingleEvent(URL);
+		const URL = `http://localhost:5000/event/${this.props.event_id}`;
+		// const URL = `https://potlucker-planner.herokuapp.com/event/${
+		// 	this.props.event_id
+		// }`;
+		this.props.getSingleEvent(URL).then(
+			this.props.getUsers(`http://localhost:5000/users/`)
+			// this.props.getUsers(`https://potlucker-planner.herokuapp.com/users/`)
+		);
 	}
 
 	render() {
@@ -83,10 +92,11 @@ export class Event extends Component {
 const mapStateToProps = state => ({
 	error: state.singleEventReducer.error,
 	fetchingSingleEvent: state.singleEventReducer.updatingEvent,
-	singleEvent: state.singleEventReducer.singleEvent
+	singleEvent: state.singleEventReducer.singleEvent,
+	allUsers: state.fetchUsers.allUsers
 });
 
 export default connect(
 	mapStateToProps,
-	{ getSingleEvent, deleteEvent, addGuest, deleteGuest }
+	{ getSingleEvent, deleteEvent, addGuest, deleteGuest, getUsers }
 )(Event);
