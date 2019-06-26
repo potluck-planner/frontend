@@ -16,6 +16,9 @@ class EventLink extends React.Component {
 	}
 
 	componentDidMount() {
+		// const URL = `http://localhost:5000/users/${
+		// 	this.state.user.username
+		// }/events`;
 		const URL = `https://potlucker-planner.herokuapp.com/users/${
 			this.state.user.username
 		}/events`;

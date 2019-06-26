@@ -6,9 +6,6 @@ import {
 	ADD_EVENT_FAIL,
 	DELETE_EVENT_SUCCESS,
 	DELETE_EVENT_FAIL
-	// UPDATE_EVENT_START,
-	// UPDATE_EVENT_SUCCESS,
-	// UPDATE_EVENT_FAIL
 } from "../actions";
 
 const initialState = {
@@ -41,7 +38,6 @@ const fetchDataReducer = (state = initialState, action) => {
 		case ADD_EVENT_SUCCESS:
 			return {
 				...state,
-				// organizer is still not immediately loading
 				events: [...state.events, action.payload.event],
 				error: null
 			};
