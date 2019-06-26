@@ -9,25 +9,25 @@ import EventLocation from "./Event-Location";
 import AddFood from "./AddFoodForm";
 
 export class Event extends Component {
-  componentDidMount() {
-    const URL = `https://potlucker-planner.herokuapp.com/event/${
-      this.props.event_id
-    }`;
-    this.props.getSingleEvent(URL);
-  }
+	componentDidMount() {
+		const URL = `https://potlucker-planner.herokuapp.com/event/${
+			this.props.event_id
+		}`;
+		this.props.getSingleEvent(URL);
+	}
 
-  render() {
-    console.log(this.props);
-    console.log(this.props.match);
-    console.log(this.props.singleEvent);
-    console.log(this.props.singleEvent.event);
-    if (this.props.singleEvent.event === undefined) {
-      return (
-        <div className="loadingIcon">
-          <Loader type="TailSpin" color="#1f2a38" height="100" width="100" />
-        </div>
-      );
-    }
+	render() {
+		console.log(this.props);
+		console.log(this.props.match);
+		console.log(this.props.singleEvent);
+		console.log(this.props.singleEvent.event);
+		if (this.props.singleEvent.event === undefined) {
+			return (
+				<div className="loadingIcon">
+					<Loader type="TailSpin" color="#1f2a38" height="100" width="100" />
+				</div>
+			);
+		}
 
 		return (
 			<div className="event">
@@ -57,24 +57,24 @@ export class Event extends Component {
 							addGuest={this.props.addGuest}
 							deleteGuest={this.props.deleteGuest}
 						/>
-            <div className="eventFood">
-              <h1>Food List</h1>
-              {this.props.singleEvent.food.map(food => (
-                <EventFood {...this.props} {...food} key={food.recipe_name} />
-              ))}
-              <AddFood {...this.props} key={this.props.quantity} />
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+						<div className="eventFood">
+							<h1>Food List</h1>
+							{this.props.singleEvent.food.map(food => (
+								<EventFood {...this.props} {...food} key={food.recipe_name} />
+							))}
+							<AddFood {...this.props} key={this.props.quantity} />
+						</div>
+					</div>
+				</div>
+			</div>
+		);
+	}
 }
 
 const mapStateToProps = state => ({
-  error: state.singleEventReducer.error,
-  fetchingSingleEvent: state.singleEventReducer.updatingEvent,
-  singleEvent: state.singleEventReducer.singleEvent
+	error: state.singleEventReducer.error,
+	fetchingSingleEvent: state.singleEventReducer.updatingEvent,
+	singleEvent: state.singleEventReducer.singleEvent
 });
 
 export default connect(
