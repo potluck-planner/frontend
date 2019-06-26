@@ -19,7 +19,6 @@ class EventsList extends React.Component {
 		const URL = `https://potlucker-planner.herokuapp.com/users/${
 			this.state.user.username
 		}/events`;
-		// const URL = `https://potlucker-planner.herokuapp.com/users/`;
 		this.props.getEvents(URL);
 	}
 

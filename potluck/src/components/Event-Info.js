@@ -117,7 +117,7 @@ class EventInfo extends React.Component {
 							className="addElement"
 							required
 						/>
-						<button>Add Event</button>
+						<button>Update Info</button>
 					</form>
 				)}
 			</div>

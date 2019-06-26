@@ -111,7 +111,7 @@ export const UPDATE_EVENT_LOCATION_SUCCESS = "UPDATE_EVENT_LOCATION_SUCCESS";
 export const UPDATE_EVENT_LOCATION_FAIL = "UPDATE_EVENT_LOCATION_FAIL";
 export const updateEventLocation = (URL, updatedEventLocation) => dispatch => {
   dispatch({ type: UPDATE_EVENT_LOCATION_START });
-  axiosWithAuth()
+  return axiosWithAuth()
     .put(URL, updatedEventLocation)
     .then(res => {
       console.log(res.data);
