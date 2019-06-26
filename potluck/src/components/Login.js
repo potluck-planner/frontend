@@ -64,7 +64,7 @@ class Login extends React.Component {
 						</button>
 					</form>
 					Need to create an account?
-					<Link to="/signup" class="signUpLink">
+					<Link to="/signup" className="signUpLink">
 						Sign Up
 					</Link>
 				</div>
