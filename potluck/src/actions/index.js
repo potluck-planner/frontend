@@ -31,64 +31,47 @@ export const FETCH_EVENT_START = "FETCH_EVENT_START";
 export const FETCH_EVENT_SUCCESS = "FETCH_EVENT_SUCCESS";
 export const FETCH_EVENT_FAILURE = "FETCH_EVENT_FAILURE";
 export const getEvents = URL => dispatch => {
-  dispatch({ type: FETCH_EVENT_START });
-  axiosWithAuth()
-    .get(URL)
-    .then(res => {
-      dispatch({ type: FETCH_EVENT_SUCCESS, payload: res.data });
-    })
-    .catch(err => {
-      console.log(err.response);
-      dispatch({ type: FETCH_EVENT_FAILURE, payload: err.response });
-    });
+	dispatch({ type: FETCH_EVENT_START });
+	axiosWithAuth()
+		.get(URL)
+		.then(res => {
+			dispatch({ type: FETCH_EVENT_SUCCESS, payload: res.data });
+		})
+		.catch(err => {
+			console.log(err.response);
+			dispatch({ type: FETCH_EVENT_FAILURE, payload: err.response });
+		});
 };
 
 export const ADD_EVENT_SUCCESS = "ADD_EVENT_SUCCESS";
 export const ADD_EVENT_FAIL = "ADD_EVENT_FAIL";
 export const addEvent = (URL, event) => dispatch => {
-  axiosWithAuth()
-    .post(URL, event)
-    .then(res => {
-      console.log(res.data);
-      dispatch({ type: ADD_EVENT_SUCCESS, payload: res.data });
-    })
-    .catch(err => {
-      console.log(err.response);
-      dispatch({ type: ADD_EVENT_FAIL, payload: err.response });
-    });
+	axiosWithAuth()
+		.post(URL, event)
+		.then(res => {
+			console.log(res.data);
+			dispatch({ type: ADD_EVENT_SUCCESS, payload: res.data });
+		})
+		.catch(err => {
+			console.log(err.response);
+			dispatch({ type: ADD_EVENT_FAIL, payload: err.response });
+		});
 };
 
 export const DELETE_EVENT_SUCCESS = "DELETE_EVENT_SUCCESS";
 export const DELETE_EVENT_FAIL = "DELETE_EVENT_FAIL";
 export const deleteEvent = URL => dispatch => {
-  axiosWithAuth()
-    .delete(URL)
-    .then(res => {
-      console.log(res);
-      dispatch({ type: DELETE_EVENT_SUCCESS, payload: res.data });
-    })
-    .catch(err => {
-      console.log(err.response);
-      dispatch({ type: DELETE_EVENT_FAIL, payload: err.response });
-    });
+	axiosWithAuth()
+		.delete(URL)
+		.then(res => {
+			console.log(res);
+			dispatch({ type: DELETE_EVENT_SUCCESS, payload: res.data });
+		})
+		.catch(err => {
+			console.log(err.response);
+			dispatch({ type: DELETE_EVENT_FAIL, payload: err.response });
+		});
 };
-
-// export const UPDATE_EVENT_START = "UPDATE_EVENT_START";
-// export const UPDATE_EVENT_SUCCESS = "UPDATE_EVENT_SUCCESS";
-// export const UPDATE_EVENT_FAIL = "UPDATE_EVENT_FAIL";
-// export const updateEvent = (URL, updatedEvent) => dispatch => {
-// 	dispatch({ type: UPDATE_EVENT_START });
-// 	axiosWithAuth()
-// 		.put(URL, updatedEvent)
-// 		.then(res => {
-// 			console.log(res.data);
-// 			dispatch({ type: UPDATE_EVENT_SUCCESS, payload: res.data });
-// 		})
-// 		.catch(err => {
-// 			console.log(err.response);
-// 			dispatch({ type: UPDATE_EVENT_FAIL, payload: err.response });
-// 		});
-// };
 
 export const FETCH_SINGLE_EVENT_START = "FETCH_SINGLE_EVENT_START";
 export const FETCH_SINGLE_EVENT_SUCCESS = "FETCH_SINGLE_EVENT_SUCCESS";
@@ -103,6 +86,40 @@ export const getSingleEvent = URL => dispatch => {
 		.catch(err => {
 			console.log(err.response);
 			dispatch({ type: FETCH_SINGLE_EVENT_FAILURE, payload: err.response });
+		});
+};
+
+export const UPDATE_EVENT_INFO_START = "UPDATE_EVENT_INFO_START";
+export const UPDATE_EVENT_INFO_SUCCESS = "UPDATE_EVENT_INFO_SUCCESS";
+export const UPDATE_EVENT_INFO_FAIL = "UPDATE_EVENT_INFO_FAIL";
+export const updateEventInfo = (URL, updatedEventInfo) => dispatch => {
+	dispatch({ type: UPDATE_EVENT_INFO_START });
+	axiosWithAuth()
+		.put(URL, updatedEventInfo)
+		.then(res => {
+			console.log(res.data);
+			dispatch({ type: UPDATE_EVENT_INFO_SUCCESS, payload: res.data });
+		})
+		.catch(err => {
+			console.log(err.response);
+			dispatch({ type: UPDATE_EVENT_INFO_FAIL, payload: err.response });
+		});
+};
+
+export const UPDATE_EVENT_LOCATION_START = "UPDATE_EVENT_LOCATION_START";
+export const UPDATE_EVENT_LOCATION_SUCCESS = "UPDATE_EVENT_LOCATION_SUCCESS";
+export const UPDATE_EVENT_LOCATION_FAIL = "UPDATE_EVENT_LOCATION_FAIL";
+export const updateEventLocation = (URL, updatedEventLocation) => dispatch => {
+	dispatch({ type: UPDATE_EVENT_LOCATION_START });
+	axiosWithAuth()
+		.put(URL, updatedEventLocation)
+		.then(res => {
+			console.log(res.data);
+			dispatch({ type: UPDATE_EVENT_LOCATION_SUCCESS, payload: res.data });
+		})
+		.catch(err => {
+			console.log(err.response);
+			dispatch({ type: UPDATE_EVENT_LOCATION_FAIL, payload: err.response });
 		});
 };
 
@@ -140,14 +157,14 @@ const ADD_FOOD_START = "ADD_FOOD_START";
 const ADD_FOOD_SUCCESS = "ADD_FOOD_SUCCESS";
 const ADD_FOOD_FAILURE = "ADD_FOOD_FAILURE";
 export const addFood = (URL, food) => dispatch => {
-  dispatch({ type: ADD_FOOD_START });
-  axiosWithAuth()
-    .post(URL, food)
-    .then(res => {
-      dispatch({ type: ADD_FOOD_SUCCESS, payload: res.data });
-    })
-    .catch(err => {
-      console.log(err.response);
-      dispatch({ type: ADD_FOOD_FAILURE });
-    });
+	dispatch({ type: ADD_FOOD_START });
+	axiosWithAuth()
+		.post(URL, food)
+		.then(res => {
+			dispatch({ type: ADD_FOOD_SUCCESS, payload: res.data });
+		})
+		.catch(err => {
+			console.log(err.response);
+			dispatch({ type: ADD_FOOD_FAILURE });
+		});
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import jsonwebtoken from "jsonwebtoken";
-import { axiosWithAuth } from "../util/axiosWithAuth";
+// import { axiosWithAuth } from "../util/axiosWithAuth";
 
 class EventGuests extends React.Component {
 	constructor() {
