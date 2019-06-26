@@ -41,10 +41,16 @@ class EventInfo extends React.Component {
 			date: this.state.date,
 			time: this.state.time
 		};
-		this.props.updateEventInfo(
-			`https://potlucker-planner.herokuapp.com/event/${this.props.event_id}`,
-			updatedEvent
-		);
+		this.props
+			.updateEventInfo(
+				`https://potlucker-planner.herokuapp.com/event/${this.props.event_id}`,
+				updatedEvent
+			)
+			.then(() =>
+				this.props.getSingleEvent(
+					`https://potlucker-planner.herokuapp.com/event/${this.props.event_id}`
+				)
+			);
 		this.setState({ updatingInfo: false });
 	};
 

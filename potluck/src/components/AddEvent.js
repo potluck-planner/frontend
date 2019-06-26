@@ -31,11 +31,9 @@ class AddEvent extends React.Component {
 			date: this.state.date,
 			time: this.state.time
 		};
-		this.props.addEvent(
-			"https://potlucker-planner.herokuapp.com/event/",
-			newEvent
-		);
-		this.props.history.push(`/`);
+		this.props
+			.addEvent("https://potlucker-planner.herokuapp.com/event/", newEvent)
+			.then(() => this.props.history.push(`/`));
 	};
 
 	render() {

@@ -48,7 +48,10 @@ export class Event extends Component {
 				</div>
 				<div className="eventBottom">
 					<div className="eventLeft">
-						<EventInfo {...this.props} />
+						<EventInfo
+							{...this.props}
+							getSingleEvent={this.props.getSingleEvent}
+						/>
 						<EventLocation {...this.props} />
 					</div>
 					<div className="eventRight">

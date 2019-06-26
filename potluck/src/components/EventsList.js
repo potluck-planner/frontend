@@ -31,6 +31,8 @@ class EventsList extends React.Component {
 					<Loader type="TailSpin" color="#1f2a38" height="100" width="100" />
 				</div>
 			);
+		} else if (this.props.error) {
+			return <h1>Sorry, it's us, not you</h1>;
 		}
 		return (
 			<div className="eventsList">
