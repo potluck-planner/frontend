@@ -131,30 +131,81 @@
 
 // Individual Card design
 .eventCard {
-  display: flex;
-  flex-flow: column wrap;
-  background: lightskyblue;
-  color: darkblue;
-  padding: 0 1% 1% 1%;
-  margin: 1% auto;
-  width: 25%;
-  .cardTop {
-    display: flex;
-    font-size: 1.5rem;
-    padding: 1%;
-    justify-content: space-between;
-    .viewDiv {
-      font-size: 1.2rem;
-    }
-    .buttonDiv {
-      display: flex;
-      margin-right: 1%;
-      width: 15%;
-      .deleteButton {
-        padding-left: 10%;
-      }
-    }
-  }
+	display: flex;
+	flex-flow: column wrap;
+	background: lightskyblue;
+	color: darkblue;
+	padding: 0 1% 1% 1%;
+	margin: 1% auto;
+	width: 25%;
+	.cardTop {
+		display: flex;
+		font-size: 1.5rem;
+		padding: 1%;
+		justify-content: space-between;
+		.viewDiv {
+			font-size: 1.2rem;
+		}
+		.buttonDiv {
+			display: flex;
+			margin-right: 1%;
+			width: 15%;
+			.updateButton {
+				position: relative;
+				cursor: pointer;
+				:hover span {
+					display: block;
+				}
+				span {
+					font-weight: 100;
+					background: skyblue;
+					border: 1px solid black;
+					color: black;
+					font-size: 1rem;
+					margin: 0 auto;
+					position: absolute;
+					text-align: center;
+					width: 700%;
+					height: 25px;
+					bottom: 100%;
+					left: -500%;
+					display: none;
+					padding: 1%;
+				}
+				span:after {
+					content: "";
+					position: absolute;
+				}
+			}
+			.deleteButton {
+				padding-left: 10%;
+				position: relative;
+				cursor: pointer;
+				:hover span {
+					display: block;
+				}
+				span {
+					background: skyblue;
+					border: 1px solid black;
+					color: black;
+					font-size: 1rem;
+					margin: 0 auto;
+					position: absolute;
+					text-align: center;
+					width: 500%;
+					height: 25px;
+					bottom: 100%;
+					left: 0;
+					display: none;
+					padding: 1%;
+				}
+				span:after {
+					content: "";
+					position: absolute;
+				}
+			}
+		}
+	}
 }
 
 // Event Page

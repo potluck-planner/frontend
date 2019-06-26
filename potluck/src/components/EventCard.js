@@ -34,7 +34,9 @@ class EventCard extends React.Component {
 							/*onClick={this.props.confirmEvent}*/
 							className="updateButton"
 						>
-							<i className="fas fa-check" />
+							<i className="fas fa-check">
+								<span>Confirm your attendance</span>
+							</i>
 						</div>
 						<div
 							// onClick should have hover with text saying decline
@@ -42,7 +44,9 @@ class EventCard extends React.Component {
 							onClick={e => this.deleteEvent(e)}
 							className="deleteButton"
 						>
-							<i className="far fa-trash-alt" />
+							<i className="far fa-trash-alt">
+								<span>Delete this event</span>
+							</i>
 						</div>
 					</div>
 				</div>
