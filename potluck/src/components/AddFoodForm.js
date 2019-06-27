@@ -18,17 +18,23 @@ class AddFood extends React.Component {
 
 	addFood = e => {
 		e.preventDefault();
-		this.props.addFood(
-			`https://potlucker-planner.herokuapp.com/event/${
-				this.props.event_id
-			}/foodlist`,
-			{
-				recipe_name: this.state.recipe_name,
-				quantity: parseInt(this.state.quantity),
-				guest_name: null,
-				being_brought: false
-			}
-		);
+		this.props
+			.addFood(
+				`https://potlucker-planner.herokuapp.com/event/${
+					this.props.event_id
+				}/foodlist`,
+				{
+					recipe_name: this.state.recipe_name,
+					quantity: parseInt(this.state.quantity),
+					guest_name: null,
+					being_brought: false
+				}
+			)
+			.then(() =>
+				this.props.getSingleEvent(
+					`https://potlucker-planner.herokuapp.com/event/${this.props.event_id}`
+				)
+			);
 	};
 
 	render() {
