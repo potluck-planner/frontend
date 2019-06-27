@@ -124,6 +124,23 @@ export const updateEventInfo = (URL, updatedEventInfo) => dispatch => {
 		});
 };
 
+export const ADD_EVENT_LOCATION_START = "ADD_EVENT_LOCATION_START";
+export const ADD_EVENT_LOCATION_SUCCESS = "ADD_EVENT_LOCATION_SUCCESS";
+export const ADD_EVENT_LOCATION_FAIL = "ADD_EVENT_LOCATION_FAIL";
+export const addEventLocation = (URL, newEventLocation) => dispatch => {
+	dispatch({ type: ADD_EVENT_LOCATION_START });
+	return axiosWithAuth()
+		.put(URL, newEventLocation)
+		.then(res => {
+			console.log(res.data);
+			dispatch({ type: ADD_EVENT_LOCATION_SUCCESS, payload: res.data });
+		})
+		.catch(err => {
+			console.log(err.response);
+			dispatch({ type: ADD_EVENT_LOCATION_FAIL, payload: err.response });
+		});
+};
+
 export const UPDATE_EVENT_LOCATION_START = "UPDATE_EVENT_LOCATION_START";
 export const UPDATE_EVENT_LOCATION_SUCCESS = "UPDATE_EVENT_LOCATION_SUCCESS";
 export const UPDATE_EVENT_LOCATION_FAIL = "UPDATE_EVENT_LOCATION_FAIL";
@@ -158,9 +175,9 @@ export const addGuest = (URL, guest) => dispatch => {
 
 export const DELETE_GUEST_SUCCESS = "DELETE_GUEST_SUCCESS";
 export const DELETE_GUEST_FAIL = "DELETE_GUEST_FAIL";
-export const deleteGuest = (URL, id, username) => dispatch => {
+export const deleteGuest = (URL, username) => dispatch => {
 	return axiosWithAuth()
-		.delete(URL, id, username)
+		.delete(URL, username)
 		.then(res => {
 			console.log(res);
 			dispatch({ type: DELETE_EVENT_SUCCESS, payload: res.data });

@@ -5,6 +5,9 @@ import {
 	UPDATE_EVENT_INFO_START,
 	UPDATE_EVENT_INFO_SUCCESS,
 	UPDATE_EVENT_INFO_FAIL,
+	ADD_EVENT_LOCATION_START,
+	ADD_EVENT_LOCATION_SUCCESS,
+	ADD_EVENT_LOCATION_FAIL,
 	UPDATE_EVENT_LOCATION_START,
 	UPDATE_EVENT_LOCATION_SUCCESS,
 	UPDATE_EVENT_LOCATION_FAIL
@@ -14,6 +17,7 @@ const initialState = {
 	singleEvent: {},
 	fetchingSingleEvent: false,
 	updatingEventInfo: false,
+	addingEventLocation: false,
 	updatingEventLocation: false,
 	error: null
 };
@@ -46,7 +50,6 @@ const singleEventReducer = (state = initialState, action) => {
 				updatingEventInfo: true
 			};
 		case UPDATE_EVENT_INFO_SUCCESS:
-			console.log(action.payload);
 			return {
 				...state,
 				updatingEventInfo: false,
@@ -58,6 +61,24 @@ const singleEventReducer = (state = initialState, action) => {
 				updatingEventInfo: false,
 				error: action.payload
 			};
+		case ADD_EVENT_LOCATION_START:
+			return {
+				...state,
+				error: null,
+				addingEventLocation: true
+			};
+		case ADD_EVENT_LOCATION_SUCCESS:
+			return {
+				...state,
+				addingEventLocation: false,
+				error: null
+			};
+		case ADD_EVENT_LOCATION_FAIL:
+			return {
+				...state,
+				addingEventLocation: false,
+				error: action.payload
+			};
 		case UPDATE_EVENT_LOCATION_START:
 			return {
 				...state,
@@ -65,7 +86,6 @@ const singleEventReducer = (state = initialState, action) => {
 				updatingEventLocation: true
 			};
 		case UPDATE_EVENT_LOCATION_SUCCESS:
-			console.log(action.payload);
 			return {
 				...state,
 				updatingEventLocation: false,
