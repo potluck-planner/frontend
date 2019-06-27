@@ -29,7 +29,7 @@ class EventFood extends React.Component {
 				// check to see if guest name for the food item is blank
 				this.props.singleEvent.food.find(
 					food => food.recipe_name === recipe_name
-				).guest_name === ""
+				).guest_name === null
 					? // if it is blank, fill in name with current active user
 					  {
 							guest_name: this.props.allUsers.find(
@@ -44,7 +44,7 @@ class EventFood extends React.Component {
 					  this.props.allUsers.find(el => el.id === this.props.activeUser.id)
 							.name
 					? // if the guest who claimed the food and activeuser are the same, allow uncheck
-					  { guest_name: "", recipe_name: recipe_name }
+					  { guest_name: null, recipe_name: recipe_name }
 					: //otherwise alert
 					  alert(`${recipe_name} has already been claimed!`)
 			)
