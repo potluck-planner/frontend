@@ -1,7 +1,13 @@
 import React from "react";
 import EventCard from "./EventCard";
 import Loader from "react-loader-spinner";
-import { getEvents, deleteEvent, deleteGuest, getUsers } from "../actions";
+import {
+	getEvents,
+	deleteEvent,
+	updateGuest,
+	deleteGuest,
+	getUsers
+} from "../actions";
 import { connect } from "react-redux";
 // import Moment from "react-moment";
 
@@ -16,6 +22,22 @@ class EventsList extends React.Component {
 				this.props.getUsers(`https://potlucker-planner.herokuapp.com/users/`)
 			);
 	}
+
+	confirmEvent = (e, event_id) => {
+		e.preventDefault();
+		this.props
+			.updateGuest(
+				`https://potlucker-planner.herokuapp.com/event/${event_id}/guests`,
+				{ username: this.props.activeUser.username, going: true }
+			)
+			.then(() =>
+				this.props.getEvents(
+					`https://potlucker-planner.herokuapp.com/users/${
+						this.props.activeUser.username
+					}/events`
+				)
+			);
+	};
 
 	// deleteGuest is hosted here so that events listing refreshes
 	deleteGuest = (e, event_id) => {
@@ -72,6 +94,7 @@ class EventsList extends React.Component {
 									{...this.props}
 									key={event.event_id}
 									deleteEvent={this.props.deleteEvent}
+									confirmEvent={this.confirmEvent}
 									deleteGuest={this.deleteGuest}
 								/>
 							);
@@ -91,5 +114,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{ getEvents, deleteEvent, deleteGuest, getUsers }
+	{ getEvents, deleteEvent, updateGuest, deleteGuest, getUsers }
 )(EventsList);

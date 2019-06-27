@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { getSingleEvent, updateGuests } from "../actions";
+import { getSingleEvent } from "../actions";
 import { connect } from "react-redux";
 
 class EventCard extends React.Component {
@@ -11,27 +11,6 @@ class EventCard extends React.Component {
 		this.props.getSingleEvent(URL);
 	}
 
-	confirmEvent = e => {
-		e.preventDefault();
-		console.log(
-			this.props.singleEvent.guests.map(guest =>
-				guest.username === this.props.activeUser.username
-					? { ...guest, going: 1 }
-					: guest
-			)
-		);
-		this.props.updateGuests(
-			`https://potlucker-planner.herokuapp.com/event/${
-				this.props.event_id
-			}/guests`,
-			this.props.singleEvent.guests.map(guest =>
-				guest.username === this.props.activeUser.username
-					? { ...guest, going: 1 }
-					: guest
-			)
-		);
-	};
-
 	deleteEvent = e => {
 		e.preventDefault();
 		this.props.deleteEvent(
@@ -41,6 +20,13 @@ class EventCard extends React.Component {
 
 	render() {
 		console.log(this.props);
+		console.log(
+			this.props.singleEvent.guests
+				? this.props.singleEvent.guests.find(
+						guest => guest.username === this.props.activeUser.username
+				  ).going
+				: null
+		);
 		return (
 			<div className="eventCard">
 				<div className="cardTop">
@@ -59,14 +45,19 @@ class EventCard extends React.Component {
 						{/* guests see confirm or decline buttons */}
 						{this.props.activeUser.id !== this.props.organizer_id && (
 							<>
-								<div
-									onClick={e => this.confirmEvent(e)}
-									className="confirmButton"
-								>
-									<i className="fas fa-check">
-										<span>Confirm your attendance</span>
-									</i>
-								</div>
+								{/* check to see if already confirmed, if so do not display confirm button */}
+								{this.props.going === null && (
+									<div
+										onClick={e =>
+											this.props.confirmEvent(e, this.props.event_id)
+										}
+										className="confirmButton"
+									>
+										<i className="fas fa-check">
+											<span>Confirm your attendance</span>
+										</i>
+									</div>
+								)}
 								<div
 									// function is hosted one level up so events listing refreshes
 									onClick={e => this.props.deleteGuest(e, this.props.event_id)}
@@ -115,5 +106,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{ getSingleEvent, updateGuests }
+	{ getSingleEvent }
 )(EventCard);
