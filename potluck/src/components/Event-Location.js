@@ -1,5 +1,5 @@
 import React from "react";
-import { updateEventLocation } from "../actions";
+import { addEventLocation, updateEventLocation } from "../actions";
 import { connect } from "react-redux";
 
 class EventLocation extends React.Component {
@@ -31,6 +31,30 @@ class EventLocation extends React.Component {
 
 	handleChange = e => {
 		this.setState({ [e.target.name]: e.target.value });
+	};
+
+	addEventLocation = e => {
+		e.preventDefault();
+		const newLocation = {
+			address: this.state.address,
+			city: this.state.city,
+			state: this.state.state
+		};
+		this.props
+			.addEventLocation(
+				// `http://localhost:5000/event/${this.props.event_id}/location`,
+				`https://potlucker-planner.herokuapp.com/event/${
+					this.props.event_id
+				}/location`,
+				newLocation
+			)
+			.then(() =>
+				this.props.getSingleEvent(
+					// `http://localhost:5000/event/${this.props.event_id}`
+					`https://potlucker-planner.herokuapp.com/event/${this.props.event_id}`
+				)
+			);
+		this.setState({ updatingLocation: false });
 	};
 
 	updateEventLocation = e => {
@@ -74,7 +98,14 @@ class EventLocation extends React.Component {
 						<p>State: {this.props.singleEvent.location.state}</p>
 					</div>
 				) : (
-					<form onSubmit={this.updateEventLocation} className="eventAdd">
+					<form
+						onSubmit={
+							this.props.singleEvent.location.length === 0
+								? this.addEventLocation
+								: this.updateEventLocation
+						}
+						className="eventAdd"
+					>
 						<label htmlFor="address">Address</label>
 						<input
 							onChange={this.handleChange}
@@ -124,5 +155,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{ updateEventLocation }
+	{ addEventLocation, updateEventLocation }
 )(EventLocation);

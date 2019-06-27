@@ -10,49 +10,6 @@ class EventGuests extends React.Component {
 		};
 	}
 
-	addGuest = e => {
-		e.preventDefault();
-		// Checks to see if user exists or if there is a duplicate
-		this.props.allUsers.map(el => el.name).includes(this.state.username) &&
-		!this.props.allUsers
-			.map(element =>
-				this.props.singleEvent.guests
-					.map(el => el.username)
-					.includes(element.username)
-					? element.name
-					: null
-			)
-			.includes(this.state.username)
-			? this.props
-					.addGuest(
-						// `http://localhost:5000/event/${this.props.event_id}/guests`,
-						`https://potlucker-planner.herokuapp.com/event/${
-							this.props.event_id
-						}/guests`,
-						{
-							username: this.props.allUsers.find(
-								el => el.name === this.state.username
-							).username,
-							going: null
-						}
-					)
-					.then(() =>
-						this.props.getSingleEvent(
-							// `http://localhost:5000/event/${this.props.event_id}`
-							`https://potlucker-planner.herokuapp.com/event/${
-								this.props.event_id
-							}`
-						)
-					)
-			: alert(
-					`${
-						this.state.username
-					} is not in the system or duplicate guest detected!`
-					// `Please invite ${this.state.username} to join Potluck Planner!`
-			  );
-		this.setState({ username: "", addToggle: false });
-	};
-
 	addToggle = e => {
 		e.preventDefault();
 		if (this.state.addToggle === false) {
@@ -68,6 +25,70 @@ class EventGuests extends React.Component {
 
 	handleChange = e => {
 		this.setState({ [e.target.name]: e.target.value });
+	};
+
+	addGuest = e => {
+		e.preventDefault();
+		// Checks to see if user exists or if there is a duplicate
+		this.props.allUsers.map(el => el.name).includes(this.state.username)
+			? !this.props.allUsers
+					.map(element =>
+						this.props.singleEvent.guests
+							.map(el => el.username)
+							.includes(element.username)
+							? element.name
+							: null
+					)
+					.includes(this.state.username)
+				? this.props
+						.addGuest(
+							// `http://localhost:5000/event/${this.props.event_id}/guests`,
+							`https://potlucker-planner.herokuapp.com/event/${
+								this.props.event_id
+							}/guests`,
+							{
+								username: this.props.allUsers.find(
+									el => el.name === this.state.username
+								).username,
+								going: null
+							}
+						)
+						.then(() =>
+							this.props.getSingleEvent(
+								// `http://localhost:5000/event/${this.props.event_id}`
+								`https://potlucker-planner.herokuapp.com/event/${
+									this.props.event_id
+								}`
+							)
+						)
+				: alert(`${this.state.username} has already been invited!`)
+			: alert(
+					`${this.state.username} is not in the system! Please invite ${
+						this.state.username
+					} to join Potluck Planner!`
+			  );
+		this.setState({ username: "", addToggle: false });
+	};
+
+	deleteGuest = (e, guest) => {
+		e.preventDefault();
+		console.log(this.props);
+		console.log(this.props.event_id);
+		console.log(
+			`https://potlucker-planner.herokuapp.com/event/${
+				this.props.event_id
+			}/guests`
+		);
+		console.log(guest);
+		console.log(guest.username);
+		this.props.deleteGuest(
+			// `http://localhost:5000/event/${this.props.event_id}/guests`,
+			`https://potlucker-planner.herokuapp.com/event/${
+				this.props.event_id
+			}/guests`,
+			this.props.event_id,
+			{ username: guest.username }
+		);
 	};
 
 	render() {
@@ -106,19 +127,7 @@ class EventGuests extends React.Component {
 								: null}
 						</p>
 						<p
-							onClick={e => {
-								e.preventDefault();
-								console.log(guest);
-								console.log(this.props.event_id);
-								this.props.deleteGuest(
-									// `http://localhost:5000/event/${this.props.event_id}/guests`,
-									`https://potlucker-planner.herokuapp.com/event/${
-										this.props.event_id
-									}/guests`,
-									this.props.event_id,
-									guest.username
-								);
-							}}
+							onClick={e => this.deleteGuest(e, guest)}
 							className="deleteGuest"
 						>
 							<i className="far fa-trash-alt" />
