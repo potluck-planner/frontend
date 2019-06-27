@@ -3,24 +3,11 @@ import Event from "./Event";
 import Loader from "react-loader-spinner";
 import { getEvents } from "../actions";
 import { connect } from "react-redux";
-import jsonwebtoken from "jsonwebtoken";
 
 class EventLink extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			user: jsonwebtoken.decode(localStorage.getItem("token"))
-				? jsonwebtoken.decode(localStorage.getItem("token"))
-				: null
-		};
-	}
-
 	componentDidMount() {
-		// const URL = `http://localhost:5000/users/${
-		// 	this.state.user.username
-		// }/events`;
 		const URL = `https://potlucker-planner.herokuapp.com/users/${
-			this.state.user.username
+			this.props.activeUser.username
 		}/events`;
 		this.props.getEvents(URL);
 	}
@@ -38,6 +25,7 @@ class EventLink extends React.Component {
 
 		return (
 			<div className="Event">
+				{/* target single event from events array with filter */}
 				{this.props.events
 					.filter(
 						event => event.event_id === parseInt(this.props.match.params.id)

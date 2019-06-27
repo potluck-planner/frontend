@@ -26,7 +26,6 @@ class Login extends React.Component {
 		event.preventDefault();
 		this.props
 			.login(this.state.credentials)
-			// .then(this.props.getUsers(`http://localhost:5000/users/`))
 			.then(
 				this.props.getUsers(`https://potlucker-planner.herokuapp.com/users/`)
 			)

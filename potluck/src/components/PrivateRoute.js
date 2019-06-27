@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 class PrivateRoute extends Component {
 	render() {
 		const { component: Component, ...rest } = this.props;
+		// extract full name from allUsers array by matching id with current activeUser
 		const myName = this.props.allUsers.filter(
 			user => user.id === this.props.activeUser.id
 		)[0]

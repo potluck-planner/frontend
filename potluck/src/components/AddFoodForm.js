@@ -27,7 +27,6 @@ class AddFood extends React.Component {
 				onSubmit={e => {
 					e.preventDefault();
 					this.props.addFood(
-						// `http://localhost:5000/event/${this.props.event_id}/foodlist`,
 						`https://potlucker-planner.herokuapp.com/event/${
 							this.props.event_id
 						}/foodlist`,
