@@ -1,26 +1,17 @@
 import React from "react";
 import EventCard from "./EventCard";
 import Loader from "react-loader-spinner";
-import jsonwebtoken from "jsonwebtoken";
 import { getEvents, deleteEvent, getUsers } from "../actions";
 import { connect } from "react-redux";
+// import Moment from "react-moment";
 
 class EventsList extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			user: jsonwebtoken.decode(localStorage.getItem("token"))
-				? jsonwebtoken.decode(localStorage.getItem("token"))
-				: null
-		};
-	}
-
 	componentDidMount() {
 		// const URL = `http://localhost:5000/users/${
 		// 	this.state.user.username
 		// }/events`;
 		const URL = `https://potlucker-planner.herokuapp.com/users/${
-			this.state.user.username
+			this.props.activeUser.username
 		}/events`;
 		this.props.getEvents(URL).then(
 			// this.props.getUsers(`http://localhost:5000/users/`)
@@ -43,17 +34,25 @@ class EventsList extends React.Component {
 			<div className="eventsList">
 				<h1>Events Listing</h1>
 				<ul>
-					{this.props.events.map(event => {
-						return (
-							<EventCard
-								{...event}
-								{...this.props}
-								{...this.state}
-								key={event.event_id}
-								deleteEvent={this.props.deleteEvent}
-							/>
-						);
-					})}
+					{this.props.events
+						.sort((a, b) => {
+							return (
+								new Date(a.date) - new Date(b.date)
+								// ||
+								// <Moment parse="HH:mm:ss">{a.time}</Moment> -
+								// <Moment parse="HH:mm:ss">{b.time}</Moment>
+							);
+						})
+						.map(event => {
+							return (
+								<EventCard
+									{...event}
+									{...this.props}
+									key={event.event_id}
+									deleteEvent={this.props.deleteEvent}
+								/>
+							);
+						})}
 				</ul>
 			</div>
 		);

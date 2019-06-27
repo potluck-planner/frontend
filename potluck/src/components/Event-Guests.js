@@ -72,22 +72,20 @@ class EventGuests extends React.Component {
 
 	deleteGuest = (e, guest) => {
 		e.preventDefault();
-		console.log(this.props);
-		console.log(this.props.event_id);
-		console.log(
-			`https://potlucker-planner.herokuapp.com/event/${
-				this.props.event_id
-			}/guests`
-		);
-		console.log(guest);
-		console.log(guest.username);
-		this.props.deleteGuest(
-			// `http://localhost:5000/event/${this.props.event_id}/guests`,
-			`https://potlucker-planner.herokuapp.com/event/${
-				this.props.event_id
-			}/guests`,
-			{ event_id: this.props.event_id, username: guest.username }
-		);
+		this.props
+			.deleteGuest(
+				// `http://localhost:5000/event/${this.props.event_id}/guests`,
+				`https://potlucker-planner.herokuapp.com/event/${
+					this.props.event_id
+				}/guests`,
+				{ data: { event_id: this.props.event_id, username: guest.username } }
+			)
+			.then(() =>
+				this.props.getSingleEvent(
+					// `http://localhost:5000/event/${this.props.event_id}`
+					`https://potlucker-planner.herokuapp.com/event/${this.props.event_id}`
+				)
+			);
 	};
 
 	render() {
