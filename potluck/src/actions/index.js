@@ -130,7 +130,7 @@ export const ADD_EVENT_LOCATION_FAIL = "ADD_EVENT_LOCATION_FAIL";
 export const addEventLocation = (URL, newEventLocation) => dispatch => {
 	dispatch({ type: ADD_EVENT_LOCATION_START });
 	return axiosWithAuth()
-		.put(URL, newEventLocation)
+		.post(URL, newEventLocation)
 		.then(res => {
 			console.log(res.data);
 			dispatch({ type: ADD_EVENT_LOCATION_SUCCESS, payload: res.data });
@@ -175,35 +175,35 @@ export const addGuest = (URL, guest) => dispatch => {
 
 export const DELETE_GUEST_SUCCESS = "DELETE_GUEST_SUCCESS";
 export const DELETE_GUEST_FAIL = "DELETE_GUEST_FAIL";
-export const deleteGuest = (URL, username) => dispatch => {
+export const deleteGuest = (URL, object) => dispatch => {
 	return axiosWithAuth()
-		.delete(URL, username)
+		.delete(URL, object)
 		.then(res => {
 			console.log(res);
-			dispatch({ type: DELETE_EVENT_SUCCESS, payload: res.data });
+			dispatch({ type: DELETE_GUEST_SUCCESS, payload: res.data });
 		})
 		.catch(err => {
 			console.log(err.response);
-			dispatch({ type: DELETE_EVENT_FAIL, payload: err.response });
+			dispatch({ type: DELETE_GUEST_FAIL, payload: err.response });
 		});
 };
 
-export const UPDATE_GUEST_START = "UPDATE_GUEST_START";
-export const UPDATE_GUEST_SUCCESS = "UPDATE_GUEST_SUCCESS";
-export const UPDATE_GUEST_FAIL = "UPDATE_GUEST_FAIL";
-export const updateGuest = (URL, username) => dispatch => {
-	dispatch({ type: UPDATE_GUEST_START });
-	return axiosWithAuth()
-		.put(URL, username)
-		.then(res => {
-			console.log(res);
-			dispatch({ type: UPDATE_GUEST_SUCCESS, payload: res.data });
-		})
-		.catch(err => {
-			console.log(err.response);
-			dispatch({ type: UPDATE_GUEST_FAIL, payload: err.response });
-		});
-};
+// export const UPDATE_GUEST_START = "UPDATE_GUEST_START";
+// export const UPDATE_GUEST_SUCCESS = "UPDATE_GUEST_SUCCESS";
+// export const UPDATE_GUEST_FAIL = "UPDATE_GUEST_FAIL";
+// export const updateGuest = (URL, username) => dispatch => {
+// 	dispatch({ type: UPDATE_GUEST_START });
+// 	return axiosWithAuth()
+// 		.put(URL, username)
+// 		.then(res => {
+// 			console.log(res);
+// 			dispatch({ type: UPDATE_GUEST_SUCCESS, payload: res.data });
+// 		})
+// 		.catch(err => {
+// 			console.log(err.response);
+// 			dispatch({ type: UPDATE_GUEST_FAIL, payload: err.response });
+// 		});
+// };
 
 export const ADD_FOOD_START = "ADD_FOOD_START";
 export const ADD_FOOD_SUCCESS = "ADD_FOOD_SUCCESS";

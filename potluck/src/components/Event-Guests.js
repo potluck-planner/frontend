@@ -86,8 +86,7 @@ class EventGuests extends React.Component {
 			`https://potlucker-planner.herokuapp.com/event/${
 				this.props.event_id
 			}/guests`,
-			this.props.event_id,
-			{ username: guest.username }
+			{ event_id: this.props.event_id, username: guest.username }
 		);
 	};
 
@@ -126,12 +125,14 @@ class EventGuests extends React.Component {
 								  )[0].name
 								: null}
 						</p>
-						<p
-							onClick={e => this.deleteGuest(e, guest)}
-							className="deleteGuest"
-						>
-							<i className="far fa-trash-alt" />
-						</p>
+						{this.props.organizer_id === this.props.activeUser.id && (
+							<p
+								onClick={e => this.deleteGuest(e, guest)}
+								className="deleteGuest"
+							>
+								<i className="far fa-trash-alt" />
+							</p>
+						)}
 					</div>
 				))}
 			</div>
