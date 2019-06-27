@@ -7,12 +7,15 @@ class EventLocation extends React.Component {
 		super(props);
 		this.state = {
 			updatingLocation: false,
-			address: "",
-			city: "",
-			state: ""
-			// address: this.props.singleEvent.location.address,
-			// city: this.props.singleEvent.location.city,
-			// state: this.props.singleEvent.location.state
+			address: this.props.singleEvent.location[0]
+				? this.props.singleEvent.location[0].address
+				: "",
+			city: this.props.singleEvent.location[0]
+				? this.props.singleEvent.location[0].city
+				: "",
+			state: this.props.singleEvent.location[0]
+				? this.props.singleEvent.location[0].state
+				: ""
 		};
 	}
 
@@ -40,12 +43,6 @@ class EventLocation extends React.Component {
 			city: this.state.city,
 			state: this.state.state
 		};
-		console.log(
-			`https://potlucker-planner.herokuapp.com/event/${
-				this.props.event_id
-			}/location`
-		);
-		console.log(newLocation);
 		this.props
 			.addEventLocation(
 				// `http://localhost:5000/event/${this.props.event_id}/location`,
@@ -87,8 +84,6 @@ class EventLocation extends React.Component {
 		this.setState({ updatingLocation: false });
 	};
 
-	// location might need [0] in front if Erik keeps as array
-
 	render() {
 		console.log(this.props);
 		return (
@@ -98,21 +93,21 @@ class EventLocation extends React.Component {
 				</div>
 				<h1>Location Details</h1>
 				{this.state.updatingLocation === false ? (
-					<div>
-						<p>
-							Address:{" "}
+					<div className="locDetails">
+						<p className="locElement eventAddress">
+							<span>Address: </span>
 							{this.props.singleEvent.location[0]
 								? this.props.singleEvent.location[0].address
 								: ""}
 						</p>
-						<p>
-							City:{" "}
+						<p className="locElement eventCity">
+							<span>City: </span>
 							{this.props.singleEvent.location[0]
 								? this.props.singleEvent.location[0].city
 								: ""}
 						</p>
-						<p>
-							State:{" "}
+						<p className="locElement eventState">
+							<span>State: </span>
 							{this.props.singleEvent.location[0]
 								? this.props.singleEvent.location[0].state
 								: ""}

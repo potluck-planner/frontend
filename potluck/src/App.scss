@@ -260,6 +260,14 @@
 					font-size: 1.5rem;
 					padding: 1%;
 				}
+				.locDetails {
+					p {
+						display: flex;
+						span {
+							width: 15%;
+						}
+					}
+				}
 			}
 		}
 		.eventRight {
