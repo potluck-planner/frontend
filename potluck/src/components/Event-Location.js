@@ -40,6 +40,12 @@ class EventLocation extends React.Component {
 			city: this.state.city,
 			state: this.state.state
 		};
+		console.log(
+			`https://potlucker-planner.herokuapp.com/event/${
+				this.props.event_id
+			}/location`
+		);
+		console.log(newLocation);
 		this.props
 			.addEventLocation(
 				// `http://localhost:5000/event/${this.props.event_id}/location`,
@@ -93,9 +99,24 @@ class EventLocation extends React.Component {
 				<h1>Location Details</h1>
 				{this.state.updatingLocation === false ? (
 					<div>
-						<p>Address: {this.props.singleEvent.location.address}</p>
-						<p>City: {this.props.singleEvent.location.city}</p>
-						<p>State: {this.props.singleEvent.location.state}</p>
+						<p>
+							Address:{" "}
+							{this.props.singleEvent.location[0]
+								? this.props.singleEvent.location[0].address
+								: ""}
+						</p>
+						<p>
+							City:{" "}
+							{this.props.singleEvent.location[0]
+								? this.props.singleEvent.location[0].city
+								: ""}
+						</p>
+						<p>
+							State:{" "}
+							{this.props.singleEvent.location[0]
+								? this.props.singleEvent.location[0].state
+								: ""}
+						</p>
 					</div>
 				) : (
 					<form
