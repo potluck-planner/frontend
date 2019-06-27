@@ -175,12 +175,12 @@ export const addGuest = (URL, guest) => dispatch => {
 
 export const DELETE_GUEST_SUCCESS = "DELETE_GUEST_SUCCESS";
 export const DELETE_GUEST_FAIL = "DELETE_GUEST_FAIL";
-export const deleteGuest = (URL, config) => dispatch => {
+export const deleteGuest = (URL, config, event_id) => dispatch => {
 	return axiosWithAuth()
 		.delete(URL, config)
 		.then(res => {
 			console.log(res);
-			dispatch({ type: DELETE_GUEST_SUCCESS, payload: res.data });
+			dispatch({ type: DELETE_GUEST_SUCCESS, payload: event_id });
 		})
 		.catch(err => {
 			console.log(err.response);

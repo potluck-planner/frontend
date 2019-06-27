@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { getSingleEvent } from "../actions";
+import { getSingleEvent, deleteGuest } from "../actions";
 import { connect } from "react-redux";
 
 class EventCard extends React.Component {
@@ -18,6 +18,25 @@ class EventCard extends React.Component {
 			// `http://localhost:5000/event/${this.props.event_id}`
 			`https://potlucker-planner.herokuapp.com/event/${this.props.event_id}`
 		);
+	};
+
+	deleteGuest = e => {
+		e.preventDefault();
+		this.props
+			.deleteGuest(
+				// `http://localhost:5000/event/${this.props.event_id}`
+				`https://potlucker-planner.herokuapp.com/event/${
+					this.props.event_id
+				}/guests`,
+				{
+					data: {
+						event_id: this.props.event_id,
+						username: this.props.activeUser.username
+					}
+				},
+				this.props.event_id
+			)
+			.then(() => this.props.history.push(`/`));
 	};
 
 	render() {
@@ -39,16 +58,17 @@ class EventCard extends React.Component {
 						{this.props.activeUser.id !== this.props.organizer_id && (
 							<>
 								<div
-									// onClick should have hover with text saying confirm
-									// onClick should only appear if guest has not already confirmed
 									/*onClick={this.props.confirmEvent}*/
-									className="updateButton"
+									className="confirmButton"
 								>
 									<i className="fas fa-check">
 										<span>Confirm your attendance</span>
 									</i>
 								</div>
-								<div className="deleteButton">
+								<div
+									onClick={e => this.deleteGuest(e)}
+									className="deleteButton"
+								>
 									<i className="fas fa-times">
 										<span>Decline invite</span>
 									</i>
@@ -82,5 +102,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{ getSingleEvent }
+	{ getSingleEvent, deleteGuest }
 )(EventCard);

@@ -78,7 +78,8 @@ class EventGuests extends React.Component {
 				`https://potlucker-planner.herokuapp.com/event/${
 					this.props.event_id
 				}/guests`,
-				{ data: { event_id: this.props.event_id, username: guest.username } }
+				{ data: { event_id: this.props.event_id, username: guest.username } },
+				this.props.event_id
 			)
 			.then(() =>
 				this.props.getSingleEvent(
@@ -114,7 +115,7 @@ class EventGuests extends React.Component {
 				<h1>Guest List</h1>
 				{this.props.singleEvent.guests.map(guest => (
 					<div key={guest.username} className="guestList">
-						<p>
+						<p className="guestName">
 							{this.props.allUsers.filter(
 								user => user.username === guest.username
 							)[0]
@@ -122,6 +123,13 @@ class EventGuests extends React.Component {
 										user => user.username === guest.username
 								  )[0].name
 								: null}
+						</p>
+						<p className="guestAttend">
+							{guest.going === null ? (
+								<span className="invited">"Invited..."</span>
+							) : (
+								<span className="attending">"Confirmed!"</span>
+							)}
 						</p>
 						{this.props.organizer_id === this.props.activeUser.id && (
 							<p
