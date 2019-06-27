@@ -4,6 +4,9 @@ import {
 	deleteEvent,
 	addGuest,
 	deleteGuest,
+	addFood,
+	deleteFood,
+	updateFood,
 	getUsers
 } from "../actions";
 import { connect } from "react-redux";
@@ -76,7 +79,12 @@ export class Event extends Component {
 							addGuest={this.props.addGuest}
 							deleteGuest={this.props.deleteGuest}
 						/>
-						<EventFood {...this.props} />
+						<EventFood
+							{...this.props}
+							addFood={this.props.addFood}
+							deleteFood={this.props.deleteFood}
+							updateFood={this.props.updateFood}
+						/>
 					</div>
 				</div>
 			</div>
@@ -93,5 +101,14 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{ getSingleEvent, deleteEvent, addGuest, deleteGuest, getUsers }
+	{
+		getSingleEvent,
+		deleteEvent,
+		addGuest,
+		deleteGuest,
+		addFood,
+		deleteFood,
+		updateFood,
+		getUsers
+	}
 )(Event);

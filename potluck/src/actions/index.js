@@ -233,3 +233,20 @@ export const deleteFood = (URL, config) => dispatch => {
 			dispatch({ type: DELETE_FOOD_FAILURE });
 		});
 };
+
+export const UPDATE_FOOD_START = "UPDATE_FOOD_START";
+export const UPDATE_FOOD_SUCCESS = "UPDATE_FOOD_SUCCESS";
+export const UPDATE_FOOD_FAIL = "UPDATE_FOOD_FAIL";
+export const updateFood = (URL, updatedFood) => dispatch => {
+	dispatch({ type: UPDATE_FOOD_START });
+	return axiosWithAuth()
+		.put(URL, updatedFood)
+		.then(res => {
+			console.log(res);
+			dispatch({ type: UPDATE_FOOD_SUCCESS, payload: res.data });
+		})
+		.catch(err => {
+			console.log(err.response);
+			dispatch({ type: UPDATE_FOOD_FAIL, payload: err.response });
+		});
+};
