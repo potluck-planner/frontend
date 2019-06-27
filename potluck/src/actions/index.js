@@ -188,22 +188,22 @@ export const deleteGuest = (URL, object) => dispatch => {
 		});
 };
 
-export const UPDATE_GUEST_START = "UPDATE_GUEST_START";
-export const UPDATE_GUEST_SUCCESS = "UPDATE_GUEST_SUCCESS";
-export const UPDATE_GUEST_FAIL = "UPDATE_GUEST_FAIL";
-export const updateGuest = (URL, username) => dispatch => {
-	dispatch({ type: UPDATE_GUEST_START });
-	return axiosWithAuth()
-		.put(URL, username)
-		.then(res => {
-			console.log(res);
-			dispatch({ type: UPDATE_GUEST_SUCCESS, payload: res.data });
-		})
-		.catch(err => {
-			console.log(err.response);
-			dispatch({ type: UPDATE_GUEST_FAIL, payload: err.response });
-		});
-};
+// export const UPDATE_GUEST_START = "UPDATE_GUEST_START";
+// export const UPDATE_GUEST_SUCCESS = "UPDATE_GUEST_SUCCESS";
+// export const UPDATE_GUEST_FAIL = "UPDATE_GUEST_FAIL";
+// export const updateGuest = (URL, username) => dispatch => {
+// 	dispatch({ type: UPDATE_GUEST_START });
+// 	return axiosWithAuth()
+// 		.put(URL, username)
+// 		.then(res => {
+// 			console.log(res);
+// 			dispatch({ type: UPDATE_GUEST_SUCCESS, payload: res.data });
+// 		})
+// 		.catch(err => {
+// 			console.log(err.response);
+// 			dispatch({ type: UPDATE_GUEST_FAIL, payload: err.response });
+// 		});
+// };
 
 export const ADD_FOOD_START = "ADD_FOOD_START";
 export const ADD_FOOD_SUCCESS = "ADD_FOOD_SUCCESS";
