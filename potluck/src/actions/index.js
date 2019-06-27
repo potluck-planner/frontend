@@ -20,7 +20,7 @@ export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAILURE = "REGISTER_FAILURE";
 export const signUp = (URL, user) => dispatch => {
 	dispatch({ type: REGISTER_START });
-	axios
+	return axios
 		.post(URL, user)
 		.then(res => dispatch({ type: REGISTER_SUCCESS, payload: res.data }))
 		.catch(err => dispatch({ type: REGISTER_FAILURE, payload: err.response }));

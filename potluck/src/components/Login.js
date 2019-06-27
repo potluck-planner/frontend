@@ -33,8 +33,17 @@ class Login extends React.Component {
 	};
 
 	render() {
+		if (this.props.error) {
+			return <h1>Oops! Something went wrong, please try again.</h1>;
+		}
 		return (
 			<section className="loginSection">
+				<a
+					href="https://potluck-planner.netlify.com/index.html"
+					className="homeButton"
+				>
+					<button>Home</button>
+				</a>
 				<div className="loginContainer">
 					<form onSubmit={this.login} className="loginForm">
 						<h1 className="loginTitle">Potluck Planner</h1>

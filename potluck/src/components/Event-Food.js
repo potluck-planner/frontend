@@ -21,13 +21,32 @@ class EventFood extends React.Component {
 
 	claimFood = (e, recipe_name) => {
 		e.preventDefault();
-		const claimedByName = this.props.activeUser.username;
 		this.props
 			.updateFood(
 				`https://potlucker-planner.herokuapp.com/event/${
 					this.props.event_id
 				}/foodlist`,
-				{ guest_name: claimedByName }
+				// check to see if guest name for the food item is blank
+				this.props.singleEvent.food.find(
+					food => food.recipe_name === recipe_name
+				).guest_name === ""
+					? // if it is blank, fill in name with current active user
+					  {
+							guest_name: this.props.allUsers.find(
+								el => el.id === this.props.activeUser.id
+							).name,
+							recipe_name: recipe_name
+					  }
+					: // if it's not blank, check to see if the person who claimed the food is the current active user
+					this.props.singleEvent.food.find(
+							food => food.recipe_name === recipe_name
+					  ).guest_name ===
+					  this.props.allUsers.find(el => el.id === this.props.activeUser.id)
+							.name
+					? // if the guest who claimed the food and activeuser are the same, allow uncheck
+					  { guest_name: "", recipe_name: recipe_name }
+					: //otherwise alert
+					  alert(`${recipe_name} has already been claimed!`)
 			)
 			.then(() =>
 				this.props.getEvents(
