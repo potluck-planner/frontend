@@ -6,6 +6,7 @@ import {
 } from "../actions";
 
 const initialState = {
+	events: [],
 	fetchingGuests: false,
 	error: null
 };
@@ -25,6 +26,9 @@ const guestReducer = (state = initialState, action) => {
 		case DELETE_GUEST_SUCCESS:
 			return {
 				...state,
+				events: [...state.events].filter(
+					event => event.event_id !== action.payload
+				),
 				error: null
 			};
 		case DELETE_GUEST_FAIL:

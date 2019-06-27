@@ -72,22 +72,21 @@ class EventGuests extends React.Component {
 
 	deleteGuest = (e, guest) => {
 		e.preventDefault();
-		console.log(this.props);
-		console.log(this.props.event_id);
-		console.log(
-			`https://potlucker-planner.herokuapp.com/event/${
+		this.props
+			.deleteGuest(
+				// `http://localhost:5000/event/${this.props.event_id}/guests`,
+				`https://potlucker-planner.herokuapp.com/event/${
+					this.props.event_id
+				}/guests`,
+				{ data: { event_id: this.props.event_id, username: guest.username } },
 				this.props.event_id
-			}/guests`
-		);
-		console.log(guest);
-		console.log(guest.username);
-		this.props.deleteGuest(
-			// `http://localhost:5000/event/${this.props.event_id}/guests`,
-			`https://potlucker-planner.herokuapp.com/event/${
-				this.props.event_id
-			}/guests`,
-			{ event_id: this.props.event_id, username: guest.username }
-		);
+			)
+			.then(() =>
+				this.props.getSingleEvent(
+					// `http://localhost:5000/event/${this.props.event_id}`
+					`https://potlucker-planner.herokuapp.com/event/${this.props.event_id}`
+				)
+			);
 	};
 
 	render() {
@@ -116,7 +115,7 @@ class EventGuests extends React.Component {
 				<h1>Guest List</h1>
 				{this.props.singleEvent.guests.map(guest => (
 					<div key={guest.username} className="guestList">
-						<p>
+						<p className="guestName">
 							{this.props.allUsers.filter(
 								user => user.username === guest.username
 							)[0]
@@ -124,6 +123,13 @@ class EventGuests extends React.Component {
 										user => user.username === guest.username
 								  )[0].name
 								: null}
+						</p>
+						<p className="guestAttend">
+							{guest.going === null ? (
+								<span className="invited">"Invited..."</span>
+							) : (
+								<span className="attending">"Confirmed!"</span>
+							)}
 						</p>
 						{this.props.organizer_id === this.props.activeUser.id && (
 							<p
