@@ -188,7 +188,7 @@ export const deleteGuest = (URL, config, event_id) => dispatch => {
 export const UPDATE_GUEST_START = "UPDATE_GUEST_START";
 export const UPDATE_GUEST_SUCCESS = "UPDATE_GUEST_SUCCESS";
 export const UPDATE_GUEST_FAIL = "UPDATE_GUEST_FAIL";
-export const updateGuests = (URL, updatedGuests) => dispatch => {
+export const updateGuest = (URL, updatedGuests) => dispatch => {
 	dispatch({ type: UPDATE_GUEST_START });
 	return axiosWithAuth()
 		.put(URL, updatedGuests)
