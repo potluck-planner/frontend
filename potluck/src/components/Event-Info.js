@@ -69,12 +69,12 @@ class EventInfo extends React.Component {
 						<p>
 							Host:{" "}
 							{/* convert organizer id to full name using allUsers array */}
-							{this.props.allUsers.filter(
+							{this.props.allUsers.find(
 								user => user.id === this.props.organizer_id
-							)[0]
-								? this.props.allUsers.filter(
+							)
+								? this.props.allUsers.find(
 										user => user.id === this.props.organizer_id
-								  )[0].name
+								  ).name
 								: null}
 						</p>
 						<p>Date: {this.props.singleEvent.event.date}</p>

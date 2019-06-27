@@ -20,13 +20,6 @@ class EventCard extends React.Component {
 
 	render() {
 		console.log(this.props);
-		console.log(
-			this.props.singleEvent.guests
-				? this.props.singleEvent.guests.find(
-						guest => guest.username === this.props.activeUser.username
-				  ).going
-				: null
-		);
 		return (
 			<div className="eventCard">
 				<div className="cardTop">
@@ -77,12 +70,12 @@ class EventCard extends React.Component {
 					<p>
 						Organizer:{" "}
 						{/* use allUsers array to get name of organizer as event endpoint only provides organizer id */}
-						{this.props.allUsers.filter(
+						{this.props.allUsers.find(
 							user => user.id === this.props.organizer_id
-						)[0]
-							? this.props.allUsers.filter(
+						)
+							? this.props.allUsers.find(
 									user => user.id === this.props.organizer_id
-							  )[0].name
+							  ).name
 							: null}
 					</p>
 					<p>Date: {this.props.date}</p>
