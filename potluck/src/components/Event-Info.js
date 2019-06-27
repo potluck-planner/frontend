@@ -43,13 +43,11 @@ class EventInfo extends React.Component {
 		};
 		this.props
 			.updateEventInfo(
-				// `http://localhost:5000/event/${this.props.event_id}`,
 				`https://potlucker-planner.herokuapp.com/event/${this.props.event_id}`,
 				updatedEvent
 			)
 			.then(() =>
 				this.props.getSingleEvent(
-					// `http://localhost:5000/event/${this.props.event_id}`
 					`https://potlucker-planner.herokuapp.com/event/${this.props.event_id}`
 				)
 			);
@@ -64,11 +62,21 @@ class EventInfo extends React.Component {
 					<i className="far fa-edit" />
 				</div>
 				<h1>Event Information</h1>
+				{/* toggle between information display and update form */}
 				{this.state.updatingInfo === false ? (
 					<div>
 						<p>Event Name: {this.props.singleEvent.event.event_name}</p>
-						{/* Need to bring in organizer/host name */}
-						{/* <p>Organizer: {this.props.singleEvent.event.organizer}</p> */}
+						<p>
+							Host:{" "}
+							{/* convert organizer id to full name using allUsers array */}
+							{this.props.allUsers.filter(
+								user => user.id === this.props.organizer_id
+							)[0]
+								? this.props.allUsers.filter(
+										user => user.id === this.props.organizer_id
+								  )[0].name
+								: null}
+						</p>
 						<p>Date: {this.props.singleEvent.event.date}</p>
 						<p>Time: {this.props.singleEvent.event.time}</p>
 						<p>Description: {this.props.singleEvent.event.description}</p>

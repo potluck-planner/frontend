@@ -29,9 +29,10 @@ class EventGuests extends React.Component {
 
 	addGuest = e => {
 		e.preventDefault();
-		// Checks to see if user exists or if there is a duplicate
+		// Checks to see if user exists in database
 		this.props.allUsers.map(el => el.name).includes(this.state.username)
-			? !this.props.allUsers
+			? // Checks to see if user has already been invited
+			  !this.props.allUsers
 					.map(element =>
 						this.props.singleEvent.guests
 							.map(el => el.username)
@@ -42,7 +43,6 @@ class EventGuests extends React.Component {
 					.includes(this.state.username)
 				? this.props
 						.addGuest(
-							// `http://localhost:5000/event/${this.props.event_id}/guests`,
 							`https://potlucker-planner.herokuapp.com/event/${
 								this.props.event_id
 							}/guests`,
@@ -55,7 +55,6 @@ class EventGuests extends React.Component {
 						)
 						.then(() =>
 							this.props.getSingleEvent(
-								// `http://localhost:5000/event/${this.props.event_id}`
 								`https://potlucker-planner.herokuapp.com/event/${
 									this.props.event_id
 								}`
@@ -74,7 +73,6 @@ class EventGuests extends React.Component {
 		e.preventDefault();
 		this.props
 			.deleteGuest(
-				// `http://localhost:5000/event/${this.props.event_id}/guests`,
 				`https://potlucker-planner.herokuapp.com/event/${
 					this.props.event_id
 				}/guests`,
@@ -83,7 +81,6 @@ class EventGuests extends React.Component {
 			)
 			.then(() =>
 				this.props.getSingleEvent(
-					// `http://localhost:5000/event/${this.props.event_id}`
 					`https://potlucker-planner.herokuapp.com/event/${this.props.event_id}`
 				)
 			);
@@ -96,6 +93,7 @@ class EventGuests extends React.Component {
 				<div>
 					<button onClick={this.addToggle}>Invite Guests</button>
 				</div>
+				{/* displays invite guest form if addtoggle status is on */}
 				{this.state.addToggle === true && (
 					<div>
 						<form className="guestForm" onSubmit={this.addGuest}>
@@ -116,6 +114,7 @@ class EventGuests extends React.Component {
 				{this.props.singleEvent.guests.map(guest => (
 					<div key={guest.username} className="guestList">
 						<p className="guestName">
+							{/* use allUsers array to get full names for guests array, which only has username */}
 							{this.props.allUsers.filter(
 								user => user.username === guest.username
 							)[0]
@@ -125,14 +124,17 @@ class EventGuests extends React.Component {
 								: null}
 						</p>
 						<p className="guestAttend">
+							{/* check guest attending status and conditionally render */}
 							{guest.going === null ? (
 								<span className="invited">"Invited..."</span>
 							) : (
 								<span className="attending">"Confirmed!"</span>
 							)}
 						</p>
+						{/* only host can see following host-star or delete buttons */}
 						{this.props.organizer_id === this.props.activeUser.id && (
 							<div>
+								{/* if host, then star icon, if guest, option to delete */}
 								{this.props.activeUser.username === guest.username ? (
 									<p className="hostIcon">
 										<i className="fas fa-star" />

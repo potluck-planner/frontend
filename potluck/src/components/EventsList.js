@@ -7,16 +7,14 @@ import { connect } from "react-redux";
 
 class EventsList extends React.Component {
 	componentDidMount() {
-		// const URL = `http://localhost:5000/users/${
-		// 	this.state.user.username
-		// }/events`;
 		const URL = `https://potlucker-planner.herokuapp.com/users/${
 			this.props.activeUser.username
 		}/events`;
-		this.props.getEvents(URL).then(
-			// this.props.getUsers(`http://localhost:5000/users/`)
-			this.props.getUsers(`https://potlucker-planner.herokuapp.com/users/`)
-		);
+		this.props
+			.getEvents(URL)
+			.then(
+				this.props.getUsers(`https://potlucker-planner.herokuapp.com/users/`)
+			);
 	}
 
 	// deleteGuest is hosted here so that events listing refreshes
@@ -24,7 +22,6 @@ class EventsList extends React.Component {
 		e.preventDefault();
 		this.props
 			.deleteGuest(
-				// `http://localhost:5000/event/${event_id}`
 				`https://potlucker-planner.herokuapp.com/event/${event_id}/guests`,
 				{
 					data: {
@@ -58,6 +55,7 @@ class EventsList extends React.Component {
 			<div className="eventsList">
 				<h1>Events Listing</h1>
 				<ul>
+					{/* sort events display by date */}
 					{this.props.events
 						.sort((a, b) => {
 							return (

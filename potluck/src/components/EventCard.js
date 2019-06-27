@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 
 class EventCard extends React.Component {
 	componentDidMount() {
-		// const URL = `http://localhost:5000/event/${this.props.event_id}`;
 		const URL = `https://potlucker-planner.herokuapp.com/event/${
 			this.props.event_id
 		}`;
@@ -22,7 +21,6 @@ class EventCard extends React.Component {
 			)
 		);
 		this.props.updateGuests(
-			// `http://localhost:5000/event/${this.props.event_id}/guests`
 			`https://potlucker-planner.herokuapp.com/event/${
 				this.props.event_id
 			}/guests`,
@@ -37,7 +35,6 @@ class EventCard extends React.Component {
 	deleteEvent = e => {
 		e.preventDefault();
 		this.props.deleteEvent(
-			// `http://localhost:5000/event/${this.props.event_id}`
 			`https://potlucker-planner.herokuapp.com/event/${this.props.event_id}`
 		);
 	};
@@ -51,6 +48,7 @@ class EventCard extends React.Component {
 						View Event
 					</Link>
 					<div className="buttonDiv">
+						{/* hosts see delete event button, guests see confirm or decline buttons */}
 						{this.props.activeUser.id === this.props.organizer_id && (
 							<div onClick={e => this.deleteEvent(e)} className="deleteButton">
 								<i className="far fa-trash-alt">
@@ -58,6 +56,7 @@ class EventCard extends React.Component {
 								</i>
 							</div>
 						)}
+						{/* guests see confirm or decline buttons */}
 						{this.props.activeUser.id !== this.props.organizer_id && (
 							<>
 								<div
@@ -86,6 +85,7 @@ class EventCard extends React.Component {
 					<p>Event Name: {this.props.event_name}</p>
 					<p>
 						Organizer:{" "}
+						{/* use allUsers array to get name of organizer as event endpoint only provides organizer id */}
 						{this.props.allUsers.filter(
 							user => user.id === this.props.organizer_id
 						)[0]

@@ -7,6 +7,7 @@ class EventLocation extends React.Component {
 		super(props);
 		this.state = {
 			updatingLocation: false,
+			// check if adding or updating location, if updating, fill with existing information
 			address: this.props.singleEvent.location[0]
 				? this.props.singleEvent.location[0].address
 				: "",
@@ -92,6 +93,7 @@ class EventLocation extends React.Component {
 					<i className="far fa-edit" />
 				</div>
 				<h1>Location Details</h1>
+				{/* toggle between display location info and add/update form */}
 				{this.state.updatingLocation === false ? (
 					<div className="locDetails">
 						<p className="locElement eventAddress">
@@ -115,6 +117,7 @@ class EventLocation extends React.Component {
 					</div>
 				) : (
 					<form
+						// check if location exists, if not then use add function, if yes then use update function
 						onSubmit={
 							this.props.singleEvent.location.length === 0
 								? this.addEventLocation

@@ -6,16 +6,13 @@ export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
 export const login = creds => dispatch => {
 	dispatch({ type: LOGIN_START });
-	return (
-		axiosWithAuth()
-			// .post("http://localhost:5000/users/login", creds)
-			.post("https://potlucker-planner.herokuapp.com/users/login", creds)
-			.then(res => {
-				localStorage.setItem("token", res.data.token);
-				dispatch({ type: LOGIN_SUCCESS, payload: res.data.token });
-			})
-			.catch(err => console.log(err.response))
-	);
+	return axiosWithAuth()
+		.post("https://potlucker-planner.herokuapp.com/users/login", creds)
+		.then(res => {
+			localStorage.setItem("token", res.data.token);
+			dispatch({ type: LOGIN_SUCCESS, payload: res.data.token });
+		})
+		.catch(err => console.log(err.response));
 };
 
 export const REGISTER_START = "REGISTER_START";
