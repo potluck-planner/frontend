@@ -1,15 +1,11 @@
 import React from "react";
 import { addFood } from "../actions";
 import { connect } from "react-redux";
-import jsonwebtoken from "jsonwebtoken";
 
 class AddFood extends React.Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
-			user: jsonwebtoken.decode(localStorage.getItem("token"))
-				? jsonwebtoken.decode(localStorage.getItem("token"))
-				: null,
 			recipe_name: "",
 			quantity: 0,
 			guest_name: null,
@@ -17,29 +13,28 @@ class AddFood extends React.Component {
 		};
 	}
 	handleChange = event => {
-		this.setState({ ...this.state, [event.target.name]: event.target.value });
+		this.setState({ [event.target.name]: event.target.value });
+	};
+
+	addFood = e => {
+		e.preventDefault();
+		this.props.addFood(
+			`https://potlucker-planner.herokuapp.com/event/${
+				this.props.event_id
+			}/foodlist`,
+			{
+				recipe_name: this.state.recipe_name,
+				quantity: parseInt(this.state.quantity),
+				guest_name: null,
+				being_brought: false
+			}
+		);
 	};
 
 	render() {
 		console.log(this.props);
 		return (
-			<form
-				onSubmit={e => {
-					e.preventDefault();
-					this.props.addFood(
-						`https://potlucker-planner.herokuapp.com/event/${
-							this.props.event_id
-						}/foodlist`,
-						{
-							recipe_name: this.state.recipe_name,
-							quantity: parseInt(this.state.quantity),
-							guest_name: null,
-							being_brought: false
-						}
-					);
-					this.props.history.push(`/event/${this.props.event_id}`);
-				}}
-			>
+			<form onSubmit={e => this.addFood(e)}>
 				<input
 					onChange={this.handleChange}
 					name="recipe_name"

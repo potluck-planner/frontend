@@ -12,7 +12,6 @@ import EventFood from "./Event-Food";
 import EventGuests from "./Event-Guests";
 import EventInfo from "./Event-Info";
 import EventLocation from "./Event-Location";
-import AddFood from "./AddFoodForm";
 
 export class Event extends Component {
 	componentDidMount() {
@@ -77,13 +76,7 @@ export class Event extends Component {
 							addGuest={this.props.addGuest}
 							deleteGuest={this.props.deleteGuest}
 						/>
-						<div className="eventFood">
-							<h1>Food List</h1>
-							{this.props.singleEvent.food.map(food => (
-								<EventFood {...this.props} {...food} key={food.recipe_name} />
-							))}
-							<AddFood {...this.props} key={this.props.quantity} />
-						</div>
+						<EventFood {...this.props} />
 					</div>
 				</div>
 			</div>
