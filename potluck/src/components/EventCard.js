@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { getSingleEvent, deleteGuest } from "../actions";
+import { getSingleEvent } from "../actions";
 import { connect } from "react-redux";
 
 class EventCard extends React.Component {
@@ -18,25 +18,6 @@ class EventCard extends React.Component {
 			// `http://localhost:5000/event/${this.props.event_id}`
 			`https://potlucker-planner.herokuapp.com/event/${this.props.event_id}`
 		);
-	};
-
-	deleteGuest = e => {
-		e.preventDefault();
-		this.props
-			.deleteGuest(
-				// `http://localhost:5000/event/${this.props.event_id}`
-				`https://potlucker-planner.herokuapp.com/event/${
-					this.props.event_id
-				}/guests`,
-				{
-					data: {
-						event_id: this.props.event_id,
-						username: this.props.activeUser.username
-					}
-				},
-				this.props.event_id
-			)
-			.then(() => this.props.history.push(`/`));
 	};
 
 	render() {
@@ -66,7 +47,8 @@ class EventCard extends React.Component {
 									</i>
 								</div>
 								<div
-									onClick={e => this.deleteGuest(e)}
+									// function is hosted one level up so events listing refreshes
+									onClick={e => this.props.deleteGuest(e, this.props.event_id)}
 									className="deleteButton"
 								>
 									<i className="fas fa-times">
@@ -84,7 +66,7 @@ class EventCard extends React.Component {
 					<p>Date: {this.props.date}</p>
 					<p>
 						{this.props.going === null
-							? "Please Confirm"
+							? "Please Confirm Attendance"
 							: "You Are Confirmed!"}
 					</p>
 				</div>
@@ -102,5 +84,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{ getSingleEvent, deleteGuest }
+	{ getSingleEvent }
 )(EventCard);
