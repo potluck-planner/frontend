@@ -30,6 +30,9 @@ class SignUp extends React.Component {
 	};
 
 	render() {
+		if (this.props.error !== null) {
+			return <h1>Oops! Something went wrong, please try again.</h1>;
+		}
 		return (
 			<section className="loginSection">
 				<div className="loginContainer">
