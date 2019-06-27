@@ -26,9 +26,9 @@ const guestReducer = (state = initialState, action) => {
 		case DELETE_GUEST_SUCCESS:
 			return {
 				...state,
-				events: [...state.events].filter(
-					event => event.event_id !== action.payload
-				),
+				// events: [...state.events].filter(
+				// 	event => event.event_id !== action.payload
+				// ),
 				error: null
 			};
 		case DELETE_GUEST_FAIL:
