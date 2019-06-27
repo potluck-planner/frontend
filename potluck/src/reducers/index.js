@@ -5,10 +5,10 @@ import signUpReducer from "./signUpReducer";
 import guestReducer from "./guestReducer";
 import fetchUsers from "./fetchUsers";
 import singleEventReducer from "./singleEventReducer";
-import addFoodReducer from "./addFoodReducer";
+import foodReducer from "./foodReducer";
 
 const eventReducer = combineReducers({
-	addFoodReducer,
+	foodReducer,
 	fetchDataReducer,
 	fetchUsers,
 	guestReducer,

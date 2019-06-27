@@ -235,7 +235,7 @@
 		display: flex;
 		.eventLeft {
 			display: flex;
-			flex-flow: column wrap;
+			flex-flow: column;
 			width: 50%;
 			.eventInfo {
 				border: 1px solid black;
@@ -272,11 +272,11 @@
 		}
 		.eventRight {
 			display: flex;
-			flex-flow: column wrap;
+			flex-flow: column;
 			width: 50%;
 			.eventGuests {
 				display: flex;
-				flex-flow: column wrap;
+				flex-flow: column;
 				border: 1px solid black;
 				margin: 1%;
 				padding: 0 0 5% 0;
@@ -311,8 +311,55 @@
 				}
 			}
 			.eventFood {
+				display: flex;
+				flex-flow: column;
 				border: 1px solid black;
 				margin: 1%;
+				button {
+					float: right;
+					margin: 2% 3% 0 0;
+				}
+				.foodForm {
+					float: right;
+					margin: 0 3% 0 0;
+				}
+				.foodTitle {
+					display: flex;
+					margin: 0 10% 0 20%;
+					text-align: left;
+					.foodTitleName {
+						width: 40%;
+					}
+					.foodTitleGuest {
+						width: 40%;
+					}
+					.foodTitleButton {
+						width: 20%;
+					}
+				}
+				.foodList {
+					display: flex;
+					flex-flow: column;
+					text-align: left;
+					margin: 0 10% 0 20%;
+					padding: 0 0 5% 0;
+					.foodObject {
+						display: flex;
+						flex-flow: row;
+						padding: 0 0 2% 0;
+						.foodName {
+							width: 40%;
+						}
+						.foodGuest {
+							width: 40%;
+						}
+						.foodButton {
+							width: 20%;
+							display: flex;
+							justify-content: space-evenly;
+						}
+					}
+				}
 			}
 		}
 	}
