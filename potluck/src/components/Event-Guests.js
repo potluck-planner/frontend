@@ -115,11 +115,13 @@ class EventGuests extends React.Component {
 					<div key={guest.username} className="guestList">
 						<p className="guestName">
 							{/* use allUsers array to get full names for guests array, which only has username */}
-							{
-								this.props.allUsers.find(
-									user => user.username === guest.username
-								).name
-							}
+							{this.props.allUsers.find(
+								user => user.username === guest.username
+							)
+								? this.props.allUsers.find(
+										user => user.username === guest.username
+								  ).name
+								: null}
 						</p>
 						<p className="guestAttend">
 							{/* check guest attending status and conditionally render */}
