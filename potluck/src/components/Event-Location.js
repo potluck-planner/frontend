@@ -1,5 +1,5 @@
 import React from "react";
-import { updateEventLocation } from "../actions";
+import { addEventLocation, updateEventLocation } from "../actions";
 import { connect } from "react-redux";
 
 class EventLocation extends React.Component {
@@ -7,12 +7,16 @@ class EventLocation extends React.Component {
 		super(props);
 		this.state = {
 			updatingLocation: false,
-			address: "",
-			city: "",
-			state: ""
-			// address: this.props.singleEvent.location.address,
-			// city: this.props.singleEvent.location.city,
-			// state: this.props.singleEvent.location.state
+			// check if adding or updating location, if updating, fill with existing information
+			address: this.props.singleEvent.location[0]
+				? this.props.singleEvent.location[0].address
+				: "",
+			city: this.props.singleEvent.location[0]
+				? this.props.singleEvent.location[0].city
+				: "",
+			state: this.props.singleEvent.location[0]
+				? this.props.singleEvent.location[0].state
+				: ""
 		};
 	}
 
@@ -33,6 +37,30 @@ class EventLocation extends React.Component {
 		this.setState({ [e.target.name]: e.target.value });
 	};
 
+	addEventLocation = e => {
+		e.preventDefault();
+		const newLocation = {
+			address: this.state.address,
+			city: this.state.city,
+			state: this.state.state
+		};
+		this.props
+			.addEventLocation(
+				// `http://localhost:5000/event/${this.props.event_id}/location`,
+				`https://potlucker-planner.herokuapp.com/event/${
+					this.props.event_id
+				}/location`,
+				newLocation
+			)
+			.then(() =>
+				this.props.getSingleEvent(
+					// `http://localhost:5000/event/${this.props.event_id}`
+					`https://potlucker-planner.herokuapp.com/event/${this.props.event_id}`
+				)
+			);
+		this.setState({ updatingLocation: false });
+	};
+
 	updateEventLocation = e => {
 		e.preventDefault();
 		const updatedLocation = {
@@ -42,22 +70,20 @@ class EventLocation extends React.Component {
 		};
 		this.props
 			.updateEventLocation(
-				`http://localhost:5000/event/${this.props.event_id}/location`,
-				// `https://potlucker-planner.herokuapp.com/event/${
-				// 	this.props.event_id
-				// }/location`,
+				// `http://localhost:5000/event/${this.props.event_id}/location`,
+				`https://potlucker-planner.herokuapp.com/event/${
+					this.props.event_id
+				}/location`,
 				updatedLocation
 			)
 			.then(() =>
 				this.props.getSingleEvent(
-					`http://localhost:5000/event/${this.props.event_id}`
-					// `https://potlucker-planner.herokuapp.com/event/${this.props.event_id}`
+					// `http://localhost:5000/event/${this.props.event_id}`
+					`https://potlucker-planner.herokuapp.com/event/${this.props.event_id}`
 				)
 			);
 		this.setState({ updatingLocation: false });
 	};
-
-	// location might need [0] in front if Erik keeps as array
 
 	render() {
 		console.log(this.props);
@@ -67,14 +93,38 @@ class EventLocation extends React.Component {
 					<i className="far fa-edit" />
 				</div>
 				<h1>Location Details</h1>
+				{/* toggle between display location info and add/update form */}
 				{this.state.updatingLocation === false ? (
-					<div>
-						<p>Address: {this.props.singleEvent.location.address}</p>
-						<p>City: {this.props.singleEvent.location.city}</p>
-						<p>State: {this.props.singleEvent.location.state}</p>
+					<div className="locDetails">
+						<p className="locElement eventAddress">
+							<span>Address: </span>
+							{this.props.singleEvent.location[0]
+								? this.props.singleEvent.location[0].address
+								: ""}
+						</p>
+						<p className="locElement eventCity">
+							<span>City: </span>
+							{this.props.singleEvent.location[0]
+								? this.props.singleEvent.location[0].city
+								: ""}
+						</p>
+						<p className="locElement eventState">
+							<span>State: </span>
+							{this.props.singleEvent.location[0]
+								? this.props.singleEvent.location[0].state
+								: ""}
+						</p>
 					</div>
 				) : (
-					<form onSubmit={this.updateEventLocation} className="eventAdd">
+					<form
+						// check if location exists, if not then use add function, if yes then use update function
+						onSubmit={
+							this.props.singleEvent.location.length === 0
+								? this.addEventLocation
+								: this.updateEventLocation
+						}
+						className="eventAdd"
+					>
 						<label htmlFor="address">Address</label>
 						<input
 							onChange={this.handleChange}
@@ -124,5 +174,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{ updateEventLocation }
+	{ addEventLocation, updateEventLocation }
 )(EventLocation);

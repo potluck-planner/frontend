@@ -1,32 +1,66 @@
 import React from "react";
 import EventCard from "./EventCard";
 import Loader from "react-loader-spinner";
-import jsonwebtoken from "jsonwebtoken";
-import { getEvents, deleteEvent, getUsers } from "../actions";
+import {
+	getEvents,
+	deleteEvent,
+	updateGuest,
+	deleteGuest,
+	getUsers
+} from "../actions";
 import { connect } from "react-redux";
+// import Moment from "react-moment";
 
 class EventsList extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			user: jsonwebtoken.decode(localStorage.getItem("token"))
-				? jsonwebtoken.decode(localStorage.getItem("token"))
-				: null
-		};
+	componentDidMount() {
+		const URL = `https://potlucker-planner.herokuapp.com/users/${
+			this.props.activeUser.username
+		}/events`;
+		this.props
+			.getEvents(URL)
+			.then(
+				this.props.getUsers(`https://potlucker-planner.herokuapp.com/users/`)
+			);
 	}
 
-	componentDidMount() {
-		const URL = `http://localhost:5000/users/${
-			this.state.user.username
-		}/events`;
-		// const URL = `https://potlucker-planner.herokuapp.com/users/${
-		// 	this.state.user.username
-		// }/events`;
-		this.props.getEvents(URL).then(
-			this.props.getUsers(`http://localhost:5000/users/`)
-			// this.props.getUsers(`https://potlucker-planner.herokuapp.com/users/`)
-		);
-	}
+	confirmEvent = (e, event_id) => {
+		e.preventDefault();
+		this.props
+			.updateGuest(
+				`https://potlucker-planner.herokuapp.com/event/${event_id}/guests`,
+				{ username: this.props.activeUser.username, going: true }
+			)
+			.then(() =>
+				this.props.getEvents(
+					`https://potlucker-planner.herokuapp.com/users/${
+						this.props.activeUser.username
+					}/events`
+				)
+			);
+	};
+
+	// deleteGuest is hosted here so that events listing refreshes
+	deleteGuest = (e, event_id) => {
+		e.preventDefault();
+		this.props
+			.deleteGuest(
+				`https://potlucker-planner.herokuapp.com/event/${event_id}/guests`,
+				{
+					data: {
+						event_id: event_id,
+						username: this.props.activeUser.username
+					}
+				},
+				event_id
+			)
+			.then(() =>
+				this.props.getEvents(
+					`https://potlucker-planner.herokuapp.com/users/${
+						this.props.activeUser.username
+					}/events`
+				)
+			);
+	};
 
 	render() {
 		console.log(this.props);
@@ -43,16 +77,28 @@ class EventsList extends React.Component {
 			<div className="eventsList">
 				<h1>Events Listing</h1>
 				<ul>
-					{this.props.events.map(event => {
-						return (
-							<EventCard
-								{...event}
-								{...this.state}
-								key={event.event_id}
-								deleteEvent={this.props.deleteEvent}
-							/>
-						);
-					})}
+					{/* sort events display by date */}
+					{this.props.events
+						.sort((a, b) => {
+							return (
+								new Date(a.date) - new Date(b.date)
+								// ||
+								// <Moment parse="HH:mm:ss">{a.time}</Moment> -
+								// <Moment parse="HH:mm:ss">{b.time}</Moment>
+							);
+						})
+						.map(event => {
+							return (
+								<EventCard
+									{...event}
+									{...this.props}
+									key={event.event_id}
+									deleteEvent={this.props.deleteEvent}
+									confirmEvent={this.confirmEvent}
+									deleteGuest={this.deleteGuest}
+								/>
+							);
+						})}
 				</ul>
 			</div>
 		);
@@ -68,5 +114,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{ getEvents, deleteEvent, getUsers }
+	{ getEvents, deleteEvent, updateGuest, deleteGuest, getUsers }
 )(EventsList);

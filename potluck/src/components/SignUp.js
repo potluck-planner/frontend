@@ -24,8 +24,7 @@ class SignUp extends React.Component {
 
 	signUp = event => {
 		event.preventDefault();
-		// const URL = "https://potlucker-planner.herokuapp.com/users/register";
-		const URL = "http://localhost:5000/users/register";
+		const URL = "https://potlucker-planner.herokuapp.com/users/register";
 		this.props.signUp(URL, this.state.credentials);
 		this.props.history.push("/redirect");
 	};

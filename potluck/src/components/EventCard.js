@@ -5,18 +5,16 @@ import { connect } from "react-redux";
 
 class EventCard extends React.Component {
 	componentDidMount() {
-		const URL = `http://localhost:5000/event/${this.props.event_id}`;
-		// const URL = `https://potlucker-planner.herokuapp.com/event/${
-		// 	this.props.event_id
-		// }`;
+		const URL = `https://potlucker-planner.herokuapp.com/event/${
+			this.props.event_id
+		}`;
 		this.props.getSingleEvent(URL);
 	}
 
 	deleteEvent = e => {
 		e.preventDefault();
 		this.props.deleteEvent(
-			`http://localhost:5000/event/${this.props.event_id}`
-			// `https://potlucker-planner.herokuapp.com/event/${this.props.event_id}`
+			`https://potlucker-planner.herokuapp.com/event/${this.props.event_id}`
 		);
 	};
 
@@ -29,6 +27,7 @@ class EventCard extends React.Component {
 						View Event
 					</Link>
 					<div className="buttonDiv">
+						{/* hosts see delete event button, guests see confirm or decline buttons */}
 						{this.props.activeUser.id === this.props.organizer_id && (
 							<div onClick={e => this.deleteEvent(e)} className="deleteButton">
 								<i className="far fa-trash-alt">
@@ -36,19 +35,27 @@ class EventCard extends React.Component {
 								</i>
 							</div>
 						)}
+						{/* guests see confirm or decline buttons */}
 						{this.props.activeUser.id !== this.props.organizer_id && (
 							<>
+								{/* check to see if already confirmed, if so do not display confirm button */}
+								{this.props.going === null && (
+									<div
+										onClick={e =>
+											this.props.confirmEvent(e, this.props.event_id)
+										}
+										className="confirmButton"
+									>
+										<i className="fas fa-check">
+											<span>Confirm your attendance</span>
+										</i>
+									</div>
+								)}
 								<div
-									// onClick should have hover with text saying confirm
-									// onClick should only appear if guest has not already confirmed
-									/*onClick={this.props.confirmEvent}*/
-									className="updateButton"
+									// function is hosted one level up so events listing refreshes
+									onClick={e => this.props.deleteGuest(e, this.props.event_id)}
+									className="deleteButton"
 								>
-									<i className="fas fa-check">
-										<span>Confirm your attendance</span>
-									</i>
-								</div>
-								<div className="deleteButton">
 									<i className="fas fa-times">
 										<span>Decline invite</span>
 									</i>
@@ -60,11 +67,21 @@ class EventCard extends React.Component {
 
 				<div>
 					<p>Event Name: {this.props.event_name}</p>
-					<p>Organizer: {this.props.username}</p>
+					<p>
+						Organizer:{" "}
+						{/* use allUsers array to get name of organizer as event endpoint only provides organizer id */}
+						{this.props.allUsers.find(
+							user => user.id === this.props.organizer_id
+						)
+							? this.props.allUsers.find(
+									user => user.id === this.props.organizer_id
+							  ).name
+							: null}
+					</p>
 					<p>Date: {this.props.date}</p>
 					<p>
 						{this.props.going === null
-							? "Please Confirm"
+							? "Please Confirm Attendance"
 							: "You Are Confirmed!"}
 					</p>
 				</div>

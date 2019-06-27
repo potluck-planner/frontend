@@ -10,10 +10,7 @@ class AddEvent extends React.Component {
 			event_name: "",
 			description: "",
 			date: new Date(),
-			time: "12:00",
-			address: "",
-			city: "",
-			state: ""
+			time: "12:00"
 		};
 	}
 
@@ -24,21 +21,14 @@ class AddEvent extends React.Component {
 	createEvent = event => {
 		event.preventDefault();
 		const newEvent = {
-			// organizer_id: this.props.activeUser.id,
 			organizer_id: this.props.activeUser.id,
 			event_name: this.state.event_name,
 			description: this.state.description,
 			date: this.state.date,
 			time: this.state.time
 		};
-		// const newEventLocation = {
-		// 	address: this.props.address,
-		// 	city: this.props.city,
-		// 	state: this.props.state
-		// };
 		this.props
-			.addEvent("http://localhost:5000/event/", newEvent)
-			// .addEvent("https://potlucker-planner.herokuapp.com/event/", newEvent)
+			.addEvent("https://potlucker-planner.herokuapp.com/event/", newEvent)
 			.then(() => this.props.history.push(`/`));
 	};
 

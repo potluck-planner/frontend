@@ -7,7 +7,6 @@ export const axiosWithAuth = () => {
 		headers: {
 			Authorization: token
 		},
-		baseURL: "http://localhost:5000/"
-		// baseURL: "https://potlucker-planner.herokuapp.com/"
+		baseURL: "https://potlucker-planner.herokuapp.com/"
 	});
 };

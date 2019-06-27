@@ -12,25 +12,23 @@ import EventFood from "./Event-Food";
 import EventGuests from "./Event-Guests";
 import EventInfo from "./Event-Info";
 import EventLocation from "./Event-Location";
-import AddFood from "./AddFoodForm";
 
 export class Event extends Component {
 	componentDidMount() {
-		const URL = `http://localhost:5000/event/${this.props.event_id}`;
-		// const URL = `https://potlucker-planner.herokuapp.com/event/${
-		// 	this.props.event_id
-		// }`;
-		this.props.getSingleEvent(URL).then(
-			this.props.getUsers(`http://localhost:5000/users/`)
-			// this.props.getUsers(`https://potlucker-planner.herokuapp.com/users/`)
-		);
+		const URL = `https://potlucker-planner.herokuapp.com/event/${
+			this.props.event_id
+		}`;
+		this.props
+			.getSingleEvent(URL)
+			.then(
+				this.props.getUsers(`https://potlucker-planner.herokuapp.com/users/`)
+			);
 	}
 
 	render() {
 		console.log(this.props);
-		console.log(this.props.match);
 		console.log(this.props.singleEvent);
-		console.log(this.props.singleEvent.event);
+		// loading animation
 		if (this.props.singleEvent.event === undefined) {
 			return (
 				<div className="loadingIcon">
@@ -42,15 +40,18 @@ export class Event extends Component {
 		return (
 			<div className="event">
 				<div className="eventTop">
-					{this.props.user.id === this.props.organizer_id && (
+					{/* only hosts have the ability to see the delete event button */}
+					{this.props.activeUser.id === this.props.organizer_id && (
 						<div
 							onClick={e => {
 								e.preventDefault();
-								this.props.deleteEvent(this.props.event_id);
-								// need to hook up user info so pushes to the correct page
-								// return this.props.match === undefined
-								// 	? null
-								// 	: this.props.history.push(`/users/${this.state.user.username}/events`);
+								this.props
+									.deleteEvent(
+										`https://potlucker-planner.herokuapp.com/event/${
+											this.props.event_id
+										}`
+									)
+									.then(() => this.props.history.push(`/`));
 							}}
 							className="deleteButton"
 						>
@@ -75,13 +76,7 @@ export class Event extends Component {
 							addGuest={this.props.addGuest}
 							deleteGuest={this.props.deleteGuest}
 						/>
-						<div className="eventFood">
-							<h1>Food List</h1>
-							{this.props.singleEvent.food.map(food => (
-								<EventFood {...this.props} {...food} key={food.recipe_name} />
-							))}
-							<AddFood {...this.props} key={this.props.quantity} />
-						</div>
+						<EventFood {...this.props} />
 					</div>
 				</div>
 			</div>

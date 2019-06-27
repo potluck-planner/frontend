@@ -156,9 +156,11 @@
 		}
 		.buttonDiv {
 			display: flex;
+			justify-content: flex-end;
 			margin-right: 1%;
 			width: 15%;
-			.updateButton {
+			.confirmButton {
+				margin: 0 15% 0 0;
 				position: relative;
 				cursor: pointer;
 				:hover span {
@@ -258,6 +260,14 @@
 					font-size: 1.5rem;
 					padding: 1%;
 				}
+				.locDetails {
+					p {
+						display: flex;
+						span {
+							width: 15%;
+						}
+					}
+				}
 			}
 		}
 		.eventRight {
@@ -265,8 +275,40 @@
 			flex-flow: column wrap;
 			width: 50%;
 			.eventGuests {
+				display: flex;
+				flex-flow: column wrap;
 				border: 1px solid black;
 				margin: 1%;
+				padding: 0 0 5% 0;
+				button {
+					float: right;
+					margin: 2% 3% 0 0;
+				}
+				form {
+					float: right;
+					margin: 0 3% 0 0;
+				}
+				.guestList {
+					display: flex;
+					padding: 0 10% 0 20%;
+					text-align: left;
+					justify-content: space-between;
+					.guestName {
+						width: 50%;
+					}
+					.guestAttend {
+						width: 30%;
+						.attending {
+							color: green;
+						}
+						.invited {
+							color: red;
+						}
+					}
+					.deleteGuest {
+						width: 20%;
+					}
+				}
 			}
 			.eventFood {
 				border: 1px solid black;

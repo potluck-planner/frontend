@@ -6,16 +6,13 @@ export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
 export const login = creds => dispatch => {
 	dispatch({ type: LOGIN_START });
-	return (
-		axiosWithAuth()
-			.post("http://localhost:5000/users/login", creds)
-			// .post("https://potlucker-planner.herokuapp.com/users/login", creds)
-			.then(res => {
-				localStorage.setItem("token", res.data.token);
-				dispatch({ type: LOGIN_SUCCESS, payload: res.data.token });
-			})
-			.catch(err => console.log(err.response))
-	);
+	return axiosWithAuth()
+		.post("https://potlucker-planner.herokuapp.com/users/login", creds)
+		.then(res => {
+			localStorage.setItem("token", res.data.token);
+			dispatch({ type: LOGIN_SUCCESS, payload: res.data.token });
+		})
+		.catch(err => console.log(err.response));
 };
 
 export const REGISTER_START = "REGISTER_START";
@@ -79,7 +76,7 @@ export const addEvent = (URL, event) => dispatch => {
 export const DELETE_EVENT_SUCCESS = "DELETE_EVENT_SUCCESS";
 export const DELETE_EVENT_FAIL = "DELETE_EVENT_FAIL";
 export const deleteEvent = URL => dispatch => {
-	axiosWithAuth()
+	return axiosWithAuth()
 		.delete(URL)
 		.then(res => {
 			console.log(res);
@@ -124,6 +121,23 @@ export const updateEventInfo = (URL, updatedEventInfo) => dispatch => {
 		});
 };
 
+export const ADD_EVENT_LOCATION_START = "ADD_EVENT_LOCATION_START";
+export const ADD_EVENT_LOCATION_SUCCESS = "ADD_EVENT_LOCATION_SUCCESS";
+export const ADD_EVENT_LOCATION_FAIL = "ADD_EVENT_LOCATION_FAIL";
+export const addEventLocation = (URL, newEventLocation) => dispatch => {
+	dispatch({ type: ADD_EVENT_LOCATION_START });
+	return axiosWithAuth()
+		.post(URL, newEventLocation)
+		.then(res => {
+			console.log(res.data);
+			dispatch({ type: ADD_EVENT_LOCATION_SUCCESS, payload: res.data });
+		})
+		.catch(err => {
+			console.log(err.response);
+			dispatch({ type: ADD_EVENT_LOCATION_FAIL, payload: err.response });
+		});
+};
+
 export const UPDATE_EVENT_LOCATION_START = "UPDATE_EVENT_LOCATION_START";
 export const UPDATE_EVENT_LOCATION_SUCCESS = "UPDATE_EVENT_LOCATION_SUCCESS";
 export const UPDATE_EVENT_LOCATION_FAIL = "UPDATE_EVENT_LOCATION_FAIL";
@@ -158,26 +172,26 @@ export const addGuest = (URL, guest) => dispatch => {
 
 export const DELETE_GUEST_SUCCESS = "DELETE_GUEST_SUCCESS";
 export const DELETE_GUEST_FAIL = "DELETE_GUEST_FAIL";
-export const deleteGuest = (eventID, username) => dispatch => {
+export const deleteGuest = (URL, config, event_id) => dispatch => {
 	return axiosWithAuth()
-		.delete(eventID, username)
+		.delete(URL, config)
 		.then(res => {
 			console.log(res);
-			dispatch({ type: DELETE_EVENT_SUCCESS, payload: res.data });
+			dispatch({ type: DELETE_GUEST_SUCCESS, payload: event_id });
 		})
 		.catch(err => {
 			console.log(err.response);
-			dispatch({ type: DELETE_EVENT_FAIL, payload: err.response });
+			dispatch({ type: DELETE_GUEST_FAIL, payload: err.response });
 		});
 };
 
 export const UPDATE_GUEST_START = "UPDATE_GUEST_START";
 export const UPDATE_GUEST_SUCCESS = "UPDATE_GUEST_SUCCESS";
 export const UPDATE_GUEST_FAIL = "UPDATE_GUEST_FAIL";
-export const updateGuest = (URL, username) => dispatch => {
+export const updateGuest = (URL, updatedGuests) => dispatch => {
 	dispatch({ type: UPDATE_GUEST_START });
 	return axiosWithAuth()
-		.put(URL, username)
+		.put(URL, updatedGuests)
 		.then(res => {
 			console.log(res);
 			dispatch({ type: UPDATE_GUEST_SUCCESS, payload: res.data });
