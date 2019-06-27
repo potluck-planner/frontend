@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { getSingleEvent } from "../actions";
+import { getSingleEvent, updateGuests } from "../actions";
 import { connect } from "react-redux";
 
 class EventCard extends React.Component {
@@ -11,6 +11,28 @@ class EventCard extends React.Component {
 		}`;
 		this.props.getSingleEvent(URL);
 	}
+
+	confirmEvent = e => {
+		e.preventDefault();
+		console.log(
+			this.props.singleEvent.guests.map(guest =>
+				guest.username === this.props.activeUser.username
+					? { ...guest, going: 1 }
+					: guest
+			)
+		);
+		this.props.updateGuests(
+			// `http://localhost:5000/event/${this.props.event_id}/guests`
+			`https://potlucker-planner.herokuapp.com/event/${
+				this.props.event_id
+			}/guests`,
+			this.props.singleEvent.guests.map(guest =>
+				guest.username === this.props.activeUser.username
+					? { ...guest, going: 1 }
+					: guest
+			)
+		);
+	};
 
 	deleteEvent = e => {
 		e.preventDefault();
@@ -39,7 +61,7 @@ class EventCard extends React.Component {
 						{this.props.activeUser.id !== this.props.organizer_id && (
 							<>
 								<div
-									/*onClick={this.props.confirmEvent}*/
+									onClick={e => this.confirmEvent(e)}
 									className="confirmButton"
 								>
 									<i className="fas fa-check">
@@ -62,7 +84,16 @@ class EventCard extends React.Component {
 
 				<div>
 					<p>Event Name: {this.props.event_name}</p>
-					<p>Organizer: {this.props.username}</p>
+					<p>
+						Organizer:{" "}
+						{this.props.allUsers.filter(
+							user => user.id === this.props.organizer_id
+						)[0]
+							? this.props.allUsers.filter(
+									user => user.id === this.props.organizer_id
+							  )[0].name
+							: null}
+					</p>
 					<p>Date: {this.props.date}</p>
 					<p>
 						{this.props.going === null
@@ -84,5 +115,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{ getSingleEvent }
+	{ getSingleEvent, updateGuests }
 )(EventCard);

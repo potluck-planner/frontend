@@ -132,12 +132,20 @@ class EventGuests extends React.Component {
 							)}
 						</p>
 						{this.props.organizer_id === this.props.activeUser.id && (
-							<p
-								onClick={e => this.deleteGuest(e, guest)}
-								className="deleteGuest"
-							>
-								<i className="far fa-trash-alt" />
-							</p>
+							<div>
+								{this.props.activeUser.username === guest.username ? (
+									<p className="hostIcon">
+										<i className="fas fa-star" />
+									</p>
+								) : (
+									<p
+										onClick={e => this.deleteGuest(e, guest)}
+										className="deleteGuest"
+									>
+										<i className="far fa-trash-alt" />
+									</p>
+								)}
+							</div>
 						)}
 					</div>
 				))}
