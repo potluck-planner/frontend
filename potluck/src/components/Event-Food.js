@@ -19,6 +19,25 @@ class EventFood extends React.Component {
 			);
 	};
 
+	claimFood = (e, recipe_name) => {
+		e.preventDefault();
+		const claimedByName = this.props.activeUser.username;
+		this.props
+			.updateFood(
+				`https://potlucker-planner.herokuapp.com/event/${
+					this.props.event_id
+				}/foodlist`,
+				{ guest_name: claimedByName }
+			)
+			.then(() =>
+				this.props.getEvents(
+					`https://potlucker-planner.herokuapp.com/users/${
+						this.props.activeUser.username
+					}/events`
+				)
+			);
+	};
+
 	render() {
 		console.log(this.props);
 		return (
@@ -42,7 +61,10 @@ class EventFood extends React.Component {
 								{food.guest_name ? food.guest_name : ""}
 							</div>
 							<div className="foodButton">
-								<i className="fas fa-check" />
+								<i
+									className="fas fa-check"
+									onClick={e => this.claimFood(e, food.recipe_name)}
+								/>
 								{this.props.organizer_id === this.props.activeUser.id ? (
 									<i
 										className="far fa-trash-alt"

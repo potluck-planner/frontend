@@ -23,6 +23,7 @@ class EventsList extends React.Component {
 			);
 	}
 
+	// confirm/updateGuest is hosted here so that events listing refreshes
 	confirmEvent = (e, event_id) => {
 		e.preventDefault();
 		this.props

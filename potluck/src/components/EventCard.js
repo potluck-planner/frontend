@@ -41,6 +41,7 @@ class EventCard extends React.Component {
 								{/* check to see if already confirmed, if so do not display confirm button */}
 								{this.props.going === null && (
 									<div
+										// function is hosted one level up so events listing refreshes
 										onClick={e =>
 											this.props.confirmEvent(e, this.props.event_id)
 										}
