@@ -77,8 +77,8 @@ class EventsList extends React.Component {
     }
     return (
       <div className="eventsList">
-        <h1>Your Upcoming Events</h1>
-        <ul>
+        <h1>Upcoming Events</h1>
+        <div className="eventsGrid">
           {/* sort events display by date */}
           {this.props.events
             .sort((a, b) => {
@@ -104,7 +104,7 @@ class EventsList extends React.Component {
                 </div>
               );
             })}
-        </ul>
+        </div>
       </div>
     );
   }
