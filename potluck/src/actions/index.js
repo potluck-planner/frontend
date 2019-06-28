@@ -217,15 +217,3 @@ export const addFood = (URL, food) => dispatch => {
       dispatch({ type: ADD_FOOD_FAILURE });
     });
 };
-
-export const DELETE_FOOD_START = "DELETE_FOOD_START";
-export const DELETE_FOOD_SUCCESS = "DELETE_FOOD_SUCCESS";
-export const DELETE_FOOD_FAILURE = "DELETE_FOOD_FAILURE";
-
-export const deleteFood = (URL) => dispatch => {
-return axiosWithAuth()
-.delete(URL)
-.then(response =>{
-	dispatch({ type: DELETE_FOOD_SUCCESS, payload:})
-})
-}
