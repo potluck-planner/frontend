@@ -307,19 +307,23 @@
         :hover span {
           display: block;
         }
+        .fa-check {
+          color: #6a7fdb;
+        }
+
         span {
+          font-family: "Noto Sans", sans-serif;
           font-weight: 100;
-          background: #fcfffc;
-          border: 1px solid #acadbc;
-          color: #040f0f;
+          background-color: #fcfffc;
+          color: #6a7fdb;
           font-size: 1rem;
           margin: 0 auto;
           position: absolute;
           text-align: center;
-          width: 700%;
+          width: 800%;
           height: 25px;
-          bottom: 100%;
-          left: -500%;
+          bottom: 125%;
+          left: 0;
           display: none;
           padding: 1%;
         }
@@ -334,6 +338,9 @@
         cursor: pointer;
         :hover span {
           display: block;
+        }
+        .fa-times {
+          color: #6a7fdb;
         }
         span {
           font-family: "Noto Sans", sans-serif;
@@ -388,6 +395,32 @@
         margin: 1% 0;
         padding: 1% 10%;
         text-align: left;
+        .eventAdd {
+          display: flex;
+          flex-flow: column;
+          .addElement {
+            padding: 0.5%;
+            margin: 2%;
+            width: 50%;
+          }
+          button {
+            float: right;
+            width: 90px;
+            height: 25px;
+            border: none;
+            background-color: #6a7fdb;
+            font-size: 0.8rem;
+            margin: 1%;
+            border-radius: 3px;
+            color: white;
+
+            &:hover {
+              cursor: pointer;
+              opacity: 0.9;
+              transition: 0.5sec ease;
+            }
+          }
+        }
         h1 {
           font-size: 1.5rem;
           font-weight: 500;
@@ -408,6 +441,32 @@
         text-align: left;
         background: #fcfffc;
         padding: 1% 10%;
+        .eventAdd {
+          display: flex;
+          flex-flow: column;
+          .addElement {
+            padding: 0.5%;
+            margin: 2%;
+            width: 50%;
+          }
+          button {
+            float: right;
+            width: 110px;
+            height: 25px;
+            border: none;
+            background-color: #6a7fdb;
+            font-size: 0.8rem;
+            margin: 1%;
+            border-radius: 3px;
+            color: white;
+
+            &:hover {
+              cursor: pointer;
+              opacity: 0.9;
+              transition: 0.5sec ease;
+            }
+          }
+        }
         h1 {
           font-size: 1.5rem;
           font-weight: 500;
