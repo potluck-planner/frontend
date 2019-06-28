@@ -1,392 +1,505 @@
 .App {
-	text-align: center;
+  text-align: center;
+  font-family: "Noto Sans", sans-serif;
 }
 
 //Login/Sign Up Page
 
 .loginLogo {
-	width: 200px;
+  width: 200px;
 }
 
 .loginSection {
-	width: 100%;
-	height: 100vh;
-	background: #fcfffc;
-	.homeButton {
-		float: left;
-		margin: 2% 0 0 2%;
-	}
-	.loginContainer {
-		display: flex;
-		flex-direction: column;
-		width: 50%;
-		margin: 0 auto;
-		.loginForm {
-			display: flex;
-			flex-direction: column;
-			width: 60%;
-			margin: 15% auto 10% auto;
-			padding: 2%;
-			background: white;
-			border-top: 1px solid #6a7fdb;
-			box-shadow: 0 3px 12px rgba(4, 15, 15, 0.4);
-			.loginTitle {
-				font-size: 2.5rem;
-				color: #040f0f;
-			}
-			.loginInput {
-				margin: 2% auto;
-				width: 50%;
-				background-color: rgba(255, 255, 255, 0.9);
-				border: 0.5px solid #acadbc;
-				height: 40px;
-				padding: 0 0 0 3%;
+  width: 100%;
+  height: 100vh;
+  background: #fcfffc;
 
-				&::placeholder {
-					padding-left: 2.5%;
-					color: #9b9ece;
-					font-size: 1rem;
-				}
-			}
-			.loginButton {
-				width: 100px;
-				height: 40px;
-				margin: 2% auto;
-				border: none;
-				background-color: #6a7fdb;
-				font-size: 1.1rem;
-				box-shadow: 0 2px 10px #6a7fdb;
-				border-radius: 3px;
-				color: white;
+  .homeButton {
+    width: 80px;
+    height: 30px;
+    border: none;
+    background-color: #6a7fdb;
+    font-size: 1rem;
+    margin: 1% 90% 0 0;
 
-				&:hover {
-					cursor: pointer;
-					box-shadow: 0 3px 13px #6a7fdb;
-				}
-			}
-		}
-	}
+    border-radius: 3px;
+    color: white;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.9;
+      transition: 0.5sec ease;
+    }
+  }
+
+  .loginContainer {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: 0 auto;
+    .loginForm {
+      display: flex;
+      flex-direction: column;
+      width: 60%;
+      margin: 10% auto 10% auto;
+      padding: 2%;
+      background: white;
+      border-top: 1px solid #6a7fdb;
+      box-shadow: 0 3px 12px rgba(4, 15, 15, 0.4);
+      .loginTitle {
+        font-size: 2.5rem;
+        color: #040f0f;
+      }
+      .loginInput {
+        margin: 2% auto;
+        width: 50%;
+        background-color: rgba(255, 255, 255, 0.9);
+        border: 0.5px solid #acadbc;
+        height: 40px;
+        padding: 0 0 0 3%;
+
+        &::placeholder {
+          padding-left: 2.5%;
+          color: #9b9ece;
+          font-size: 1rem;
+        }
+      }
+      .loginButton {
+        width: 100px;
+        height: 40px;
+        margin: 2% auto;
+        border: none;
+        background-color: #6a7fdb;
+        font-size: 1.1rem;
+        box-shadow: 0 2px 10px #6a7fdb;
+        border-radius: 3px;
+        color: white;
+
+        &:hover {
+          cursor: pointer;
+          box-shadow: 0 3px 13px #6a7fdb;
+        }
+      }
+    }
+  }
 }
 
 .redirectConfirm {
-	width: 80%;
-	margin: 20% auto;
+  width: 80%;
+  margin: 20% auto;
 }
 
 .signUpLink {
-	margin: 0 auto;
-	width: 100px;
-	border: none;
-	padding: 1% 0;
-	font-size: 1.2rem;
-	font-weight: 500;
+  margin: 0 auto;
+  width: 100px;
+  border: none;
+  padding: 1% 0;
+  font-size: 1.2rem;
+  font-weight: 500;
 
-	color: #040f0f;
+  color: #040f0f;
 
-	&:hover {
-		cursor: pointer;
-		opacity: 0.3;
-		transition: 0.5sec ease;
-	}
+  &:hover {
+    cursor: pointer;
+    opacity: 0.3;
+    transition: 0.5sec ease;
+  }
 }
 
 // Logout button
 .logOut {
-	display: flex;
-	justify-content: space-between;
-	padding: 1%;
-	button {
-		padding: 0.5%;
-	}
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1%;
+  background-color: #fcfffc;
+  border-bottom: 0.5px solid #acadbc;
+
+  .dashTitle {
+    font-size: 1.2rem;
+    color: #040f0f;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    .logo {
+      width: 40px;
+      padding: 0;
+      margin: 1%;
+    }
+  }
+
+  .navBar {
+    width: 30%;
+    display: flex;
+    justify-content: space-evenly;
+
+    .navLink {
+      color: #040f0f;
+      text-decoration: none;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+    .active {
+      color: #6a7fdb;
+    }
+  }
+
+  .logOutButton {
+    width: 80px;
+    height: 30px;
+    border: none;
+    background-color: #6a7fdb;
+    font-size: 1rem;
+
+    border-radius: 3px;
+    color: white;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.9;
+      transition: 0.5sec ease;
+    }
+  }
 }
 
-// NavBar from top
-.navBar {
-	display: flex;
-	justify-content: space-evenly;
-	.navLink {
-		font-size: 2rem;
-		text-decoration: none;
-		background: #fcfffc;
-		flex-grow: 1;
-		padding: 1%;
-		border: 1px solid black;
-		color: darkblue;
-		text-align: center;
-	}
-	.active {
-		background: #6a7fdb;
-	}
-}
+.addEventPage {
+  margin: 0 10%;
+  display: flex;
+  flex-direction: column;
 
-.loadingIcon {
-	margin: 20%;
-	display: flex;
-	justify-content: center;
+  h1 {
+    font-size: 2rem;
+    font-weight: 400;
+  }
+
+  .eventsPage {
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+
+    .eventAdd {
+      display: flex;
+      flex-flow: column wrap;
+      width: 40%;
+      padding: 1%;
+
+      .addElement {
+        padding: 1%;
+        margin: 2%;
+      }
+
+      .createButton {
+        width: 150px;
+        height: 30px;
+        border: none;
+        background-color: #6a7fdb;
+        font-size: 1rem;
+        margin: 2% auto;
+        border-radius: 3px;
+        color: white;
+
+        &:hover {
+          cursor: pointer;
+          opacity: 0.9;
+          transition: 0.5sec ease;
+        }
+      }
+    }
+
+    .eventImgs {
+      width: 50%;
+    }
+  }
 }
 
 // EventsList - sets spacing for event cards
 .eventsList {
-	display: flex;
-	text-align: center;
-	flex-flow: column wrap;
-	ul {
-		display: flex;
-		flex-flow: row wrap;
-		justify-content: space-evenly;
-	}
+  width: 90%;
+  margin: auto;
+  h1 {
+    font-size: 2rem;
+    font-weight: 400;
+    text-align: center;
+    margin: 2% auto;
+  }
+  .eventsPage {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    width: 100%;
+
+    .eventAdd {
+      display: flex;
+      flex-flow: column wrap;
+      width: 30%;
+      padding: 1%;
+      margin: 2% 0;
+
+      .addElement {
+        padding: 1%;
+        margin: 2%;
+      }
+
+      button {
+        width: 50%;
+        margin: 2% auto;
+        padding: 1%;
+      }
+    }
+
+    .eventImgs {
+      width: 35%;
+    }
+  }
 }
 
 // Individual Card design
 .eventCard {
-	display: flex;
-	flex-flow: column wrap;
-	background: skyblue;
-	color: darkblue;
-	padding: 0 1% 1% 1%;
-	margin: 1% auto;
-	width: 25%;
-	.cardTop {
-		display: flex;
-		font-size: 1.5rem;
-		padding: 1%;
-		justify-content: space-between;
-		.viewDiv {
-			font-size: 1.2rem;
-		}
-		.buttonDiv {
-			display: flex;
-			justify-content: flex-end;
-			margin-right: 1%;
-			width: 15%;
-			.confirmButton {
-				margin: 0 15% 0 0;
-				position: relative;
-				cursor: pointer;
-				:hover span {
-					display: block;
-				}
-				span {
-					font-weight: 100;
-					background: skyblue;
-					border: 1px solid black;
-					color: black;
-					font-size: 1rem;
-					margin: 0 auto;
-					position: absolute;
-					text-align: center;
-					width: 700%;
-					height: 25px;
-					bottom: 100%;
-					left: -500%;
-					display: none;
-					padding: 1%;
-				}
-				span:after {
-					content: "";
-					position: absolute;
-				}
-			}
-			.deleteButton {
-				padding-left: 10%;
-				position: relative;
-				cursor: pointer;
-				:hover span {
-					display: block;
-				}
-				span {
-					font-weight: 100;
-					background: skyblue;
-					border: 1px solid black;
-					color: black;
-					font-size: 1rem;
-					margin: 0 auto;
-					position: absolute;
-					text-align: center;
-					width: 500%;
-					height: 25px;
-					bottom: 100%;
-					left: 0;
-					display: none;
-					padding: 1%;
-				}
-				span:after {
-					content: "";
-					position: absolute;
-				}
-			}
-		}
-	}
+  display: flex;
+  flex-flow: column wrap;
+  background: #fcfffc;
+  border: 1px solid #acadbc;
+  padding: 1%;
+  margin: auto;
+  width: 25%;
+  .cardTop {
+    display: flex;
+    align-items: baseline;
+    font-size: 1.5rem;
+    padding: 1%;
+    justify-content: space-between;
+    .viewDiv {
+      font-size: 1.2rem;
+      text-decoration: none;
+      color: #6a7fdb;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+    .fa-trash-alt {
+      color: #6a7fdb;
+    }
+    .buttonDiv {
+      display: flex;
+      justify-content: flex-end;
+      margin-right: 1%;
+      width: 15%;
+      .confirmButton {
+        margin: 0 15% 0 0;
+        position: relative;
+        cursor: pointer;
+        :hover span {
+          display: block;
+        }
+        span {
+          font-weight: 100;
+          background: #fcfffc;
+          border: 1px solid #acadbc;
+          color: #040f0f;
+          font-size: 1rem;
+          margin: 0 auto;
+          position: absolute;
+          text-align: center;
+          width: 700%;
+          height: 25px;
+          bottom: 100%;
+          left: -500%;
+          display: none;
+          padding: 1%;
+        }
+        span:after {
+          content: "";
+          position: absolute;
+        }
+      }
+      .deleteButton {
+        padding-left: 10%;
+        position: relative;
+        cursor: pointer;
+        :hover span {
+          display: block;
+        }
+        span {
+          font-family: "Noto Sans", sans-serif;
+          font-weight: 100;
+          background-color: #fcfffc;
+          color: #6a7fdb;
+          font-size: 1rem;
+          margin: 0 auto;
+          position: absolute;
+          text-align: center;
+          width: 600%;
+          height: 25px;
+          bottom: 125%;
+          left: 0;
+          display: none;
+          padding: 1%;
+        }
+        span:after {
+          content: "";
+          position: absolute;
+        }
+      }
+    }
+  }
 }
 
 // Event Page
 .event {
-	.eventElement {
-	}
-	.eventTop {
-		display: flex;
-		justify-content: flex-end;
-		font-size: 1.5rem;
-		.deleteButton {
-			width: 10%;
-		}
-	}
-	.eventBottom {
-		display: flex;
-		.eventLeft {
-			display: flex;
-			flex-flow: column;
-			width: 50%;
-			.eventInfo {
-				border: 1px solid black;
-				margin: 1%;
-				padding: 1% 1% 5% 15%;
-				text-align: left;
-				.updateButton {
-					display: flex;
-					justify-content: flex-end;
-					font-size: 1.5rem;
-					padding: 1%;
-				}
-			}
-			.eventLocation {
-				border: 1px solid black;
-				margin: 1%;
-				padding: 1% 1% 5% 15%;
-				text-align: left;
-				.updateButton {
-					display: flex;
-					justify-content: flex-end;
-					font-size: 1.5rem;
-					padding: 1%;
-				}
-				.locDetails {
-					p {
-						display: flex;
-						span {
-							width: 15%;
-						}
-					}
-				}
-			}
-		}
-		.eventRight {
-			display: flex;
-			flex-flow: column;
-			width: 50%;
-			.eventGuests {
-				display: flex;
-				flex-flow: column;
-				border: 1px solid black;
-				margin: 1%;
-				padding: 0 0 5% 0;
-				button {
-					float: right;
-					margin: 2% 3% 0 0;
-				}
-				form {
-					float: right;
-					margin: 0 3% 0 0;
-				}
-				.guestList {
-					display: flex;
-					padding: 0 10% 0 20%;
-					text-align: left;
-					justify-content: space-between;
-					.guestName {
-						width: 50%;
-					}
-					.guestAttend {
-						width: 30%;
-						.attending {
-							color: green;
-						}
-						.invited {
-							color: red;
-						}
-					}
-					.deleteGuest {
-						width: 20%;
-					}
-				}
-			}
-			.eventFood {
-				display: flex;
-				flex-flow: column;
-				border: 1px solid black;
-				margin: 1%;
-				button {
-					float: right;
-					margin: 2% 3% 0 0;
-				}
-				.foodForm {
-					float: right;
-					margin: 0 3% 0 0;
-				}
-				.foodTitle {
-					display: flex;
-					margin: 0 10% 0 20%;
-					text-align: left;
-					.foodTitleName {
-						width: 40%;
-					}
-					.foodTitleGuest {
-						width: 40%;
-					}
-					.foodTitleButton {
-						width: 20%;
-					}
-				}
-				.foodList {
-					display: flex;
-					flex-flow: column;
-					text-align: left;
-					margin: 0 10% 0 20%;
-					padding: 0 0 5% 0;
-					.foodObject {
-						display: flex;
-						flex-flow: row;
-						padding: 0 0 2% 0;
-						.foodName {
-							width: 40%;
-						}
-						.foodGuest {
-							width: 40%;
-						}
-						.foodButton {
-							width: 20%;
-							display: flex;
-							justify-content: space-evenly;
-						}
-					}
-				}
-			}
-		}
-	}
+  .eventElement {
+  }
+  .eventTop {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 1.5rem;
+    .deleteButton {
+      width: 10%;
+    }
+  }
+  .eventBottom {
+    display: flex;
+    .eventLeft {
+      display: flex;
+      flex-flow: column;
+      width: 50%;
+      .eventInfo {
+        border: 1px solid black;
+        margin: 1%;
+        padding: 1% 1% 5% 15%;
+        text-align: left;
+        .updateButton {
+          display: flex;
+          justify-content: flex-end;
+          font-size: 1.5rem;
+          padding: 1%;
+        }
+      }
+      .eventLocation {
+        border: 1px solid black;
+        margin: 1%;
+        padding: 1% 1% 5% 15%;
+        text-align: left;
+        .updateButton {
+          display: flex;
+          justify-content: flex-end;
+          font-size: 1.5rem;
+          padding: 1%;
+        }
+        .locDetails {
+          p {
+            display: flex;
+            span {
+              width: 15%;
+            }
+          }
+        }
+      }
+    }
+    .eventRight {
+      display: flex;
+      flex-flow: column;
+      width: 50%;
+      .eventGuests {
+        display: flex;
+        flex-flow: column;
+        border: 1px solid black;
+        margin: 1%;
+        padding: 0 0 5% 0;
+        button {
+          float: right;
+          margin: 2% 3% 0 0;
+        }
+        form {
+          float: right;
+          margin: 0 3% 0 0;
+        }
+        .guestList {
+          display: flex;
+          padding: 0 10% 0 20%;
+          text-align: left;
+          justify-content: space-between;
+          .guestName {
+            width: 50%;
+          }
+          .guestAttend {
+            width: 30%;
+            .attending {
+              color: green;
+            }
+            .invited {
+              color: red;
+            }
+          }
+          .deleteGuest {
+            width: 20%;
+          }
+        }
+      }
+      .eventFood {
+        display: flex;
+        flex-flow: column;
+        border: 1px solid black;
+        margin: 1%;
+        button {
+          float: right;
+          margin: 2% 3% 0 0;
+        }
+        .foodForm {
+          float: right;
+          margin: 0 3% 0 0;
+        }
+        .foodTitle {
+          display: flex;
+          margin: 0 10% 0 20%;
+          text-align: left;
+          .foodTitleName {
+            width: 40%;
+          }
+          .foodTitleGuest {
+            width: 40%;
+          }
+          .foodTitleButton {
+            width: 20%;
+          }
+        }
+        .foodList {
+          display: flex;
+          flex-flow: column;
+          text-align: left;
+          margin: 0 10% 0 20%;
+          padding: 0 0 5% 0;
+          .foodObject {
+            display: flex;
+            flex-flow: row;
+            padding: 0 0 2% 0;
+            .foodName {
+              width: 40%;
+            }
+            .foodGuest {
+              width: 40%;
+            }
+            .foodButton {
+              width: 20%;
+              display: flex;
+              justify-content: space-evenly;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 // Add Event Design
-.eventAdd {
-	display: flex;
-	flex-flow: column wrap;
-	width: 30%;
-	padding: 1%;
-	.addElement {
-		padding: 1%;
-		margin: 2%;
-	}
-	button {
-		width: 50%;
-		margin: 2% auto;
-		padding: 1%;
-	}
-}
 
 // Update Form design
 .updateForm {
-	display: flex;
-	button {
-		width: 70%;
-		height: 50%;
-	}
+  display: flex;
+  button {
+    width: 70%;
+    height: 50%;
+  }
 }
