@@ -24,6 +24,7 @@ class EventsList extends React.Component {
       );
   }
 
+  // confirm/updateGuest is hosted here so that events listing refreshes
   confirmEvent = (e, event_id) => {
     e.preventDefault();
     this.props
@@ -91,7 +92,6 @@ class EventsList extends React.Component {
             .map(event => {
               return (
                 <div className="eventsPage">
-                  <img src={eventImg} alt="Event Image" className="eventImgs" />
                   <EventCard
                     {...event}
                     {...this.props}

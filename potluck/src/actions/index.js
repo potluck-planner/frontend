@@ -20,12 +20,13 @@ export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAILURE = "REGISTER_FAILURE";
 export const signUp = (URL, user) => dispatch => {
   dispatch({ type: REGISTER_START });
-  axios
+  return axios
     .post(URL, user)
     .then(res => dispatch({ type: REGISTER_SUCCESS, payload: res.data }))
     .catch(err => dispatch({ type: REGISTER_FAILURE, payload: err.response }));
 };
 
+// in our database, allUsers is the only place where we can access the user Full Name
 export const FETCH_USERS_START = "FETCH_USERS_START";
 export const FETCH_USERS_SUCCESS = "FETCH_USERS_SUCCESS";
 export const FETCH_USERS_FAILURE = "FETCH_USERS_FAILURE";
@@ -215,5 +216,38 @@ export const addFood = (URL, food) => dispatch => {
     .catch(err => {
       console.log(err.response);
       dispatch({ type: ADD_FOOD_FAILURE });
+    });
+};
+
+export const DELETE_FOOD_START = "DELETE_FOOD_START";
+export const DELETE_FOOD_SUCCESS = "DELETE_FOOD_SUCCESS";
+export const DELETE_FOOD_FAILURE = "DELETE_FOOD_FAILURE";
+export const deleteFood = (URL, config) => dispatch => {
+  dispatch({ type: DELETE_FOOD_START });
+  return axiosWithAuth()
+    .delete(URL, config)
+    .then(res => {
+      dispatch({ type: DELETE_FOOD_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      console.log(err.response);
+      dispatch({ type: DELETE_FOOD_FAILURE });
+    });
+};
+
+export const UPDATE_FOOD_START = "UPDATE_FOOD_START";
+export const UPDATE_FOOD_SUCCESS = "UPDATE_FOOD_SUCCESS";
+export const UPDATE_FOOD_FAIL = "UPDATE_FOOD_FAIL";
+export const updateFood = (URL, updatedFood) => dispatch => {
+  dispatch({ type: UPDATE_FOOD_START });
+  return axiosWithAuth()
+    .put(URL, updatedFood)
+    .then(res => {
+      console.log(res);
+      dispatch({ type: UPDATE_FOOD_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      console.log(err.response);
+      dispatch({ type: UPDATE_FOOD_FAIL, payload: err.response });
     });
 };
