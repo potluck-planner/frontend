@@ -89,9 +89,11 @@ class EventLocation extends React.Component {
 		console.log(this.props);
 		return (
 			<div className="eventLocation">
-				<div onClick={this.updateLocation} className="updateButton">
-					<i className="far fa-edit" />
-				</div>
+				{this.props.activeUser.id === this.props.organizer_id && (
+					<div onClick={this.updateLocation} className="updateButton">
+						<i className="far fa-edit" />
+					</div>
+				)}
 				<h1>Location Details</h1>
 				{/* toggle between display location info and add/update form */}
 				{this.state.updatingLocation === false ? (
